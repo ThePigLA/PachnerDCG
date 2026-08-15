@@ -1,1489 +1,1300 @@
 \documentclass[11pt]{article}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{fullpage}
-\usepackage{enumitem}
-\usepackage{bbm}
-\usepackage{hyperref}
 
-% --- theorem environments
-\newtheorem{theorem}{Theorem}[section]
-\newtheorem{proposition}[theorem]{Proposition}
-\theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
-\theoremstyle{definition}
-\newtheorem{definition}[theorem]{Definition}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage[margin=1.12in]{geometry}
+\usepackage{microtype}
+\usepackage{url}
+\usepackage[hidelinks]{hyperref}
+\setlength{\emergencystretch}{2em}
+
+\newtheorem{theorem}{Theorem}
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{conjecture}[theorem]{Conjecture}
-\newtheorem{problem}[theorem]{Problem}
+\newtheorem{question}[theorem]{Question}
 
-% --- macros
-\newcommand{\C}{\mathbb{C}}
-\newcommand{\D}{\mathbb{D}}
-\newcommand{\ip}[2]{\left\langle #1,\,#2\right\rangle}
-\newcommand{\norm}[1]{\left\|#1\right\|}
-\newcommand{\opnorm}[1]{\left\|#1\right\|_2}
-\newcommand{\Herm}{\mathrm{Herm}}
-\newcommand{\diag}{\mathrm{diag}}
-\newcommand{\spec}{\mathrm{spec}}
-\newcommand{\tr}{\mathrm{tr}}
-\newcommand{\Id}{\mathbbm{1}}
-\newcommand{\W}{W}
-\newcommand{\kappaopt}{\chi}
-\newcommand{\adj}{^{\ast}}
-\newcommand{\rank}{\operatorname{rank}}
+\newtheorem*{theorem*}{Theorem}
+\newtheorem*{corollary*}{Corollary}
 
-\DeclareMathOperator{\cond}{cond}
-\DeclareMathOperator{\supp}{supp}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{plain}
 
-\title{\textbf{Crouzeix's Conjecture for Nilpotent Dimension $3$}}
-\author{Draft for circulation}
-\date{\today}
+\title{Component Trees of Pachner Graphs\\
+with Applications to Triangulated \(3\)-Spheres}
+\author{Vance Faber\thanks{Hoquiam, WA, \texttt{vance.faber@gmail.com}}
+\and Michael Murphy\thanks{Venice, CA}}
+\date{}
 
 \begin{document}
 \maketitle
 
-% ----------------------------------------------------------------
-\section{Introduction: Crouzeix ratio and the nilpotent $3\times 3$ case}
-\label{sec:intro}
-
-For $T\in\C^{n\times n}$, recall the numerical range (field of values)
-\[
-\W(T):=\{\ip{Tx}{x}:\ x\in\C^n,\ \norm{x}=1\}.
-\]
-It is classical that $\W(T)$ is a compact convex subset of $\C$ containing $\spec(T)$.
-
-A central theme in functional calculus is to compare $\opnorm{p(T)}$ to the sup norm of $p$
-on a set in the complex plane. For the numerical range this leads to the following quantity.
-
-\begin{definition}[Crouzeix ratio]
-\label{def:crouzeix-ratio}
-For $T\in\C^{n\times n}$ define
-\[
-\mathcal C(T)
-\;:=\;
-\sup_{p\not\equiv 0}\,
-\frac{\opnorm{p(T)}}{\max_{z\in \W(T)}|p(z)|}.
-\]
-\end{definition}
-
-Crouzeix's conjecture asserts that $\mathcal C(T)\le 2$ for all square matrices $T$,
-with equality in certain extremal cases. In this paper we focus on the case of
-\emph{nilpotent} $3\times 3$ matrices. This is already rich enough to exhibit the
-geometric features that govern extremality: the functional $\mathcal C$ is an
-\emph{envelope} of nonsmooth objects (a polynomial supremum over $\partial\W(T)$ in the
-denominator and the spectral norm in the numerator), and as a result its maximizers
-typically lie on a \emph{degeneracy locus} where ties occur.
-
-\begin{problem}
-\label{prob:nilpotent}
-Show that $\mathcal C(N)\le 2$ for every nilpotent $N\in\C^{3\times 3}$.
-\end{problem}
-
-\paragraph{Relation to prior work on the $3\times3$ nilpotent case.}
-The case of nilpotent $3\times3$ matrices has been previously investigated by Crouzeix
-using conformal mapping techniques and numerical verification.
-In an unpublished manuscript, Crouzeix reduced the problem to a one--parameter family
-and established sharp asymptotic bounds near the extremal cases corresponding to
-rank--one nilpotents and the $3\times3$ Jordan block, supplemented by extensive numerical
-evidence in the interior of the parameter range.
-However, a complete rigorous proof excluding equality in the interior was not obtained.
-The present work resolves this remaining gap by a different approach, based on a
-geometric analysis of the unitary similarity quotient and a variational rigidity argument,
-and does not rely on conformal mapping techniques or numerical computation.
-
-\begin{remark}[Relationship to the 2-similar functional]
-\label{rem:two-similar-context}
-Related work developed explicit similarity certificates for the stronger
-``2-similar'' bound. In the present rewrite we take $\mathcal C$ as the organizing
-functional. The similarity certificates will reappear later only as \emph{strengthenings}
-away from the degeneracy locus, not as the main backbone of the argument.
-\end{remark}
-
-% ----------------------------------------------------------------
-\section{Reductions, normalization, and the degeneracy locus}
-\label{sec:reductions}
-
-\subsection{Unitary invariance and Schur reduction}
-
-The functional $\mathcal C$ is unitarily invariant: for unitary $U$,
-\[
-\W(U^\ast T U)=\W(T),
-\qquad
-\opnorm{p(U^\ast T U)}=\opnorm{p(T)},
-\qquad
-\Rightarrow\qquad
-\mathcal C(U^\ast T U)=\mathcal C(T).
-\]
-Hence we may freely replace $T$ by a unitarily similar representative.
-
-In the nilpotent $3\times 3$ case, Schur triangularization yields a strictly upper
-triangular form. Accordingly, throughout Part~I we work with the model class
-\[
-\mathcal N_3
-\;:=\;
-\{\, N\in\C^{3\times 3}:\ N^3=0 \,\},
-\qquad
-N\sim_U
-\begin{pmatrix}
-0 & \alpha & \gamma\\
-0 & 0 & \beta\\
-0 & 0 & 0
-\end{pmatrix}.
-\]
-We emphasize that the parameters $(\alpha,\beta,\gamma)$ are \emph{not} unitary invariants;
-they encode a convenient coordinate chart. The statements we keep in this rewrite will be
-formulated in unitary-invariant terms whenever possible.
-
-\subsection{Scale normalization}
-
-The quantity $\mathcal C$ is scale-invariant:
-\[
-\begin{aligned}
-\W(tT) &= t\,\W(T),\\
-\max_{z\in\W(tT)} |p(z)|
-&= \max_{z\in\W(T)} |p(tz)|,\\
-p(tT) &= (p_t)(T),\\
-\Rightarrow\quad \mathcal C(tT) &= \mathcal C(T),
-\qquad (t\neq 0).
-\end{aligned}
-\]
-Thus we may impose a convenient normalization on $N$.
-For conceptual clarity we adopt the spectral normalization
-\begin{equation}
-\label{eq:spectral-normalization}
-\opnorm{N}=1.
-\end{equation}
-Any other norm-based slice could be used for sampling or parametrization; in finite dimension
-all norms are equivalent, and the qualitative statements (e.g.\ uniform gaps away from a ridge)
-transfer between normalizations.
-
-\subsection{Extremizing sequences and structural degeneracy}
-
-Fix $N\in\mathcal N_3$.
-For any polynomial $p\not\equiv 0$, define the Crouzeix quotient
-\[
-\Phi_N(p)
-=
-\frac{\|p(N)\|_2}{\max_{z\in W(N)}|p(z)|}.
-\]
-Then
-\[
-\mathcal C(N)=\sup_{p\not\equiv 0}\Phi_N(p).
-\]
-
-\paragraph{Polynomial reduction in the numerator.}
-Since $N^3=0$, polynomial evaluation collapses modulo $z^3$: for every polynomial $p$
-there exist $a,b,c\in\C$ and a polynomial $r$ such that
-\[
-p(z)=a+bz+cz^2+z^3 r(z),
-\qquad\text{hence}\qquad
-p(N)=aI+bN+cN^2.
-\]
-In particular, the numerator $\|p(N)\|_2$ depends only on the triple $(a,b,c)$.
-However, the denominator $\max_{z\in W(N)}|p(z)|$ depends on the full restriction
-of $p$ to $W(N)$ and cannot in general be reduced to degree $2$.
-
-\paragraph{Normalization.}
-For any $p\not\equiv 0$ we may rescale $p$ so that
-\[
-\max_{z\in W(N)} |p(z)|=1,
-\]
-in which case $\Phi_N(p)=\|p(N)\|_2$.
-Thus
-\[
-\mathcal C(N)
-=
-\sup\bigl\{\, \|p(N)\|_2 :
-p\ \text{polynomial},\ 
-\max_{z\in W(N)}|p(z)|=1 \bigr\}.
-\]
-We do not assume that this supremum is attained.
-
-\paragraph{Extremizing sequences.}
-If $\mathcal C(N)>0$, by definition there exists a sequence of polynomials $(p_k)$
-such that
-\[
-\max_{z\in W(N)}|p_k(z)|=1,
-\qquad
-\|p_k(N)\|_2 \longrightarrow \mathcal C(N).
-\]
-Such a sequence will be called an \emph{extremizing sequence} for $N$.
-
-\medskip
-
-The guiding principle of this paper is that equality
-$\mathcal C(N)=2$ can occur only when the extremizing behavior
-exhibits structural degeneracy: either boundary contact for the denominator
-is nonunique, or the top singular value in the numerator develops multiplicity.
-
-\begin{definition}[Active set and structural degeneracy]
-\label{def:degeneracy}
-Let $N\in\mathcal N_3$ and let $(p_k)$ be an extremizing sequence
-normalized by
-\[
-\max_{z\in W(N)} |p_k(z)|=1.
-\]
-
-For each $k$, define the active boundary set
-\[
-\mathcal A(N,p_k)
-=
-\Bigl\{\, z\in\partial W(N):
-|p_k(z)| = 1 \Bigr\}.
-\]
-
-We say that $N$ is \emph{structurally nondegenerate}
-if there exists an extremizing sequence $(p_k)$
-such that, for all sufficiently large $k$:
-
-\begin{enumerate}[label=(ND\arabic*), leftmargin=*]
-\item $\mathcal A(N,p_k)$ is a singleton;
-\item the top singular value of $p_k(N)$ is simple.
-\end{enumerate}
-
-Otherwise, $N$ is called \emph{structurally degenerate}.
-\end{definition}
-
-\begin{remark}[Two explicit degenerate families]
-\label{rem:explicit-degenerate}
-Two algebraic families are immediately degenerate and will play a central role:
-\begin{enumerate}[label=(\alph*), leftmargin=*]
-\item Order-$2$ nilpotents: $N^2=0$.  Equivalently, $N$ has rank $1$ (or $0$) and is unitarily
-similar to a scalar multiple of $E_{12}$.
-\item The $3\times3$ Jordan block (order-$3$ nilpotents), up to unitary similarity and scaling.
-\end{enumerate}
-In addition, degeneracy may arise from nonunique boundary contact in
-$\partial W(N)$ for extremizing sequences, even when $N^2\neq 0$.
-\end{remark}
-
-% ----------------------------------------------------------------
-\section{The nilpotent factor manifold and a hidden symmetry}
-\label{sec:factor-manifold}
-
-In this section we describe the global geometry of the unitary--similarity quotient
-of normalized nilpotent $3\times 3$ matrices and identify a nontrivial symmetry of the
-Crouzeix ratio $\mathcal C$.  This viewpoint will allow us to reduce the extremal problem
-to a one--dimensional analysis.
-
-\subsection{The factor manifold}
-
-Let
-\[
-\mathcal M
-\;:=\;
-\bigl\{\, N\in\mathcal N_3 : \opnorm{N}=1 \,\bigr\}\big/\!\sim_U,
-\]
-where $\sim_U$ denotes unitary similarity.
-We refer to $\mathcal M$ as the \emph{nilpotent factor manifold}.
-
-Two algebraic strata play a distinguished role.
-
-\begin{enumerate}[label=(\roman*), leftmargin=*]
-\item \emph{Rank--one nilpotents.}
-If $N^2=0$ then $\rank(N)\le 1$, and $N$ is unitarily similar to a scalar multiple of $E_{12}$.
-Under the normalization $\opnorm{N}=1$, all such matrices represent a single point in $\mathcal M$,
-which we denote by $[E_{12}]$.
-
-\item \emph{Rank--two nilpotents.}
-If $N^2\neq 0$ then $N$ has nilpotency index $3$ and forms the generic stratum of $\mathcal M$.
-This stratum is two--dimensional.
-\end{enumerate}
-
-A particularly useful unitary--invariant coordinate on $\mathcal M$ is provided by the
-second singular value.
-
-\begin{definition}[Latitude parameter]
-\label{def:t-parameter}
-For $N\in\mathcal N_3$ satisfying $\opnorm{N}=1$, define
-\[
-t(N):=s_2(N).
-\]
-\end{definition}
-
-For strictly upper triangular nilpotent $3\times 3$ matrices one has the exact identity
-\[
-s_2(N)=\opnorm{N^2},
-\]
-so that $t(N)\in[0,1]$.
-
-The extreme values of $t$ correspond to the two algebraic degeneracies.
-
-\begin{itemize}
-\item $t(N)=0$ if and only if $N^2=0$, in which case $[N]=[E_{12}]$.
-\item $t(N)=1$ if and only if $N$ is unitarily similar to the $3\times 3$ Jordan block $J_3$.
-\end{itemize}
-
-Thus the rank--one class $[E_{12}]$ and the Jordan class $[J_3]$ are the two extreme points of
-the $t$--coordinate.
-
-\begin{proposition}[Topology of the factor manifold]
-\label{prop:factor-sphere}
-The quotient space $\mathcal M$ is homeomorphic to the $2$--sphere.
-Under this identification, the classes $[E_{12}]$ and $[J_3]$ correspond to the two poles,
-and the parameter $t\in[0,1]$ plays the role of a latitude coordinate.
-\end{proposition}
-
-\begin{proof}[Proof sketch of Proposition~\ref{prop:factor-sphere}]
-We describe the topology of the quotient
-\[
-\mathcal M
-=
-\{\,N\in\mathcal N_3:\ \opnorm{N}=1\,\}\big/\!\sim_U.
-\]
-
-Every nilpotent $3\times3$ matrix is unitarily similar to a strictly upper triangular matrix.
-After normalization $\opnorm{N}=1$, the rank--two stratum admits the meridian
-parametrization of Section~\ref{sec:meridian}, with parameters $(t,a)$ ranging over the
-triangle
-\[
-\mathcal D=\{(t,a): 0\le t\le1,\ \ t\le a\le1\}.
-\]
-For each fixed $t\in(0,1)$, the parameter $a$ varies over an interval and describes a
-one--parameter family of unitary equivalence classes.
-In addition, multiplication by unimodular scalars induces a continuous $S^1$--action on
-$\mathcal M$ whose orbits are circles for generic rank--two matrices.
-
-Thus, for each $t\in(0,1)$, the corresponding subset of $\mathcal M$ is a compact
-two--dimensional surface obtained by a family of $S^1$--orbits parameterized by $a$.
-As $t\downarrow0$, the entire rank--two family collapses to the single rank--one class
-$[E_{12}]$, while as $t\uparrow1$ it collapses to the single class of the Jordan block
-$[J_3]$.
-
-Topologically, this is exactly the construction of a $2$--sphere obtained by taking a
-cylinder (or annulus) and collapsing each boundary component to a point.
-Hence $\mathcal M$ is homeomorphic to $S^2$, with $[E_{12}]$ and $[J_3]$ as the two poles.
-\end{proof}
-
-\begin{remark}
-The factor manifold $\mathcal M$ has no boundary in the topological sense.
-The apparent ``edges'' at $t=0$ and $t=1$ arise from the collapse of entire strata to single
-points in the unitary quotient.
-\end{remark}
-
-\subsection{A phase--rotation symmetry of the Crouzeix ratio}
-
-We now identify a nontrivial continuous symmetry of $\mathcal C$ on $\mathcal M$.
-
-For $\phi\in\mathbb R$, define the map
-\[
-\Phi_\phi:\ \mathcal N_3\to\mathcal N_3,
-\qquad
-\Phi_\phi(N):=e^{i\phi}N.
-\]
-
-\begin{lemma}[Phase--rotation invariance]
-\label{lem:phase-invariance}
-For all $N\in\mathcal N_3$ and all $\phi\in\mathbb R$,
-\[
-\mathcal C(e^{i\phi}N)=\mathcal C(N).
-\]
-\end{lemma}
-
-\begin{proof}
-Let $r_\phi(z)=e^{i\phi}z$.  Then $\W(e^{i\phi}N)=r_\phi(\W(N))$.
-Given any polynomial $p$, define $q(z)=p(r_\phi(z))$.
-Then $q(N)=p(e^{i\phi}N)$ and
-\[
-\max_{z\in\W(N)}|q(z)|
-=
-\max_{w\in\W(e^{i\phi}N)}|p(w)|.
-\]
-Thus the ratio defining $\mathcal C(e^{i\phi}N)$ for the polynomial $p$ coincides with the
-ratio defining $\mathcal C(N)$ for the polynomial $q$.
-Taking the supremum over all polynomials yields the claim.
-\end{proof}
-
-\begin{remark}[Nontriviality of the action]
-\label{rem:nontrivial-action}
-The map $\Phi_\phi$ is not, in general, a unitary similarity.
-On a dense open subset of $\mathcal M$ it generates free $S^1$--orbits.
-However, the action collapses at the poles:
-\[
-\Phi_\phi(E_{12})\sim_U E_{12},
-\qquad
-\Phi_\phi(J_3)\sim_U J_3,
-\]
-so that $[E_{12}]$ and $[J_3]$ are fixed points of the action.
-\end{remark}
-
-\subsection{The pole cases: $\mathcal C(E_{12})=\mathcal C(J_3)=2$}
-\label{subsec:poles-C-equals-2}
-
-In this subsection we verify directly that the two pole classes satisfy $\mathcal C=2$.
-The argument has two steps: we first show that the numerical range is a disk centered at $0$,
-and then compute $\mathcal C$ using a standard dilation inequality.
-
-\begin{lemma}[Disk numerical range for $E_{12}$]
-\label{lem:W-disk-E12}
-Let $E_{12}\in\C^{3\times3}$ denote the matrix with a single $1$ in the $(1,2)$ entry and
-zeros elsewhere. Then
-\[
-\W(E_{12})=\{z\in\C:\ |z|\le \tfrac12\}.
-\]
-In particular, the numerical radius is $w(E_{12})=\tfrac12$.
-\end{lemma}
-
-\begin{proof}
-For $x=(x_1,x_2,x_3)^\top$ with $\norm{x}=1$,
-\[
-\ip{E_{12}x}{x}=\overline{x_1}\,x_2.
-\]
-Hence $|\ip{E_{12}x}{x}|\le |x_1|\,|x_2|\le \tfrac12(|x_1|^2+|x_2|^2)\le \tfrac12$.
-Conversely, for any $\theta\in \mathbb{R}$ the choice
-$x_1=\tfrac{1}{\sqrt2}$, $x_2=\tfrac{e^{i\theta}}{\sqrt2}$, $x_3=0$ gives
-$\ip{E_{12}x}{x}=\tfrac12 e^{i\theta}$.
-By convexity of $\W(E_{12})$, this yields the full disk of radius $\tfrac12$.
-\end{proof}
-
-\begin{lemma}[Disk numerical range for the $3\times3$ Jordan block]
-\label{lem:W-disk-J3}
-Let
-\[
-J_3=
-\begin{pmatrix}
-0 & 1 & 0\\
-0 & 0 & 1\\
-0 & 0 & 0
-\end{pmatrix}.
-\]
-Then $\W(J_3)$ is the disk centered at $0$ of radius $\frac{\sqrt2}{2}$:
-\[
-\W(J_3)=\{z\in\C:\ |z|\le \tfrac{\sqrt2}{2}\}.
-\]
-In particular, $w(J_3)=\frac{\sqrt2}{2}$.
-\end{lemma}
-
-\begin{proof}
-First note that for each $\theta\in \mathbb{R}$,
-\[
-D_\theta^\ast J_3 D_\theta = e^{i\theta} J_3,
-\qquad
-D_\theta:=\diag(1,e^{i\theta},e^{i2\theta}).
-\]
-Thus $\W(J_3)$ is invariant under rotations about the origin. Since $\W(J_3)$ is compact and
-convex, it follows that $\W(J_3)$ is a disk centered at $0$, with radius equal to the numerical
-radius $w(J_3)$.
-
-To compute the radius, observe that
-\[
-w(J_3)=\max_{\norm{x}=1} \Re\,\ip{J_3x}{x}
-=
-\lambda_{\max}\!\left(\frac{J_3+J_3^\ast}{2}\right).
-\]
-The Hermitian matrix $(J_3+J_3^\ast)/2$ is the tridiagonal matrix with $1/2$ on the first
-super- and subdiagonals:
-\[
-\frac{J_3+J_3^\ast}{2}
-=
-\begin{pmatrix}
-0 & \tfrac12 & 0\\
-\tfrac12 & 0 & \tfrac12\\
-0 & \tfrac12 & 0
-\end{pmatrix}.
-\]
-A direct eigenvalue computation yields eigenvalues $0,\pm \tfrac{\sqrt2}{2}$, hence
-$w(J_3)=\tfrac{\sqrt2}{2}$.
-\end{proof}
-
-\begin{lemma}[Berger's inequality for disk numerical range]
-\label{lem:berger}
-Let $T\in\C^{n\times n}$ and suppose $\W(T)\subseteq \{z:|z|\le r\}$.
-Then for every polynomial $p$,
-\[
-\opnorm{p(T)} \le 2\,\max_{|z|\le r}|p(z)|.
-\]
-Equivalently, $\mathcal C(T)\le 2$ whenever $\W(T)$ is contained in a disk centered at $0$.
-\end{lemma}
-
-\begin{proof}
-Let $w(T)$ denote the numerical radius. The hypothesis implies $w(T)\le r$, hence
-$w(T/r)\le 1$.
-A theorem of Berger (unitary $2$-dilation for operators of numerical radius at most $1$)
-implies the polynomial inequality
-\[
-\opnorm{p(T/r)} \le 2 \max_{|z|\le 1}|p(z)|
-\quad\text{for all polynomials }p.
-\]
-Applying this to $q(z):=p(rz)$ gives
-\[
-\opnorm{p(T)}=\opnorm{q(T/r)} \le 2 \max_{|z|\le 1}|q(z)|
-=2\max_{|w|\le r}|p(w)|.
-\]
-\end{proof}
-
-\begin{proposition}[The pole cases achieve $\mathcal C=2$]
-\label{prop:poles-achieve-2}
-With $E_{12}$ and $J_3$ as above,
-\[
-\mathcal C(E_{12})=2,
-\qquad
-\mathcal C(J_3)=2.
-\]
-\end{proposition}
-
-\begin{proof}
-For $E_{12}$, Lemma~\ref{lem:W-disk-E12} gives $\W(E_{12})=\{ |z|\le 1/2\}$.
-Lemma~\ref{lem:berger} yields $\mathcal C(E_{12})\le 2$.
-On the other hand, taking $p(z)=z$ gives
-\[
-\frac{\opnorm{p(E_{12})}}{\max_{z\in\W(E_{12})}|p(z)|}
-=
-\frac{\opnorm{E_{12}}}{\max_{|z|\le 1/2}|z|}
-=
-\frac{1}{1/2}=2,
-\]
-so $\mathcal C(E_{12})\ge 2$, hence equality.
-
-For $J_3$, Lemma~\ref{lem:W-disk-J3} gives $\W(J_3)=\{ |z|\le \sqrt2/2\}$, so again
-Lemma~\ref{lem:berger} implies $\mathcal C(J_3)\le 2$.
-Taking $p(z)=z^2$ gives $p(J_3)=J_3^2$ and $\opnorm{J_3^2}=1$, while
-$\max_{|z|\le \sqrt2/2}|z^2|=(\sqrt2/2)^2=1/2$, hence
-\[
-\frac{\opnorm{p(J_3)}}{\max_{z\in\W(J_3)}|p(z)|}
-=
-\frac{1}{1/2}=2.
-\]
-Thus $\mathcal C(J_3)\ge 2$, hence equality.
-\end{proof}
-
-\begin{remark}[Reference for Berger's theorem]
-A standard reference for the unitary $2$-dilation theorem for numerical radius $\le 1$
-(and the resulting inequality in Lemma~\ref{lem:berger}) is Berger's original paper.
-Any modern text covering numerical radius dilations may also be cited.
-\end{remark}
-
-\subsection{Reduction to a meridian}
-
-The phase--rotation invariance has an immediate and decisive consequence.
-
-\begin{corollary}[Meridian reduction]
-\label{cor:meridian-reduction}
-The functional $\mathcal C$ is constant along the orbits of $\Phi_\phi$ on $\mathcal M$.
-Consequently, to study the maximizers of $\mathcal C$ on $\mathcal M$, it suffices to restrict
-attention to any transversal slice intersecting each $\Phi_\phi$--orbit once.
-\end{corollary}
-
-\begin{remark}[Geometric interpretation]
-The action $\Phi_\phi$ plays the role of a ``rotation'' about the axis joining the poles
-$[E_{12}]$ and $[J_3]$.  The orbits of this action are the analogues of longitude circles on
-the sphere, and $\mathcal C$ is constant along them.
-\end{remark}
-
-% ----------------------------------------------------------------
-\section{Meridian parametrization and reduction to one dimension}
-\label{sec:meridian}
-
-In this section we make the reduction of Corollary~\ref{cor:meridian-reduction} explicit.
-Exploiting the phase--rotation symmetry, we parametrize a transversal ``meridian'' of the
-factor manifold $\mathcal M$ and thereby reduce the extremal problem for $\mathcal C$ to
-a compact one--dimensional family.
-
-\subsection{A real gauge fixing}
-
-Let $N\in\mathcal N_3$ with $\opnorm{N}=1$ and $N^2\neq 0$.
-By unitary similarity we may assume that $N$ is strictly upper triangular:
-\[
-N
-=
-\begin{pmatrix}
-0 & \alpha & \gamma\\
-0 & 0 & \beta\\
-0 & 0 & 0
-\end{pmatrix}.
-\]
-Using diagonal unitary conjugation we may further arrange that $\alpha,\beta\ge 0$ are real.
-Finally, by the phase--rotation symmetry $\Phi_\phi(N)=e^{i\phi}N$ and
-Lemma~\ref{lem:phase-invariance}, we may choose $\phi$ so that $\gamma\ge 0$ is also real.
-
-Thus every $\Phi_\phi$--orbit in $\mathcal M$ intersects the real cone
-\[
-\mathcal N_3^{\mathrm{real}}
-\;:=\;
-\left\{
-\begin{pmatrix}
-0 & a & c\\
-0 & 0 & b\\
-0 & 0 & 0
-\end{pmatrix}
-:\ a,b,c\ge 0
-\right\}
-\]
-in at least one point.  This slice serves as a meridian for the symmetry.
-
-\subsection{Constraints from normalization}
-
-Let
-\[
-N(a,b,c)
-=
-\begin{pmatrix}
-0 & a & c\\
-0 & 0 & b\\
-0 & 0 & 0
-\end{pmatrix},
-\qquad a,b,c\ge 0,
-\]
-and impose the spectral normalization $\opnorm{N}=1$.
-The nonzero singular values of $N$ are the square roots of the eigenvalues of
-\[
-B
-=
-\begin{pmatrix}
-a^2 & ac\\
-ac & b^2+c^2
-\end{pmatrix}.
-\]
-
-Let $s_1\ge s_2$ denote these singular values.
-Then
-\[
-s_1^2+s_2^2 = \tr(B)=a^2+b^2+c^2,
-\qquad
-s_1^2 s_2^2 = \det(B)=a^2b^2.
-\]
-
-Under the normalization $\opnorm{N}=s_1=1$ and the definition $t=s_2$, we obtain the exact
-relations
-\begin{equation}
-\label{eq:meridian-constraints}
-a^2+b^2+c^2 = 1+t^2,
-\qquad
-ab=t.
-\end{equation}
-
-In particular, $t\in(0,1]$ on the rank--two stratum.
-
-\subsection{Explicit meridian parametrization}
-
-Solving \eqref{eq:meridian-constraints}, we may take $a\in[t,1]$ as a free parameter and set
-\begin{equation}
-\label{eq:abc-param}
-b=\frac{t}{a},
-\qquad
-c=\sqrt{(1-a^2)\left(1-\frac{t^2}{a^2}\right)}.
-\end{equation}
-
-The feasibility condition $c\ge 0$ is equivalent to $t\le a\le 1$.
-Thus the family \eqref{eq:abc-param} parametrizes a closed triangular region
-\[
-\mathcal D
-=
-\{(t,a):\ 0\le t\le 1,\ \ t\le a\le 1\}.
-\]
-
-The boundary of $\mathcal D$ has the following interpretations in $\mathcal M$:
-\begin{itemize}
-\item $t=0$: the entire edge collapses to the single point $[E_{12}]$.
-\item $a=t$: corresponds to $b=1$ and $c=0$.
-\item $a=1$: corresponds to $a=1$, $b=t$, and $c=0$.
-\item $t=1$: forces $a=b=1$ and $c=0$, yielding the single point $[J_3]$.
-\end{itemize}
-
-\subsection{Reduction of the extremal problem}
-
-By Corollary~\ref{cor:meridian-reduction}, the Crouzeix ratio $\mathcal C$ is constant along
-the $\Phi_\phi$--orbits.
-Hence $\mathcal C$ descends to a continuous function on the compact set $\mathcal D$ via
-\[
-(t,a)\ \longmapsto\ \mathcal C\bigl(N(a,b,c)\bigr),
-\]
-with $b,c$ given by \eqref{eq:abc-param}.
-
-In particular,
-\begin{itemize}
-\item $\mathcal C$ attains its maximum on $\mathcal D$;
-\item any interior maximizer $(t,a)$ with $0<t<1$ and $t<a<1$ corresponds to a
-nontrivial $\Phi_\phi$--orbit of maximizers in $\mathcal M$.
-\end{itemize}
-
-The symmetry analysis of the previous section therefore suggests that extremal values of
-$\mathcal C$ can occur only at points where the $\Phi_\phi$--action degenerates, namely
-at the poles $[E_{12}]$ and $[J_3]$.
-
-This heuristic will be made rigorous in the next section by excluding interior maximizers
-on $\mathcal D$.
-
-% ----------------------------------------------------------------
-\section{Exclusion of interior maximizers and proof of the conjecture}
-\label{sec:exclusion}
-
-We now complete the proof of Problem~\ref{prob:nilpotent} by showing that
-$\mathcal C$ cannot attain the value $2$ at any interior point of the meridian
-domain $\mathcal D$.
-Combined with the symmetry and compactness established in the previous sections,
-this will imply that equality can occur only at the two poles of the factor manifold.
-
-\subsection{Consequences of symmetry and degeneracy}
-
-Recall from Lemma~\ref{lem:phase-invariance} that $\mathcal C$ is invariant under the
-phase--rotation action $\Phi_\phi(N)=e^{i\phi}N$.
-On the factor manifold $\mathcal M$, this action has exactly two fixed points:
-the classes $[E_{12}]$ and $[J_3]$.
-Every other point lies on a nontrivial $S^1$--orbit.
-
-Suppose that $N\in\mathcal M$ is such that $\mathcal C(N)$ attains the global maximum
-of $\mathcal C$ over $\mathcal M$.
-Then the entire $\Phi_\phi$--orbit of $N$ also consists of maximizers.
-
-If $N$ is not a fixed point of the action, this orbit is one--dimensional.
-In particular, $N$ cannot be a structurally nondegenerate maximizer in the sense of
-Definition~\ref{def:degeneracy}, since any perturbation along the orbit leaves
-$\mathcal C$ unchanged while altering both the active boundary set and the top singular
-directions of the extremizing polynomial.
-
-Thus any maximizer of $\mathcal C$ must lie in the \emph{degeneracy locus} of the problem.
-
-\subsection{Identification of the degeneracy locus}
-
-Two explicit degenerate families were identified in
-Remark~\ref{rem:explicit-degenerate}:
-\begin{itemize}
-\item[(i)] Order--$2$ nilpotents ($N^2=0$), represented by $[E_{12}]$;
-\item[(ii)] The order--$3$ Jordan block, represented by $[J_3]$.
-\end{itemize}
-
-By Proposition~\ref{prop:factor-sphere}, these two classes are precisely the poles of
-the factor manifold $\mathcal M$.
-All other points of $\mathcal M$ belong to the rank--two stratum and lie on nontrivial
-$\Phi_\phi$--orbits.
-
-In particular, any interior point of the meridian domain $\mathcal D$ corresponds to
-a rank--two nilpotent matrix $N$ with $N^2\neq 0$ and $N\not\sim_U J_3$.
-
-\subsection{A quantitative interior gap: excluding $\mathcal C=2$ away from the poles}
-\label{subsec:interior-gap}
-
-The argument in the previous subsection shows that if a maximizer of $\mathcal C$ is not a fixed point of the
-phase--rotation action $\Phi_\phi(N)=e^{i\phi}N$, then it must be \emph{structurally degenerate} in the sense of
-Definition~\ref{def:degeneracy}.  However, structural degeneracy is a weaker condition than being a fixed point of
-$\Phi_\phi$, and the two notions should not be conflated.  To complete the proof we therefore replace the qualitative
-``degeneracy'' argument by a \emph{quantitative} statement: $\mathcal C$ stays strictly below $2$ on every compact
-subset of the rank--two stratum.
-
-By the meridian parametrization of Section~\ref{sec:meridian}, every class in the rank--two stratum has a representative
-\[
-N(t,a)=
-\begin{pmatrix}
-0 & a & c\\
-0 & 0 & b\\
-0 & 0 & 0
-\end{pmatrix},
-\qquad
-b=\frac{t}{a},
-\qquad
-c=\sqrt{(1-a^2)\Bigl(1-\frac{t^2}{a^2}\Bigr)},
-\]
-with $(t,a)$ ranging over the compact triangle
-\[
-\mathcal D=\{(t,a): 0\le t\le 1,\ \ t\le a\le 1\}.
-\]
-We write
-\[
-\mathcal C(t,a)\;:=\;\mathcal C\bigl(N(t,a)\bigr).
-\]
-
-\begin{proposition}[Uniform interior gap]
-\label{prop:uniform-interior-gap}
-For every $\varepsilon\in(0,\tfrac12)$ there exists $\delta=\delta(\varepsilon)>0$ such that
-\[
-\mathcal C(t,a)\ \le\ 2-\delta
-\qquad
-\text{for all } (t,a)\in\mathcal D_\varepsilon
-:=\{(t,a)\in\mathcal D:\ \varepsilon\le t\le 1-\varepsilon\}.
-\]
-Equivalently, $\sup_{\mathcal D_\varepsilon}\mathcal C<2$.
-\end{proposition}
-
-\begin{remark}[Why Proposition~\ref{prop:uniform-interior-gap} closes the gap]
-Once Proposition~\ref{prop:uniform-interior-gap} is established, the global maximum of $\mathcal C$ on $\mathcal M$
-must occur in the complementary set $\mathcal D\setminus \mathcal D_\varepsilon$, and letting $\varepsilon\downarrow 0$
-forces any maximizing sequence to approach one of the poles.  Since $[E_{12}]$ and $[J_3]$ are the only points with
-$t=0$ and $t=1$, this reduces equality $\mathcal C=2$ to those two classes.
-\end{remark}
-
-\paragraph{Plan of proof of Proposition~\ref{prop:uniform-interior-gap}.}
-The proof has two steps.
-
-\begin{enumerate}[label=(\roman*), leftmargin=*]
-\item \emph{Compactness and continuity.}
-We first record that $(t,a)\mapsto \mathcal C(t,a)$ is continuous on $\mathcal D$.  Hence $\mathcal C$ attains a maximum
-on each compact subset of $\mathcal D$, in particular on $\mathcal D_\varepsilon$.
-
-\item \emph{Excluding the value $2$ in the interior.}
-We then show that $\mathcal C(t,a)=2$ cannot occur at any point of $\mathcal D_\varepsilon$.
-Concretely, we derive necessary structural conditions for equality $\mathcal C(N)=2$ for nilpotent $3\times 3$ matrices
-(equality forces simultaneous degeneracy in the boundary contact for the extremizing quadratic and in the top singular
-value of $p(N)$), and we prove that these conditions can only be met at the poles.
-\end{enumerate}
-
-Both steps are implemented in the next two subsections:
-continuity is proved in Lemma~\ref{lem:C-continuous} below, while the exclusion of $\mathcal C=2$ on $\mathcal D_\varepsilon$
-is reduced to an explicit ``equality structure'' lemma for quadratic extremizers (Lemma~\ref{lem:equality-structure})
-together with a rigidity argument on the meridian family (Lemma~\ref{lem:rigidity-meridian}).
-
-\subsection{Continuity of the Crouzeix ratio on the meridian domain}
-\label{subsec:continuity}
-
-We begin by recording a basic regularity property of the Crouzeix ratio on the meridian
-family.
-
-\begin{lemma}[Continuity of $\mathcal C$]
-\label{lem:C-continuous}
-The map
-\[
-(t,a)\ \longmapsto\ \mathcal C\bigl(N(t,a)\bigr)
-\]
-is continuous on the compact domain
-\[
-\mathcal D=\{(t,a): 0\le t\le 1,\ \ t\le a\le 1\}.
-\]
-\end{lemma}
-
-\begin{proof}
-It suffices to prove that $N\mapsto\mathcal C(N)$ is continuous on the set of
-nilpotent $3\times3$ matrices with $\|N\|_2=1$, since $(t,a)\mapsto N(t,a)$
-is continuous on $\mathcal D$.
-
-Recall
-\[
-\mathcal C(N)
-=
-\sup_{p\not\equiv 0}
-\frac{\|p(N)\|_2}{\max_{z\in W(N)}|p(z)|}.
-\]
-
-\smallskip
-\noindent
-\emph{Upper semicontinuity.}
-Let $N_k\to N$ in operator norm.
-Fix $\varepsilon>0$.
-Choose a polynomial $p$ such that
-\[
-\mathcal C(N)
-\le
-\frac{\|p(N)\|_2}{\max_{z\in W(N)}|p(z)|}
-+\varepsilon.
-\]
-Since polynomial evaluation is continuous,
-\[
-\|p(N_k)\|_2\to \|p(N)\|_2.
-\]
-Moreover, the numerical range depends continuously on $N$ in the Hausdorff metric,
-so
-\[
-\max_{z\in W(N_k)}|p(z)|\to \max_{z\in W(N)}|p(z)|.
-\]
-Hence
-\[
-\limsup_{k\to\infty} \mathcal C(N_k)
-\le
-\mathcal C(N)+\varepsilon.
-\]
-Since $\varepsilon>0$ is arbitrary,
-\[
-\limsup_{k\to\infty} \mathcal C(N_k)
-\le
-\mathcal C(N).
-\]
-
-\smallskip
-\noindent
-\emph{Lower semicontinuity.}
-Fix $\varepsilon>0$ and choose a polynomial $p$ such that
-\[
-\mathcal C(N)
-\ge
-\frac{\|p(N)\|_2}{\max_{z\in W(N)}|p(z)|}
--\varepsilon.
-\]
-As above,
-\[
-\|p(N_k)\|_2\to \|p(N)\|_2
-\quad\text{and}\quad
-\max_{z\in W(N_k)}|p(z)|\to \max_{z\in W(N)}|p(z)|.
-\]
-Therefore
-\[
-\liminf_{k\to\infty} \mathcal C(N_k)
-\ge
-\mathcal C(N)-\varepsilon.
-\]
-Since $\varepsilon>0$ is arbitrary,
-\[
-\liminf_{k\to\infty} \mathcal C(N_k)
-\ge
-\mathcal C(N).
-\]
-
-\smallskip
-Combining upper and lower semicontinuity gives
-\[
-\lim_{k\to\infty} \mathcal C(N_k)=\mathcal C(N).
-\]
-Thus $\mathcal C$ is continuous in $N$, and hence continuous in $(t,a)$.
-\end{proof}
-
-\begin{remark}
-Lemma~\ref{lem:C-continuous} ensures that $\mathcal C$ attains its maximum on every compact
-subset of $\mathcal D$, in particular on the truncated domains
-$\mathcal D_\varepsilon=\{(t,a): \varepsilon\le t\le 1-\varepsilon\}$.
-This compactness will be used crucially in the proof of
-Proposition~\ref{prop:uniform-interior-gap}.
-\end{remark}
-
-\subsection{Necessary equality structure under $\mathcal C(N)=2$}
-\label{subsec:equality-structure}
-
-We next identify structural conditions that are \emph{necessary} for equality
-$\mathcal C(N)=2$ in the nilpotent $3\times 3$ case.
-These conditions will later be shown to fail uniformly on the interior of the
-meridian domain.
-
-Since $N^3=0$, for each polynomial $p$ there exists a quadratic $q$
-such that $p(N)=q(N)$.
-
-\begin{lemma}[Equality forces simultaneous degeneracy]
-\label{lem:equality-structure}
-If $\mathcal C(N)=2$, then there exists a sequence of polynomials
-$p_k$ normalized by
-\[
-\max_{z\in W(N)}|p_k(z)|=1,
-\]
-such that
-\[
-\|p_k(N)\|_2 \longrightarrow 2,
-\]
-and along this sequence the following two properties must fail
-eventually:
-
-\begin{enumerate}[label=(E\arabic*), leftmargin=*]
-\item the active boundary set
-\[
-\mathcal A(N,p_k)
-=\{\,z\in\partial\W(N): |p_k(z)|=1\,\}
-\]
-cannot be a singleton for all sufficiently large $k$;
-
-\item the top singular value of $p_k(N)$ cannot remain simple
-for all sufficiently large $k$.
-\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-Assume $\mathcal C(N)=2$.
-By definition of the supremum, for each $k$ there exists a polynomial
-$p_k$ such that
-\[
-\frac{\|p_k(N)\|_2}{\max_{z\in W(N)}|p_k(z)|}
->
-2-\frac{1}{k}.
-\]
-Normalizing so that
-\[
-\max_{z\in W(N)}|p_k(z)|=1,
-\]
-we obtain
-\[
-\|p_k(N)\|_2 > 2-\frac{1}{k}.
-\]
-
-We argue by contradiction.
-
-\medskip
-\noindent
-\emph{(E1) Singleton boundary contact.}
-Suppose that for infinitely many $k$ the active boundary set
-$\mathcal A(N,p_k)$ consists of a single point.
-At such a polynomial the constraint
-\[
-\max_{z\in W(N)}|p(z)|=1
-\]
-is locally nondegenerate: small perturbations of $p_k$
-that preserve the contact at that boundary point
-strictly decrease the denominator.
-Since the map $p\mapsto p(N)$ is linear
-and the operator norm is directionally differentiable,
-one can choose a perturbation direction
-that increases $\|p(N)\|_2$ to first order
-while preserving feasibility to first order.
-This yields
-\[
-\Phi_N(p_k+\varepsilon \dot p)
->
-\Phi_N(p_k)
-\]
-for sufficiently small $\varepsilon>0$,
-contradicting the fact that
-$\Phi_N(p_k)\to 2=\mathcal C(N)$.
-Hence the active boundary set cannot remain a singleton
-along a maximizing sequence.
-
-\medskip
-\noindent
-\emph{(E2) Simple top singular value.}
-Suppose instead that along a subsequence
-the top singular value of $p_k(N)$ is simple.
-At such points the operator norm is Fr\'echet differentiable.
-Therefore there exists a perturbation direction
-$\dot p$ such that
-\[
-\frac{d}{d\varepsilon}\Big|_{\varepsilon=0}
-\| (p_k+\varepsilon \dot p)(N)\|_2
-> 0.
-\]
-Since the denominator constraint is already
-degenerate by the previous argument,
-one can choose $\dot p$ so that the first--order variation
-of $\max_{z\in W(N)}|p(z)|$ vanishes.
-This again produces a perturbation
-that increases the quotient,
-contradicting near--maximality.
-
-\medskip
-Therefore, if $\mathcal C(N)=2$,
-every maximizing sequence must exhibit
-simultaneous degeneracy:
-nonunique boundary contact and
-non-simple top singular value.
-\end{proof}
-
-\begin{remark}[Interpretation]
-Lemma~\ref{lem:equality-structure} shows that equality $\mathcal C(N)=2$ is a highly
-nongeneric phenomenon.
-It can occur only when the extremizing quadratic polynomial exhibits degeneracy both in
-the boundary maximization over $\W(N)$ and in the singular value structure of $p(N)$.
-The next subsection shows that such simultaneous degeneracy cannot occur uniformly on
-the interior of the meridian domain.
-\end{remark}
-
-\subsection{Rigidity on the meridian family}
-\label{subsec:rigidity}
-
-We now show that the simultaneous degeneracies identified in
-Lemma~\ref{lem:equality-structure} cannot occur on the interior of the meridian
-domain. This completes the proof of Proposition~\ref{prop:uniform-interior-gap}.
-
-\begin{lemma}[Rotation invariance forces $c=0$]
-\label{lem:rotation-invariance}
-Let
-\[
-N=\begin{pmatrix}0&a&c\\0&0&b\\0&0&0\end{pmatrix}
-\quad (a,b\ge 0).
-\]
-If there exists a one-parameter family of diagonal unitaries $U_\theta$
-such that $U_\theta^\ast N U_\theta = e^{i\theta}N$ for all $\theta$,
-then $c=0$.  In particular, if $c>0$ then $W(N)$ is not rotation invariant and hence is not a disk.
-\end{lemma}
-
-\begin{proof}
-Write $U_\theta=\diag(e^{i\alpha_1\theta},e^{i\alpha_2\theta},e^{i\alpha_3\theta})$.
-The relation $U_\theta^\ast N U_\theta=e^{i\theta}N$ forces
-
-\[
-e^{i(\alpha_2-\alpha_1)\theta}=e^{i\theta}\quad\text{from the $(1,2)$ entry},
-\qquad
-e^{i(\alpha_3-\alpha_2)\theta}=e^{i\theta}\quad\text{from the $(2,3)$ entry}.
-\]
-Hence $\alpha_2-\alpha_1=1$ and $\alpha_3-\alpha_2=1$, so $\alpha_3-\alpha_1=2$.
-But the $(1,3)$ entry would then transform by $e^{i(\alpha_3-\alpha_1)\theta}=e^{i2\theta}$, which cannot
-equal $e^{i\theta}$ for all $\theta$ unless that entry is zero, i.e.\ $c=0$.
-\end{proof}
-
-
-\begin{lemma}[The $c=0$ family is strictly subextremal for $t\in(0,1)$]
-\label{lem:c0-family}
-For $t\in(0,1)$ let
-\[
-S_t=\begin{pmatrix}0&1&0\\0&0&t\\0&0&0\end{pmatrix}.
-\]
-Then $W(S_t)$ is the disk centered at $0$ of radius
-\[
-w(S_t)=\frac12\sqrt{1+t^2},
-\]
-and
-\[
-\mathcal C(S_t)
-=
-\max\!\left\{\frac{2}{\sqrt{1+t^2}},\ \frac{4t}{1+t^2}\right\}
-<2
-\qquad (t\in(0,1)).
-\]
-\end{lemma}
-
-\begin{proof}
-Let $D_\theta=\diag(1,e^{i\theta},e^{i2\theta})$. Then $D_\theta^\ast S_t D_\theta=e^{i\theta}S_t$,
-so $W(S_t)$ is rotation invariant; since $W(S_t)$ is compact convex, it is a disk centered at $0$.
-
-Its radius equals the numerical radius:
-\[
-w(S_t)=\max_{\|x\|=1}\Re\langle S_tx,x\rangle
-=\lambda_{\max}\!\left(\frac{S_t+S_t^\ast}{2}\right).
-\]
-Now
-\[
-\frac{S_t+S_t^\ast}{2}=
-\begin{pmatrix}
-0 & \frac12 & 0\\[2pt]
-\frac12 & 0 & \frac{t}{2}\\[2pt]
-0 & \frac{t}{2} & 0
-\end{pmatrix},
-\]
-whose eigenvalues are $0,\pm \frac12\sqrt{1+t^2}$, so $w(S_t)=\frac12\sqrt{1+t^2}$.
-
-Define the rescaled matrix
-\[
-T:=\frac{S_t}{w(S_t)}.
-\]
-Then $W(T)=\overline{\D}$ and
-\[
-T=\begin{pmatrix}0&\alpha&0\\0&0&\beta\\0&0&0\end{pmatrix},
-\qquad
-\alpha=\frac{1}{w(S_t)}=\frac{2}{\sqrt{1+t^2}},
-\qquad
-\beta=\frac{t}{w(S_t)}=\frac{2t}{\sqrt{1+t^2}}.
-\]
-In particular,
-\[
-\|T\|_2=\alpha,
-\qquad
-\|T^2\|_2=\alpha\beta=\frac{4t}{1+t^2}.
-\]
-By scale invariance of $\mathcal C$ we have $\mathcal C(S_t)=\mathcal C(T)$, and since
-$W(T)=\overline{\D}$,
-\[
-\mathcal C(T)
-=\sup\Bigl\{\ \|q(T)\|_2:\ q \text{ polynomial},\ \|q\|_{\infty,\D}\le 1\ \Bigr\}.
-\]
-
-\smallskip
-\noindent\emph{Upper bound.}
-We show that for every polynomial $q$ with $\|q\|_{\infty,\D}\le 1$,
-\begin{equation}
-\label{eq:two-line-vn-bound}
-\|q(T)\|_2
-\;\le\;
-\max\{\|T\|_2,\|T^2\|_2\}
-\;=\;
-\max\{\alpha,\alpha\beta\}.
-\end{equation}
-Let $M:=\max\{\alpha,\alpha\beta\}$ and choose a positive diagonal matrix $S$ so that
-\[
-C:=S^{-1}TS
-\quad\text{satisfies}\quad
-\|C\|_2\le 1,
-\qquad
-\|S\|_2\,\|S^{-1}\|_2=M.
-\]
-There are two cases.
-
-\emph{Case 1: $\beta\le 1$ (equivalently $t\le 1/\sqrt3$).}
-Take $S=\diag(1,1/\alpha,1/\alpha)$. Then
-\[
-C=S^{-1}TS=\begin{pmatrix}0&1&0\\0&0&\beta\\0&0&0\end{pmatrix},
-\]
-so $\|C\|_2=\max\{1,\beta\}=1$, and $\|S\|_2=1$, $\|S^{-1}\|_2=\alpha$, hence
-$\|S\|_2\|S^{-1}\|_2=\alpha=M$.
-
-\emph{Case 2: $\beta\ge 1$ (equivalently $t\ge 1/\sqrt3$).}
-Take $S=\diag(1,1/\alpha,1/(\alpha\beta))$. Then
-\[
-C=S^{-1}TS=\begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix},
-\]
-so $\|C\|_2=1$, and $\|S\|_2=1$, $\|S^{-1}\|_2=\alpha\beta$, hence
-$\|S\|_2\|S^{-1}\|_2=\alpha\beta=M$.
-
-In either case, $C$ is a contraction. By von Neumann's inequality,
-for every polynomial $q$ with $\|q\|_{\infty,\D}\le 1$ we have
-\[
-\|q(C)\|_2\le 1.
-\]
-Since $q(T)=S\,q(C)\,S^{-1}$,
-\[
-\|q(T)\|_2\le \|S\|_2\,\|q(C)\|_2\,\|S^{-1}\|_2\le \|S\|_2\|S^{-1}\|_2=M,
-\].
-
-\smallskip
-\noindent\emph{Lower bound.}
-The polynomials $q(z)=z$ and $q(z)=z^2$ satisfy $\|q\|_{\infty,\D}=1$ and yield
-\[
-\|q(T)\|_2=\|T\|_2=\alpha,
-\qquad
-\|q(T)\|_2=\|T^2\|_2=\alpha\beta.
-\]
-Hence $\mathcal C(T)\ge \max\{\alpha,\alpha\beta\}$.
-
-Combining the upper and lower bounds gives
-\[
-\mathcal C(S_t)=\mathcal C(T)=\max\{\alpha,\alpha\beta\}
-=
-\max\!\left\{\frac{2}{\sqrt{1+t^2}},\ \frac{4t}{1+t^2}\right\}.
-\]
-This is strictly less than $2$ for $t\in(0,1)$ (and equals $2$ only at $t=0$ and $t=1$).
-\end{proof}
-
-\begin{lemma}[Flat portions are isolated: an explicit characterization]
-\label{lem:uniform-convexity}
-Let
-\[
-N=\begin{pmatrix}0&a&c\\0&0&b\\0&0&0\end{pmatrix},
-\qquad a,b,c>0,
-\]
-and for $\theta\in\R$ define
-\[
-H(\theta):=\Re(e^{-i\theta}N)=\frac12\bigl(e^{-i\theta}N+e^{i\theta}N^\ast\bigr).
-\]
-Then the support function of $W(N)$ is
-\[
-h(\theta)=\lambda_{\max}(H(\theta)).
-\]
-Moreover, the supporting line to $W(N)$ with outward normal $e^{i\theta}$ touches $\partial W(N)$ in more
-than one point (i.e.\ $\partial W(N)$ has a flat portion with normal $e^{i\theta}$) \emph{if and only if}
-$\lambda_{\max}(H(\theta))$ has multiplicity at least two.
-
-For the above $N$ this can happen \emph{only} in the following exceptional situation:
-\[
-\cos\theta=-1
-\quad\text{and}\quad
-a=b=c.
-\]
-In particular, if $a,b,c>0$ and $a,b,c$ are not all equal, then $\partial W(N)$ has no flat portions.
-\end{lemma}
-
-\begin{proof}
-The identity $h(\theta)=\lambda_{\max}(H(\theta))$ is standard: for any matrix $T$,
-\[
-\max_{z\in W(T)}\Re(e^{-i\theta}z)=\lambda_{\max}\bigl(\Re(e^{-i\theta}T)\bigr).
-\]
-
-Next, the supporting line with outward normal $e^{i\theta}$ touches $\partial W(N)$ in more than one point
-if and only if the maximizer of $x^\ast H(\theta)x$ over $\|x\|=1$ is non-unique, which holds if and only if
-the maximal eigenvalue of the Hermitian matrix $H(\theta)$ has multiplicity $\ge 2$.
-
-We now characterize when $\lambda_{\max}(H(\theta))$ can be multiple.
-A direct determinant computation gives the characteristic polynomial of $H(\theta)$:
-\begin{equation}
-\label{eq:H-charpoly}
-\det(\lambda I-H(\theta))
-=
-\lambda^3-p\,\lambda-q\cos\theta,
-\qquad
-p:=\frac{a^2+b^2+c^2}{4},\quad
-q:=\frac{abc}{4}.
-\end{equation}
-(One may verify \eqref{eq:H-charpoly} by expanding $\det(\lambda I-H(\theta))$ using the explicit entries of $H(\theta)$.)
-
-A multiple eigenvalue occurs if and only if the cubic in \eqref{eq:H-charpoly} has a multiple real root, i.e.,
-if and only if it shares a root with its derivative:
-\[
-(\lambda^3-p\lambda-q\cos\theta)=0,
-\qquad
-(3\lambda^2-p)=0.
-\]
-Thus any multiple root must be of the form $\lambda=\pm\sqrt{p/3}$.
-Substituting $\lambda=\sqrt{p/3}$ into \eqref{eq:H-charpoly} yields
-\[
-0=\left(\frac{p}{3}\right)^{3/2}-p\left(\frac{p}{3}\right)^{1/2}-q\cos\theta
-=
--\frac{2}{3\sqrt3}\,p^{3/2}-q\cos\theta,
-\]
-hence a double root at $+\sqrt{p/3}$ (which is the only way the \emph{top} eigenvalue can fail to be simple)
-forces
-\begin{equation}
-\label{eq:top-double-condition}
-q\cos\theta=-\frac{2}{3\sqrt3}\,p^{3/2}.
-\end{equation}
-Since $q>0$ and $\cos\theta\in[-1,1]$, \eqref{eq:top-double-condition} implies $\cos\theta=-1$ and
-\begin{equation}
-\label{eq:q-equality}
-q=\frac{2}{3\sqrt3}\,p^{3/2}.
-\end{equation}
-
-We now show \eqref{eq:q-equality} holds if and only if $a=b=c$.
-Indeed, the AM--GM inequality gives
-\[
-\frac{a^2+b^2+c^2}{3}\ge (a^2b^2c^2)^{1/3}=(abc)^{2/3},
-\]
-so
-\[
-(a^2+b^2+c^2)^{3/2}\ge 3\sqrt3\,abc,
-\]
-with equality if and only if $a=b=c$.
-Rewriting this in terms of $p$ and $q$ gives exactly
-\[
-q\le \frac{2}{3\sqrt3}\,p^{3/2},
-\]
-with equality if and only if $a=b=c$.
-Therefore \eqref{eq:top-double-condition} can occur only when $\cos\theta=-1$ and $a=b=c$.
-
-This proves the stated characterization of flat portions.
-\end{proof}
-
-\begin{lemma}[Rigidity away from the poles]
-\label{lem:rigidity-meridian}
-Fix $\varepsilon\in(0,\tfrac12)$ and let
-\[
-\mathcal D_\varepsilon:=\{(t,a)\in\mathcal D:\ \varepsilon\le t\le 1-\varepsilon\}.
-\]
-Then
-\[
-\sup_{(t,a)\in\mathcal D_\varepsilon}\ \mathcal C\bigl(N(t,a)\bigr)\;<\;2.
-\]
-In particular, $\mathcal C\bigl(N(t,a)\bigr)=2$ does not occur on $\mathcal D_\varepsilon$.
-\end{lemma}
-
-\begin{proof}
-Write $N(t,a)=\begin{psmallmatrix}0&a&c\\0&0&b\\0&0&0\end{psmallmatrix}$
-with $b=t/a$ and $c=\sqrt{(1-a^2)(1-t^2/a^2)}\ge 0$.
-
-We split $\mathcal D_\varepsilon$ into the edge set where $c=0$ and its complement:
-\[
-\Gamma_\varepsilon:=\{(t,a)\in\mathcal D_\varepsilon:\ c(t,a)=0\},
-\qquad
-\Omega_\varepsilon:=\mathcal D_\varepsilon\setminus \Gamma_\varepsilon.
-\]
-
-\medskip
-\noindent\emph{Step 1: the edge set $\Gamma_\varepsilon$ (where $c=0$).}
-On $\Gamma_\varepsilon$ we have either $a=t$ or $a=1$, hence $c=0$.
-In either case $N(t,a)$ is unitarily similar (by permuting basis vectors if needed) to the
-weighted shift $S_t$ from Lemma~\ref{lem:c0-family}.
-Therefore,
-\[
-\sup_{(t,a)\in\Gamma_\varepsilon}\mathcal C(N(t,a))
-=
-\sup_{t\in[\varepsilon,1-\varepsilon]}\mathcal C(S_t)
-<2
-\]
-by Lemma~\ref{lem:c0-family}.
-
-\medskip
-\noindent\emph{Step 2: the region with $c>0$.}
-On $\Omega_\varepsilon$ we have $c>0$.  However, $\Omega_\varepsilon$ accumulates at the edge set
-$\Gamma_\varepsilon$ where $c=0$, so we first obtain a uniform gap on $\Gamma_\varepsilon$ and then extend it
-to a neighborhood of $\Gamma_\varepsilon$ by continuity.
-
-Set
-\[
-m_\varepsilon := \sup_{(t,a)\in\Gamma_\varepsilon}\ \mathcal C\bigl(N(t,a)\bigr).
-\]
-By Step~1 we have $m_\varepsilon<2$; define $\delta_\varepsilon^{(1)} := \tfrac12(2-m_\varepsilon)>0$.
-By continuity of $(t,a)\mapsto \mathcal C(t,a)$ on $\mathcal D$ (Lemma~\ref{lem:C-continuous}),
-there exists an open neighborhood $U_\varepsilon$ of $\Gamma_\varepsilon$ in $\mathcal D$ such that
-\[
-\mathcal C(t,a)\ \le\ m_\varepsilon+\delta_\varepsilon^{(1)}
-\ =\ 2-\delta_\varepsilon^{(1)}
-\qquad\text{for all }(t,a)\in U_\varepsilon\cap\mathcal D_\varepsilon.
-\]
-In particular, $\mathcal C<2$ holds on a full neighborhood of the edge set, including points with $c>0$ but
-sufficiently close to $\Gamma_\varepsilon$.
-
-Now let
-\[
-K_\varepsilon := \mathcal D_\varepsilon \setminus U_\varepsilon.
-\]
-Then $K_\varepsilon$ is compact and satisfies $c(t,a)>0$ for all $(t,a)\in K_\varepsilon$.
-By compactness there exists $c_{\min}=c_{\min}(\varepsilon)>0$ such that
-\[
-c(t,a)\ \ge\ c_{\min}\qquad\text{for all }(t,a)\in K_\varepsilon.
-\]
-On $K_\varepsilon$ the boundary $\partial W(N(t,a))$ is $C^1$ and strictly convex (no flat portions),
-and each supporting line touches $\partial W(N(t,a))$ at a unique point
-(see Lemma~\ref{lem:uniform-convexity}).
-
-Therefore the simultaneous degeneracy conditions (E1)--(E2) of Lemma~\ref{lem:equality-structure}
-cannot occur on $K_\varepsilon$, and hence $\mathcal C(t,a)<2$ for all $(t,a)\in K_\varepsilon$.
-Since $\mathcal C$ is continuous and $K_\varepsilon$ is compact, it attains a maximum there; set
-$m_\varepsilon^{(2)}:=\sup_{K_\varepsilon}\mathcal C<2$ and define $\delta_\varepsilon^{(2)}:=\tfrac12(2-m_\varepsilon^{(2)})>0$.
-
-Combining the neighborhood estimate on $U_\varepsilon\cap\mathcal D_\varepsilon$ with the compact estimate on
-$K_\varepsilon$ yields
-\[
-\sup_{(t,a)\in\mathcal D_\varepsilon}\mathcal C(t,a)
-\le
-2-\min\{\delta_\varepsilon^{(1)},\delta_\varepsilon^{(2)}\}
-<2,
-\]
-as claimed.
-
-\medskip
-Combining Step~1 and Step~2 yields $\sup_{\mathcal D_\varepsilon}\mathcal C<2$.
-\end{proof}
-
-\subsection{Completion of the proof}
-
-We now summarize the argument.
-
-\begin{theorem}[Crouzeix's conjecture for nilpotent $3\times 3$ matrices]
-\label{thm:nilpotent-3x3}
-For every nilpotent matrix $N\in\C^{3\times 3}$,
-\[
-\mathcal C(N)\le 2.
-\]
-Moreover, equality holds if and only if $N$ is unitarily similar to a scalar multiple of
-either $E_{12}$ or the $3\times 3$ Jordan block $J_3$.
+\begin{abstract}
+Fix a closed connected PL \(d\)-manifold \(M\), where \(d\ge2\).  For each
+\(n\), let \(G(n)\) be the graph whose vertices are the simplicial
+triangulations of \(M\) with \(n\) vertices, with an edge for each
+vertex-preserving bistellar flip, and let \(C(n)\) be its set of connected
+components.  We form a directed graph \(\mathcal C\) whose vertices are the
+elements of \(C(n)\), over all \(n\).  There is an edge from
+\(U\in C(n)\) to \(V\in C(n+1)\) when a facet subdivision---equivalently, a
+\(1\)--\((d+1)\) bistellar move---takes some triangulation in \(U\) to a
+triangulation in \(V\).
+
+We prove that every vertex of \(\mathcal C\) has out-degree one: every facet
+subdivision of every triangulation in \(U\) lies in the same component of
+\(G(n+1)\).  Since the full Pachner graph of \(M\) is connected, the
+underlying undirected graph of \(\mathcal C\) is a graded tree.  Consequently,
+the directed rays from any two components eventually meet.  The unique path
+between two components, which we call their \emph{canonical component path},
+lifts to a Pachner sequence consisting first of facet subdivisions, then of
+vertex-preserving bistellar moves, and finally of inverse facet subdivisions.
+
+A chosen triangulation determines a monotone closure containing exactly one
+fixed-vertex component at each higher level.  Let \(n_0\) be the minimum
+number of vertices in a triangulation of \(M\).  When \(G(n_0)\) is connected,
+its stabilization ray is a distinguished \emph{trunk}.  For \(S^3\), the
+trunk begins at the boundary of the \(4\)-simplex.  We prove that it contains
+every triangulated \(3\)-sphere with at most \(11\) vertices, every
+\(12\)-vertex seed sphere with minimum edge valence at least \(4\), and every
+facet subdivision of each of the four known unflippable \(3\)-spheres.  For
+four surfaces whose flip graphs are disconnected at the minimum level, all
+components merge after one facet subdivision; one example merges \(59\)
+isolated components at once.  Examples from the \(3\)-torus and the
+Bagchi--Datta family illustrate unflippable behavior beyond \(S^3\) and in
+arbitrarily high dimensions.
+\end{abstract}
+
+\section{Introduction}
+\label{sec:introduction}
+
+Pachner's theorem states that any two PL-homeomorphic triangulations of a
+closed manifold are related by a finite sequence of bistellar moves
+\cite{P91}.  Thus, the full Pachner graph of a fixed closed PL manifold is
+connected.  Its horizontal slices, obtained by fixing the number of vertices
+and allowing only vertex-preserving bistellar moves, need not be connected.
+The purpose of this paper is to describe how the components of these slices
+fit together as the number of vertices increases.
+
+Fix a closed connected PL \(d\)-manifold \(M\), where \(d\ge2\).  Let
+\(G(n)\) be the graph whose vertices are the simplicial triangulations of
+\(M\) with \(n\) vertices, with an edge for each vertex-preserving bistellar
+move.  Write
+\[
+ C(n)=\pi_0\bigl(G(n)\bigr)
+\]
+for the set of connected components of \(G(n)\).  Since \(M\) is fixed, we
+suppress it from the notation.  When several manifolds are compared, we
+restore the subscript and write \(G_M(n)\) and \(C_M(n)\).
+
+Form a directed graph \(\mathcal C\) whose vertices are the elements of
+\(C(n)\), over all \(n\).  There is a directed edge from \(U\in C(n)\) to
+\(V\in C(n+1)\) if some facet subdivision of some triangulation in \(U\)
+belongs to \(V\).  Our main theorem is the following.
+
+\begin{theorem*}[Component Stabilization Theorem]
+Every vertex of \(\mathcal C\) has out-degree one.  Equivalently, if \(P\)
+and \(Q\) lie in the same component of \(G(n)\), then every facet subdivision
+of \(P\) is connected by vertex-preserving bistellar moves to every facet
+subdivision of \(Q\).
+\end{theorem*}
+
+The same local argument works in every dimension.  After a new vertex is
+inserted into a facet, it can be slid across a common ridge into an adjacent
+facet by a \(2\)--\(d\) move followed by a \(d\)--\(2\) move.  Since the
+facet-adjacency graph of a connected closed triangulated manifold is
+connected, all choices of the subdivided facet give triangulations in one
+component of \(G(n+1)\).  A vertex-preserving bistellar move downstairs can
+then be performed upstairs by choosing the subdivided facet outside its
+support.
+
+The global consequences follow from the Component Stabilization Theorem
+together with Pachner's theorem.  The full Pachner graph is connected, and
+the grading of \(\mathcal C\), together with the unique upward edge from each
+vertex, rules out cycles.  Hence the underlying undirected graph of
+\(\mathcal C\) is a graded tree.  The directed rays from any two components
+eventually meet, and the unique path between them rises from both ends to
+their first common stabilization.  We call this route the \emph{canonical
+component path}.  Its lift to triangulations is worth stating separately.
+
+\begin{corollary*}[Canonical component paths]
+Any two simplicial triangulations \(P\) and \(Q\) of the same closed
+connected PL \(d\)-manifold admit a Pachner sequence of the form
+\[
+ P
+ \xrightarrow{\;1\text{--}(d+1)\;*}
+ P^+
+ \xrightarrow{\;\text{vertex-preserving moves}\;*}
+ Q^+
+ \xrightarrow{\;(d+1)\text{--}1\;*}
+ Q.
+\]
+This sequence lifts the canonical component path between the fixed-vertex
+components containing \(P\) and \(Q\).  The number of vertices first
+increases, then remains constant, and finally decreases.
+\end{corollary*}
+
+The component path is canonical, but a Pachner sequence lifting it is not: the
+result does not select the facets to subdivide or a preferred horizontal flip
+path.  This result is also distinct from the unimodal path theorem of Burton
+and He \cite{BH26}.  Their theorem concerns generalized one-vertex
+triangulations of \(3\)-manifolds and grades complexity by the number of
+tetrahedra.  Here the triangulations are simplicial, the horizontal graphs fix
+the number of vertices, and the component graph is graded by that number.
+The hypotheses and grading are therefore different.
+
+The component tree need not have a unique vertex at its lowest occupied
+level.  Every component determines a unique stabilization ray, and any two
+such rays eventually share a common tail.  A chosen triangulation therefore
+determines a monotone closure under facet subdivisions and vertex-preserving
+moves, but that choice need not be distinguished.
+
+Let \(n_0\) be the minimum number of vertices in a triangulation of \(M\).
+When \(G(n_0)\) is connected, its unique component determines a distinguished
+stabilization ray, which we call the \emph{trunk}.  In particular, a manifold
+has a trunk whenever its triangulation with the minimum number of vertices is
+unique up to combinatorial isomorphism, as for a sphere or the \(2\)-torus.
+The trunk is a ray of components; it does not select a preferred
+triangulation, facet, or flip sequence at any level.  For \(S^d\), it begins
+with the boundary of the \((d+1)\)-simplex.  The computations below describe
+the first levels of the \(S^3\) trunk and several branches that merge into it.
+
+The paper is organized as follows.  Section~\ref{sec:definitions} sets up
+bistellar notation in arbitrary dimension and defines support, fixed-vertex
+components, lift fibers, and unflippability.  Section~\ref{sec:stabilization}
+proves the Component Stabilization Theorem.  Section~\ref{sec:tree} derives
+the component tree, its predecessor structure, coalescence, and canonical
+component paths as consequences.  Section~\ref{sec:rays} develops
+stabilization rays, monotone closures, and trunks.  Section~\ref{sec:examples}
+gives examples outside \(S^3\), including one-step mergers in surface flip
+graphs, the K\"uhnel--Lassmann \(3\)-torus, and unflippable spheres in every
+dimension at least four.  Sections~\ref{sec:s3} and \ref{sec:experiments}
+specialize to triangulated \(3\)-spheres and present the computational results.
+
+\section{Bistellar moves and fixed-vertex Pachner graphs}
+\label{sec:definitions}
+
+Throughout, \(M\) denotes a closed connected PL \(d\)-manifold with
+\(d\ge2\), and a triangulation means a finite simplicial complex whose
+geometric realization is PL-homeomorphic to \(M\).  We identify isomorphic
+triangulations.
+
+\paragraph{Basic simplicial terminology.}
+A \emph{facet} of a \(d\)-dimensional triangulation is a \(d\)-simplex, and a
+\emph{ridge} is a \((d-1)\)-simplex.  For a simplex \(\alpha\in T\), its
+\emph{link} is
+\[
+ \operatorname{lk}_T(\alpha)
+ =\{\gamma\in T:\gamma\cap\alpha=\varnothing
+   \text{ and }\gamma\cup\alpha\in T\}.
+\]
+We write \(\partial\alpha\) for the boundary complex of \(\alpha\) and
+\(A*B\) for the simplicial join of two complexes.  The closed star of
+\(\alpha\) is \(\alpha*\operatorname{lk}_T(\alpha)\).
+
+\paragraph{Bistellar moves.}
+Let \(\alpha\) and \(\beta\) be disjoint simplices with
+\[
+ |\alpha|+|\beta|=d+2,
+\]
+where \(|\cdot|\) denotes the number of vertices.  Suppose that
+\(\alpha\in T\), \(\beta\notin T\), and
+\(\operatorname{lk}_T(\alpha)=\partial\beta\).  Thus, the closed star of
+\(\alpha\) is the ball \(\alpha*\partial\beta\), and the bistellar move
+\[
+ \alpha*\partial\beta
+ \quad\longleftrightarrow\quad
+ \partial\alpha*\beta
+\]
+replaces this ball by the second one.  If \(|\beta|=p\) and
+\(|\alpha|=q\), so that \(p+q=d+2\), we call the forward operation a
+\(p\)--\(q\) move.  Its source contains \(p\) facets and its target contains
+\(q\) facets.
+
+The \(1\)--\((d+1)\) move is stellar subdivision of a facet and adds one
+vertex.  Its inverse is the \((d+1)\)--\(1\) move and deletes one vertex.
+All other bistellar moves preserve the vertex set; we call them
+\emph{proper} or \emph{vertex-preserving} moves.  Equivalently, these are the
+\(p\)--\(q\) moves with \(2\le p,q\le d\).
+
+\paragraph{Support.}
+The \emph{support} of a bistellar move in its source triangulation is the
+bistellar ball \(\alpha*\partial\beta\), or, equivalently when only facets
+are being counted, the collection of \(p\) facets removed by the move.
+
+\paragraph{Pachner graphs and horizontal slices.}
+Let \(\mathcal P\) be the full Pachner graph whose vertices are all
+simplicial triangulations of the fixed manifold \(M\), with edges given by
+all bistellar moves.  For each \(n\), let \(G(n)\) be the induced graph on
+the triangulations with \(n\) vertices, with edges given by all proper
+bistellar moves.  We retain a loop when such a move produces an isomorphic
+triangulation.  We call \(G(n)\) the \emph{restricted Pachner graph} or
+\emph{fixed-vertex flip graph}.  Let
+\[
+ C(n)=\pi_0\bigl(G(n)\bigr)
+\]
+be its set of connected components.  As in the introduction, the fixed
+manifold is suppressed from the notation; when several manifolds are under
+discussion, we write \(G_M(n)\) and \(C_M(n)\).
+
+We write \(T_1\sim_n T_2\) when \(T_1\) and \(T_2\) lie in the same
+component of \(G(n)\).
+
+\paragraph{Lift fibers.}
+If \(T\) is a vertex of \(G(n)\) and \(\sigma\) is a facet of \(T\), let
+\(T^\sigma\) denote the triangulation obtained by stellarly subdividing
+\(\sigma\) with a new vertex.  The \emph{lift fiber} of \(T\) is
+\[
+ L(T)=\{T^\sigma:\sigma\text{ is a facet of }T\}
+ \subseteq V\bigl(G(n+1)\bigr).
+\]
+
+\paragraph{Unflippable triangulations.}
+An \(n\)-vertex triangulation \(T\) of \(M\) is \emph{unflippable} if it
+admits no proper bistellar move.  Equivalently, \(T\) is an isolated vertex
+of \(G(n)\).
+
+\paragraph{The component graph.}
+The \emph{component graph} \(\mathcal C\) is the directed graded graph whose
+vertices are the elements of \(C(n)\), over all \(n\).  There is a directed
+edge from \(U\in C(n)\) to \(V\in C(n+1)\) if some facet subdivision of some
+triangulation in \(U\) belongs to \(V\).
+
+\section{Component stabilization in arbitrary dimension}
+\label{sec:stabilization}
+
+\begin{theorem}[Component Stabilization Theorem]
+\label{thm:component-stabilization}
+Every vertex of \(\mathcal C\) has out-degree one.  Equivalently, if
+\(U\in C(n)\) and \(P,Q\in U\), then every element of \(L(P)\) and every
+element of \(L(Q)\) lie in the same connected component of \(G(n+1)\).
 \end{theorem}
 
+We prove Theorem~\ref{thm:component-stabilization} through three lemmas.  The
+first is a local transport move.
+
+\begin{lemma}[Sliding a stellar vertex across a ridge]
+\label{lem:slide}
+Let \(T\) be a triangulation of a closed \(d\)-manifold.  Suppose the facets
+\(a*F\) and \(b*F\) share the ridge \(F\).  Insert a new vertex \(v\) into
+\(a*F\).  The resulting triangulation is connected by two proper bistellar
+moves to the triangulation obtained by inserting \(v\) into \(b*F\).
+More precisely, the slide is a \(2\)--\(d\) move followed by a
+\(d\)--\(2\) move.
+\end{lemma}
+
 \begin{proof}
-By unitary similarity and scaling invariance we may assume $N\in\mathcal N_3$ with
-$\opnorm{N}=1$.
-Then $[N]\in\mathcal M$, and by compactness $\mathcal C$ attains its maximum on $\mathcal M$.
-
-By Lemma~\ref{lem:phase-invariance} and Corollary~\ref{cor:meridian-reduction}, any maximizer
-must lie in the degeneracy locus of the phase--rotation action.
-By Proposition~\ref{prop:factor-sphere}, these classes correspond to the two poles
-$[E_{12}]$ and $[J_3]$.
-At these points one has $\mathcal C=2$, as is classical.
-
-All other points of $\mathcal M$ correspond to interior points of the meridian domain
-$\mathcal D$ and satisfy $\mathcal C<2$ by the preceding subsection.
-This completes the proof.
+After subdividing \(a*F\), the two facets \(v*F\) and \(b*F\) form the
+bistellar ball
+\[
+ F*\partial(vb).
+\]
+The edge \(vb\) is absent, so the \(2\)--\(d\) move
+\[
+ F*\partial(vb)\longrightarrow \partial F*(vb)
+\]
+is legal.  The ridge \(F\) is absent after this move.  The remaining facets
+of the stellar subdivision of \(a*F\) form
+\[
+ \partial F*(va),
+\]
+so the \(d\)--\(2\) move
+\[
+ \partial F*(va)\longrightarrow F*\partial(va)
+\]
+is legal.  The second move restores \(a*F\), while the first move together
+with the surviving facet \(v*F\) gives precisely the stellar subdivision of
+\(b*F\).  Both moves are proper.  When \(d=2\), they are two diagonal flips.
 \end{proof}
 
+\begin{lemma}[Lift fibers are connected]
+\label{lem:fibers-connected}
+For every triangulation \(T\) of a closed connected \(d\)-manifold, all
+elements of \(L(T)\) lie in one connected component of \(G(n+1)\).
+\end{lemma}
+
+\begin{proof}
+The facet-adjacency graph of a connected triangulated closed manifold is
+connected.  To see this, choose points in the interiors of two facets and
+join them by a PL path in \(|T|\).  Since the \((d-2)\)-skeleton has
+codimension at least two, PL general position allows the path to be chosen
+disjoint from it.  The path therefore passes from one facet to another only
+through the relative interiors of ridges, and the facets it traverses form a
+path in the facet-adjacency graph.  Successive applications of
+Lemma~\ref{lem:slide} transport the stellar vertex along such a path using
+only proper bistellar moves.
+\end{proof}
+
+The third lemma lifts an edge of a horizontal graph.
+
+\begin{lemma}[Proper edges lift between fibers]
+\label{lem:edges-lift}
+If \(P\) and \(Q\) are adjacent in \(G(n)\), then there are
+\(P'\in L(P)\) and \(Q'\in L(Q)\) that are adjacent in \(G(n+1)\).
+\end{lemma}
+
+\begin{proof}
+Suppose \(P\to Q\) is a proper \(p\)--\(q\) move, written
+\[
+ \alpha*\partial\beta\longrightarrow\partial\alpha*\beta.
+\]
+Its support contains \(p\le d\) facets.  Each facet of a closed simplicial
+\(d\)-manifold has \(d+1\) ridges, and every ridge belongs to exactly two
+facets.  Two distinct facets share at most one ridge, because their
+intersection is either empty or a single common face of dimension at most
+\(d-1\).  Hence the \(d+1\) ridges of a facet lead to \(d+1\) distinct
+neighbors, so the facet-adjacency graph is simple and \((d+1)\)-regular.  It
+therefore has at least \(d+2\) vertices.  Thus, \(P\) has a facet \(\rho\)
+outside the support.
+
+The move leaves \(\rho\) and every proper face of \(\rho\) unchanged.
+Stellar subdivision of \(\rho\) leaves its boundary unchanged; among faces
+on the original vertices it removes only \(\rho\), and every new face
+contains the new vertex \(v\).  The complementary simplex \(\beta\) remains
+absent as well: it uses only the original vertices, so subdivision cannot
+create it, and \(\beta\notin P\) implies \(\beta\notin P^\rho\).
+Consequently, the original bistellar ball and its attaching boundary are
+unchanged and the complementary simplex is still absent, so the same proper
+move is legal after subdivision.  Subdivide \(\rho\) in both \(P\) and
+\(Q\).  The original move then gives an edge
+\[
+ P^\rho\longleftrightarrow Q^\rho
+\]
+in \(G(n+1)\).
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:component-stabilization}]
+Let \(U\in C(n)\).  Choose triangulations \(P,Q\in U\) and a path
+\[
+ P=S_0,S_1,\ldots,S_m=Q
+\]
+in \(G(n)\).  Lemma~\ref{lem:edges-lift} supplies, for each \(i\), an edge
+between one element of \(L(S_i)\) and one element of \(L(S_{i+1})\).
+Lemma~\ref{lem:fibers-connected} connects any two choices inside each fiber.
+Concatenating the fiber paths and lifted edges connects any prescribed
+element of \(L(P)\) to any prescribed element of \(L(Q)\).  Thus, all facet
+subdivisions of all triangulations in \(U\) lie in one component of
+\(G(n+1)\), and \(U\) has exactly one outgoing neighbor in \(\mathcal C\).
+\end{proof}
+
+For \(U\in C(n)\), denote its unique outgoing neighbor by \(s_n(U)\).  Thus,
+Theorem~\ref{thm:component-stabilization} defines a map
+\[
+ s_n:C(n)\longrightarrow C(n+1).
+\]
+
+\begin{remark}[A quantitative lift bound]
+The proof is constructive.  If a path
+\(S_0,S_1,\ldots,S_m\) is given downstairs and \(D_i\) is the diameter of
+the facet-adjacency graph of \(S_i\), then each base move can be lifted after
+at most \(D_i\) slides, each slide costing two proper moves.  Including a
+final slide to a prescribed terminal facet subdivision gives the upper bound
+\[
+ \sum_{i=0}^{m-1}(2D_i+1)+2D_m
+\]
+on the length of the lifted path.
+\end{remark}
+
+\section{Consequences: the component tree and canonical component paths}
+\label{sec:tree}
+
+All structural statements in this section are consequences of
+Theorem~\ref{thm:component-stabilization} together with Pachner's theorem.
+The underlying simple graph of \(\mathcal C\) is obtained from the full
+Pachner graph \(\mathcal P\) by identifying all triangulations in each
+component of \(G(n)\), and then suppressing loops and parallel edges.
+
+\begin{corollary}[The component graph is a tree]
+\label{cor:component-tree}
+For every closed connected PL manifold \(M\) of dimension at least two, the
+underlying undirected graph of \(\mathcal C\) is a tree.
+\end{corollary}
+
+\begin{proof}
+By Pachner's theorem, the full Pachner graph \(\mathcal P\) is connected, so
+its quotient obtained by identifying horizontal components is connected.
+Suppose that the underlying undirected graph of \(\mathcal C\) contained a
+cycle.  A vertex of minimum level on that cycle would have two distinct
+neighbors at the next level, contradicting
+Theorem~\ref{thm:component-stabilization}.  Thus, the underlying graph is
+acyclic and, being connected, is a tree.
+\end{proof}
+
+\paragraph{Newborn components.}
+A component of a fixed-vertex graph is \emph{newborn} if it has no neighbor at
+the preceding level of \(\mathcal C\).
+
+\begin{proposition}[Predecessors and leaves]
+\label{prop:predecessors}
+Let \(U\in C(n)\).  Then \(U\) has a neighbor at level \(n-1\) if and only
+if some triangulation in \(U\) admits a \((d+1)\)--\(1\) bistellar move.
+Consequently, \(U\) is newborn if and only if none of its triangulations
+admits a vertex-deleting move, and this holds if and only if \(U\) is a leaf
+of the component tree.
+\end{proposition}
+
+\begin{proof}
+If \(U=s_{n-1}(V)\), choose a triangulation \(P\in V\) and a facet \(\rho\)
+of \(P\).  The facet subdivision \(P^\rho\) belongs to \(U\), and its
+stellar vertex supports the inverse \((d+1)\)--\(1\) move.
+
+Conversely, suppose that \(T\in U\) admits a \((d+1)\)--\(1\) move.  The
+move produces an \((n-1)\)-vertex triangulation \(P\), and \(T\) is a facet
+subdivision of \(P\).  If \(V\) is the component containing \(P\), then
+\(U=s_{n-1}(V)\).
+
+Every node of \(\mathcal C\) has exactly one neighbor at the next level, and
+its neighbors at the preceding level are precisely its predecessors.  It is
+therefore a leaf exactly when it has no predecessor.
+\end{proof}
+
+\begin{corollary}[Unflippable leaves]
+\label{cor:unflippable-leaves}
+Every unflippable triangulation of \(M\) represents a newborn leaf of the
+component tree.
+\end{corollary}
+
+\begin{proof}
+Let \(T\) be unflippable.  Suppose that a \((d+1)\)--\(1\) move deletes a
+vertex \(v\), so that \(\operatorname{lk}_T(v)=\partial\sigma\), where the
+\(d\)-simplex \(\sigma\) is absent from \(T\).  Choose a ridge \(\tau\) of
+\(\sigma\).  Since \(T\) is closed, the ridge \(\tau\) lies in exactly two
+facets, \(v*\tau\) and \(w*\tau\).  The absence of \(\sigma\) implies
+\(w\notin\sigma\), while \(\operatorname{lk}_T(v)=\partial\sigma\) implies
+that \(vw\notin T\).  Thus,
+\[
+ \operatorname{lk}_T(\tau)=\partial(vw),
+\]
+so \(\tau*\partial(vw)\) supports a proper \(2\)--\(d\) bistellar move,
+contrary to unflippability.  Thus, \(T\) admits no vertex-deleting move.
+Since its fixed-vertex component consists only of \(T\),
+Proposition~\ref{prop:predecessors} applies.
+\end{proof}
+
+Thus, stabilization may identify distinct components, but it cannot split one
+component into several.  More strongly, any two stabilization rays merge.
+
+\begin{corollary}[Coalescence]
+\label{cor:coalescence}
+Let \(U\in C(n)\) and \(V\in C(m)\).  There are integers \(r,s\ge0\) such
+that
+\[
+ s_{n+r-1}\circ\cdots\circ s_n(U)
+ =
+ s_{m+s-1}\circ\cdots\circ s_m(V).
+\]
+In particular, any two components have a common stabilization.
+\end{corollary}
+
+\begin{proof}
+Take the unique finite path from \(U\) to \(V\) in the tree underlying
+\(\mathcal C\).  Along this path there can be no strict local minimum of the
+level function, since such a vertex would have two distinct upward neighbors.
+Therefore, the path rises monotonically from both ends to one highest vertex.
+That vertex is an iterated stabilization of both \(U\) and \(V\).
+\end{proof}
+
+\begin{corollary}[Canonical component paths]
+\label{cor:canonical-path}
+Let \(U\in C(n)\) and \(V\in C(m)\).  Their stabilization rays have a first
+common component \(W\).  The unique path from \(U\) to \(V\) in the
+component tree rises from \(U\) and \(V\) to \(W\); this is the
+\emph{canonical component path} between \(U\) and \(V\).
+
+If \(P\in U\) and \(Q\in V\), then this component path lifts to a Pachner
+sequence
+\[
+ P
+ \xrightarrow{\;1\text{--}(d+1)\;*}
+ P^+
+ \xrightarrow{\;\text{proper moves}\;*}
+ Q^+
+ \xrightarrow{\;(d+1)\text{--}1\;*}
+ Q,
+\]
+where \(P^+\) and \(Q^+\) lie in \(W\).  Thus, the number of vertices first
+increases, then remains constant, and finally decreases.
+\end{corollary}
+
+\begin{proof}
+Corollary~\ref{cor:coalescence} gives a common component of the two
+stabilization rays.  Since each ray has a unique successor at every level,
+their common components form a common tail and therefore have a first member
+\(W\).  The unique path in the tree rises from both ends to \(W\).
+
+Choose any sequence of facet subdivisions of \(P\) and of \(Q\) that reaches
+the level of \(W\).  Iterated applications of
+Theorem~\ref{thm:component-stabilization} place the resulting triangulations
+\(P^+\) and \(Q^+\) in \(W\).  By the definition of a component, they are
+connected by proper bistellar moves.  Reversing the subdivisions of \(Q\)
+gives the final descending segment.
+\end{proof}
+
+\begin{remark}
+The component path is canonical; a Pachner sequence lifting it is not.  The
+result does not select the facets to subdivide or a preferred proper-move path
+inside the common component.  It also gives no useful a priori bound on the
+height of the first common stabilization; obtaining effective bounds is one
+of the main questions raised below.
+\end{remark}
+
+\section{Stabilization rays, monotone closures, and trunks}
+\label{sec:rays}
+
+For \(U\in C(n_0)\), the sequence
+\[
+ U,\quad s_{n_0}(U),\quad
+ s_{n_0+1}s_{n_0}(U),\quad\ldots
+\]
+is the \emph{stabilization ray} from \(U\).  Corollary~\ref{cor:coalescence}
+says that any two stabilization rays eventually share a common tail.  The
+component tree is therefore one-ended, but it need not have a preferred
+lowest vertex.
+
+\paragraph{Monotone closure.}
+Let \(R\) be a triangulation of \(M\) with \(n_0\) vertices.  Its
+\emph{monotone closure} \(\mathcal M(R)\) is the set of triangulations
+reachable from \(R\) by proper bistellar moves and
+\(1\)--\((d+1)\) facet subdivisions, without using a
+\((d+1)\)--\(1\) move.  For \(n\ge n_0\), let
+\[
+ \mathcal M_R(n)
+ =G(n)\bigl[\mathcal M(R)\cap V(G(n))\bigr]
+\]
+be the induced subgraph at level \(n\).
+
+\begin{corollary}[Monotone closures]
+\label{cor:monotone-closure}
+For every \(n\ge n_0\), the graph \(\mathcal M_R(n)\) is exactly one
+connected component of \(G(n)\).  Its component is the
+\((n-n_0)\)-fold stabilization of the component containing \(R\).
+\end{corollary}
+
+\begin{proof}
+At level \(n_0\), the monotone closure contains exactly the component of
+\(G(n_0)\) containing \(R\).  Suppose its level-\(n\) slice is one component
+\(U\).  Every monotone path to level \(n+1\) has a last facet subdivision,
+followed only by proper moves.  By the Component Stabilization Theorem, all
+facet subdivisions of all triangulations in \(U\) lie in the single
+component \(s_n(U)\), and proper moves fill out that entire component.  Thus,
+the next slice is exactly \(s_n(U)\).  Induction proves the claim.
+\end{proof}
+
+In particular, the first move in a Pachner path that starts in
+\(\mathcal M(R)\) and leaves \(\mathcal M(R)\) must be a
+\((d+1)\)--\(1\) move: proper moves and facet subdivisions remain in the
+monotone closure.
+
+\begin{corollary}[Eventual merger with a chosen ray]
+\label{cor:absorption}
+For every component \(U\in C(n)\) and every triangulation \(R\), some
+iterated stabilization of \(U\) is a level of \(\mathcal M(R)\).
+\end{corollary}
+
+\begin{proof}
+Apply Corollary~\ref{cor:coalescence} to \(U\) and the component containing
+\(R\).  The upward orbit of the latter component is precisely the sequence of
+components in the monotone closure.
+\end{proof}
+
+\paragraph{Trunks.}
+Let \(n_0\) be the minimum number of vertices in a triangulation of \(M\).
+Suppose that \(G(n_0)\) is connected, and let \(U_0\) be its unique
+component.  The stabilization ray beginning at \(U_0\) is the \emph{trunk}
+of \(M\).  We write \(\mathcal T(n)\) for its level-\(n\) component.  By
+Corollary~\ref{cor:monotone-closure}, the triangulations in these components
+form \(\mathcal M(R)\) for any \(R\in U_0\).
+
+In particular, \(M\) has a trunk whenever its triangulation with the minimum
+number of vertices is unique up to combinatorial isomorphism.  If the graph
+at the minimum level has more than one component, there is no distinguished
+trunk, although every component determines a stabilization ray and all of
+those rays eventually have a common tail.  A trunk is a ray of components; it
+does not select a preferred triangulation, facet, or flip sequence at any
+level.
+
+\paragraph{The sphere trunk.}
+For \(S^d\), the boundary \(\partial\Delta^{d+1}\) of the
+\((d+1)\)-simplex is the unique triangulation with \(d+2\) vertices and hence
+begins the trunk.  For \(d=3\), let
+\[
+ \mathcal T(n)=\mathcal M_{\partial\Delta^4}(n).
+\]
+
+\begin{corollary}[Sphere trunk components]
+\label{cor:trunk-component}
+For every \(n\ge5\), \(\mathcal T(n)\) is exactly one connected component
+of \(G(n)\).
+\end{corollary}
+
+\section{Examples beyond triangulated \texorpdfstring{\(S^3\)}{S3}}
+\label{sec:examples}
+
+The theorem and its consequences apply to every closed connected PL manifold
+of dimension at least two.  The following examples illustrate both the
+presence of several components at the minimum level and the speed with which
+distinct stabilization rays can merge.
+
+\subsection{Surface flip graphs and one-step coalescence}
+\label{sec:surfaces}
+
+Because several manifolds occur in this subsection, we restore the suppressed
+subscript and write \(G_F(n)\) and \(C_F(n)\) for a surface \(F\).
+In dimension two, the proper bistellar move is the \(2\)--\(2\) diagonal
+flip, and facet subdivision is the \(1\)--\(3\) move.  If a closed
+triangulated surface has \(n\) vertices, Euler characteristic \(\chi\), and
+\(e\) edges, then
+\[
+ e=3(n-\chi).
+\]
+Equality \(e=\binom n2\) forces the triangulation to be neighborly, and a
+neighborly surface triangulation admits no diagonal flip, because the
+opposite diagonal is already present.  Following Negami
+\cite{N99frozen}, a surface triangulation admitting no diagonal flip is
+called \emph{frozen}; frozen is the two-dimensional case of unflippability
+as defined in Section~\ref{sec:definitions}.
+
+Fixed-vertex flip connectivity of surfaces has a long history.  Wagner proved
+connectivity for the sphere, and Dewdney treated the torus \cite{W36,D73}.
+More generally, Negami proved that for every closed surface \(F\), the graph
+\(G_F(n)\) is connected for all sufficiently large \(n\)
+\cite{N94,N99survey}; King later gave an explicit bound linear in
+\(\lvert\chi(F)\rvert\) \cite{King03}.  A related result of Komuro,
+Nakamoto, and Negami preserves minimum degree at least four \cite{KNN99}.
+Thus, the component tree of a surface eventually has a single ray.  Our
+computations instead concern its first mergers at minimum levels.
+
+The unique \(7\)-vertex triangulation of the torus is the classical
+M\"obius triangulation, whose \(1\)-skeleton is \(K_7\); its polyhedral
+realization is due to Cs\'asz\'ar \cite{Csaszar49,K23}.  It is frozen and
+begins the trunk of \(T^2\).  The following four minimum levels have several
+components.  Here \(N_h\) denotes the nonorientable surface of genus \(h\),
+and \(\Sigma_g\) the orientable surface of genus \(g\).  The minimum numbers of vertices follow from Ringel and
+Jungerman--Ringel \cite{R55,JR80}; the enumerations and component decompositions use the surface censuses
+\cite{Sul06,SulPM,SL09,LutzSurf}, including the classification of the \(59\)
+neighborly \(\Sigma_6\) triangulations \cite{ABS96}.
+
+\begin{center}
+\begin{tabular}{c|c|r|c}
+surface & minimum level & triangulations & component sizes \\ \hline
+\(N_4\)       & 9  & 37 & \(32,3,2\) \\
+\(N_5\)       & 9  & 2  & \(1,1\) \\
+\(\Sigma_3\)  & 10 & 20 & \(13,5,1,1\) \\
+\(\Sigma_6\)  & 12 & 59 & \(1^{59}\)
+\end{tabular}
+\end{center}
+
+The two triangulations of \(N_5\) and all \(59\) triangulations of
+\(\Sigma_6\) are neighborly and therefore frozen.  The nontrivial component
+sizes for \(N_4\) and \(\Sigma_3\) show that minimum-level branches need not
+be singleton components.
+
+\begin{proposition}[One-step coalescence at minimum levels]
+\label{prop:surface-coalescence}
+The stabilization maps
+\[
+ s_9^{N_4}:C_{N_4}(9)\to C_{N_4}(10),\qquad
+ s_9^{N_5}:C_{N_5}(9)\to C_{N_5}(10),
+\]
+\[
+ s_{10}^{\Sigma_3}:C_{\Sigma_3}(10)\to C_{\Sigma_3}(11),\qquad
+ s_{12}^{\Sigma_6}:C_{\Sigma_6}(12)\to C_{\Sigma_6}(13)
+\]
+are constant: in each case, all components at the minimum level merge into
+one component after a single facet subdivision.  For \(N_4\)
+and \(\Sigma_3\), the maps are moreover surjective, since
+\(G_{N_4}(10)\) and \(G_{\Sigma_3}(11)\) are
+connected.  In particular, a single stabilization fiber can contain at least
+\(59\) fixed-vertex components.
+\end{proposition}
+
+\begin{proof}
+We used the catalogued facet lists from the Manifold Page \cite{LutzSurf}.
+For \(N_4\), the complete catalog of \(13{,}657\) ten-vertex triangulations
+forms one component; the same is true of the \(65{,}878\) eleven-vertex
+triangulations of \(\Sigma_3\).  This proves both constancy and surjectivity
+in those two cases.
+
+For \(N_5\) and \(\Sigma_6\), explicit diagonal-flip paths join a chosen
+facet subdivision of one representative from every source component.  The
+Component Stabilization Theorem makes the representative and facet choices
+immaterial, so both maps are constant.  These certificates do not enumerate
+the entire next level and therefore do not assert that
+\(G_{N_5}(10)\) or \(G_{\Sigma_6}(13)\) is connected.
+\end{proof}
+
+
+
+\subsection{Unflippable triangulations beyond \texorpdfstring{\(S^3\)}{S3}}
+
+The classical \(15\)-vertex triangulation of the \(3\)-torus constructed by
+K\"uhnel and Lassmann is neighborly, and its edges have valence \(4\) or
+\(6\) \cite{KL84,BK12}.  Neighborliness blocks every \(2\)--\(3\) move,
+and the absence of a valence-three edge blocks every \(3\)--\(2\) move.
+It is therefore unflippable.  It is often described as the smallest known
+triangulation of \(T^3\), although vertex-minimality and uniqueness remain
+open \cite{L09,BK12}.
+
+Spreer's census of cyclic combinatorial \(3\)-manifolds contains \(6070\)
+combinatorial types with at most \(22\) vertices, representing \(67\)
+topological types, and records locally minimal examples at many levels
+\cite{S14}.  Here ``locally minimal'' means that the triangulation cannot be
+reduced by bistellar moves without first adding a vertex; this is weaker than
+unflippability, but the census supplies a broad source of non-spherical
+examples for the fixed-vertex questions considered here.  The known
+unflippable spheres \(U(20),U_1(21),U_2(21)\) also arise from this census.
+
+The Dougherty--Faber--Murphy sphere \(U(16)\) is an unflippable
+\(3\)-sphere \cite{DFM04}.  Bagchi and Datta use it to construct
+unflippable spheres in all larger dimensions \cite{BD13}.  They first build a
+\(4\)-ball \(B^4_{16}\) with boundary \(U(16)\).  If
+\(B^e_{e+1}\) is the standard \(e\)-simplex, then for every \(e\ge0\),
+\[
+ S^{e+4}_{e+17}
+ =\partial\bigl(B^4_{16}*B^e_{e+1}\bigr)
+\]
+is an unflippable combinatorial \((e+4)\)-sphere.  In dimension \(d=e+4\),
+this gives an unflippable \(d\)-sphere on \(d+13\) vertices for every
+\(d\ge4\).
+
+Each such sphere is an isolated fixed-vertex component.  Nevertheless, Corollary~\ref{cor:component-tree} guarantees that its stabilization
+ray eventually
+merges with the sphere trunk.  Thus, unflippable triangulations
+appear in arbitrarily high dimensions, while stabilization imposes a uniform
+global constraint on how their components fit into the full Pachner graph.
+
+\section{The trunk of triangulated \texorpdfstring{\(S^3\)}{S3}}
+\label{sec:s3}
+
+In this section and Section~\ref{sec:experiments}, fix \(M=S^3\).  Thus,
+\(G(n)\) and \(C(n)\) denote the fixed-vertex graph and its component set for
+triangulated \(3\)-spheres.  The monotone closure of \(\partial\Delta^4\)
+consists of all triangulations reachable using
+\(1\)--\(4\), \(2\)--\(3\), and \(3\)--\(2\) moves, but no
+\(4\)--\(1\) moves.  By Corollary~\ref{cor:trunk-component}, its
+level-\(n\) slice \(\mathcal T(n)\) is a single induced component of
+\(G(n)\).
+
+\paragraph{Polytopal spheres lie in the trunk.}
+Every simplicial \(4\)-polytope admits a Schlegel diagram, which gives a
+regular triangulation of a point configuration in \(\mathbb R^3\) whose
+convex hull is a tetrahedron.  By the incremental topological flipping
+theorem of Edelsbrunner and Shah \cite{ES96}, such a regular triangulation
+can be constructed from the outer tetrahedron by inserting points and
+applying \(2\)--\(3\) and \(3\)--\(2\) flips.  In the full Pachner graph,
+this gives a path from \(\partial\Delta^4\) to the boundary of the given
+polytope using only \(1\)--\(4\), \(2\)--\(3\), and \(3\)--\(2\) moves.
+Thus, every polytopal triangulated \(3\)-sphere with \(n\) vertices lies in
+\(\mathcal T(n)\).
+
+\paragraph{The trunk also contains non-polytopal spheres.}
+Non-polytopal triangulated \(3\)-spheres first occur with eight vertices.  The
+Br\"uckner and Barnette spheres are the two classical examples
+\cite{GS67,Bar73}.  A direct check shows that both lie in
+\(\mathcal T(8)\): each is one \(2\)--\(3\) flip from a polytopal
+triangulation or from the other, so \(G(8)=\mathcal T(8)\).
+
+At \(n=9\), Altshuler, Bokowski, and Steinberg \cite{ABS80} showed that
+\(G(9)\) is connected, so \(G(9)=\mathcal T(9)\).  Their classification
+contains \(1296\) simplicial \(3\)-spheres.  Using Firsching's classification
+and data \cite{F20,F-Data}, we identified the \(1142\) polytopal and \(154\)
+non-polytopal types and verified that the subgraph induced by the
+non-polytopal types is connected.
+
+\paragraph{Known unflippable 3-spheres.}
+The four currently known examples relevant to our computations are
+\[
+ U(16),\qquad U(20),\qquad U_1(21),\qquad U_2(21).
+\]
+The \(16\)-vertex example is from \cite{DFM04}; the \(20\)- and
+\(21\)-vertex examples arise among the cyclic triangulations studied in
+\cite{S14}.  Each is neighborly and has minimum edge valence at least four.
+Thus, every \(2\)--\(3\) move is blocked by an existing complementary edge
+and every \(3\)--\(2\) move is blocked by edge valence.  Each is therefore
+unflippable and, by Corollary~\ref{cor:unflippable-leaves}, represents a
+newborn singleton leaf of the component tree, distinct from
+\(\mathcal T(n)\) for the corresponding value of \(n\).
+
+The computational results below extend the connected range through
+\(n=11\), treat a high-valence part of the \(n=12\) seed space, and show
+that these four isolated branches merge into the trunk
+after one stabilization.
+
+\section{Computational results for \texorpdfstring{\(S^3\)}{S3}}
+\label{sec:experiments}
+
+The structural results above reduce membership in \(\mathcal T(n)\) to one
+fixed-vertex connectivity problem.  Throughout this section, we use the
+computational framework of Sulanke and Lutz \cite{SL09} for seed enumeration
+and, for the \(10\)-vertex polytopality labels, Firsching's classification
+and accompanying online data \cite{F17,F-Data}.
+
+\subsection{\texorpdfstring{\(G(10)\)}{G(10)} is connected}
+
+Lutz enumerated the \(247{,}882\) ten-vertex triangulated
+\(3\)-spheres \cite{Lutz08}.  Firsching classified these as \(162{,}004\)
+polytopal and \(85{,}878\) non-polytopal types \cite{F17,F-Data}.  We use the
+Lutz census identifiers, as recorded in Firsching's data, and use the
+polytopal labels only as a convenient source of vertices already known to lie
+in \(\mathcal T(10)\).
+
+\paragraph{Seed triangulations.}
+A triangulation is a \emph{seed triangulation} if it admits no legal
+\(3\)--\(2\) bistellar flip.
+
+Every triangulation is either a seed or can be connected to a seed by a
+sequence of \(3\)--\(2\) flips.  Indeed, each legal \(3\)--\(2\) move
+reduces the number of tetrahedra, so repeated \(3\)--\(2\) moves terminate.
+
+Thus, to prove that all of \(G(10)\) lies in \(\mathcal T(10)\), it
+suffices to check the ten-vertex seeds.  Taking the complement of Firsching's
+polytopal list and testing each non-polytopal type for legal \(3\)--\(2\)
+moves, we found exactly \(15\) non-polytopal seeds.  For each, we enumerated
+its legal \(2\)--\(3\) moves and found a move to a polytopal triangulation.
+Since polytopal triangulations lie in \(\mathcal T(10)\), each of the \(15\)
+non-polytopal seeds also lies in \(\mathcal T(10)\).
+
+The remaining seeds are polytopal and hence also lie in \(\mathcal T(10)\).
+Therefore every \(10\)-vertex seed lies in \(\mathcal T(10)\), and every
+\(10\)-vertex triangulated \(3\)-sphere is connected by \(3\)--\(2\) flips
+to \(\mathcal T(10)\).  Consequently,
+\[
+ G(10)=\mathcal T(10),
+\]
+and \(G(10)\) is connected.
+
+\subsection{\texorpdfstring{\(G(11)\)}{G(11)} is connected}
+
+Using Sulanke and Lutz's software \cite{SL09}, we enumerated the \(681\) seed
+triangulations with \(11\) vertices.  After preliminary topological filters,
+\(225\) candidate \(3\)-manifold seeds remained.  Simulated annealing and
+isomorphism testing identified \(222\) as triangulated \(3\)-spheres; the
+remaining three were triangulations of \(\mathbb{RP}^3\).
+
+Since \(G(10)\) is connected, every \(10\)-vertex triangulated
+\(3\)-sphere lies in \(\mathcal T(10)\).  Hence every \(1\)--\(4\)
+subdivision of a \(10\)-vertex sphere lies in the single stabilized component
+\(\mathcal T(11)\).  To prove that \(G(11)\) is connected, it is
+enough to connect every \(11\)-vertex seed sphere to one such subdivision.
+
+Starting from \(1\)--\(4\) subdivisions of \(10\)-vertex spheres, we
+performed random walks in \(G(11)\).  These walks produced explicit
+restricted-flip paths from vertices of \(\mathcal T(11)\) to all \(222\) spherical
+\(11\)-vertex seeds.  Therefore every \(11\)-vertex seed sphere lies in
+\(\mathcal T(11)\).
+
+Every non-seed admits a \(3\)--\(2\) move, and repeated \(3\)--\(2\) moves
+terminate at a seed.  Reversing these moves stays within \(G(11)\).
+Hence
+\[
+ G(11)=\mathcal T(11),
+\]
+and \(G(11)\) is connected.
+
+\subsection{A high-valence seed computation in \texorpdfstring{\(G(12)\)}{G(12)}}
+
+Full seed enumeration at \(n=12\) is substantially more expensive than at
+\(n=11\).  The most plausible candidates for new components outside
+\(\mathcal T(12)\) are high-valence seeds, since the known unflippable examples have no
+valence-three edges.  We therefore focused first on the high-valence regime.
+
+We exhaustively enumerated all \(12\)-vertex seed triangulations whose edges
+all have valence at least \(4\).  For every seed in this class, we found an
+explicit restricted-flip path to \(\mathcal T(12)\).  Equivalently, the union
+of these paths gives a connected subgraph of \(G(12)\) containing
+all high-valence seeds and a known vertex of \(\mathcal T(12)\).  Thus, no
+high-valence \(12\)-vertex seed gives a component outside
+\(\mathcal T(12)\).
+
+Any possible disconnected component of \(G(12)\) must therefore
+come from a seed containing a valence-three edge whose \(3\)--\(2\) move is
+blocked by the complementary triangle.  A complete proof that
+\(G(12)\) is connected requires enumerating and analyzing these
+blocked valence-three seeds.  For larger \(n\), exhaustive seed enumeration
+becomes rapidly more difficult because of the growth rate of triangulated
+\(3\)-spheres \cite{NSW16}.
+
+\subsection{The known unflippable spheres after one facet subdivision}
+
+For each of the four unflippable spheres
+\[
+ U(16),\quad U(20),\quad U_1(21),\quad U_2(21),
+\]
+we performed one \(1\)--\(4\) move to obtain a triangulation \(U^+\) on one
+additional vertex.  We then found an explicit simplification sequence from
+\(U^+\) to \(\partial\Delta^4\) using only \(2\)--\(3\), \(3\)--\(2\),
+and \(4\)--\(1\) moves.  Reversing the sequence gives a path from
+\(\partial\Delta^4\) to \(U^+\) using only \(1\)--\(4\), \(2\)--\(3\),
+and \(3\)--\(2\) moves.
+
+\begin{proposition}[One-step merger of the known unflippable spheres]
+\label{prop:one-step-absorption}
+For each of
+\[
+ U(16),\quad U(20),\quad U_1(21),\quad U_2(21),
+\]
+every \(1\)--\(4\) subdivision lies in \(\mathcal T(n+1)\), where
+the original sphere has \(n\) vertices.  Thus, each isolated component
+merges into the sphere trunk after one stabilization.
+\end{proposition}
+
+\begin{proof}
+For each example, the accompanying data contains an explicit sequence from
+one subdivision \(U^+\) to \(\partial\Delta^4\) using only \(2\)--\(3\),
+\(3\)--\(2\), and \(4\)--\(1\) moves.  Reversing the sequence shows that
+\(U^+\in\mathcal T(n+1)\).  Lemma~\ref{lem:fibers-connected} then gives the
+same conclusion for every facet subdivision of \(U\).
+\end{proof}
+
+The simplification sequences were found by simulated annealing
+\cite{BL00,JLL22}, but the annealing procedure is not part of the proof.  Once
+a sequence is found, it is a directly checkable certificate.  These examples
+show that the coalescence guaranteed by Corollary~\ref{cor:coalescence}
+can occur after only one stabilization.
+
+\begin{corollary}[First branching level for \(S^3\)]
+\label{cor:first-branching-bound}
+Let
+\[
+ b(S^3)=\min\{n:G(n)\text{ is disconnected}\}.
+\]
+Then
+\[
+ 12\le b(S^3)\le16.
+\]
+\end{corollary}
+
+\smallskip
+\begin{proof}
+The fixed-vertex graphs are connected through level \(11\), so
+\(b(S^3)\ge12\).  The unflippable sphere \(U(16)\) represents a newborn leaf
+by Corollary~\ref{cor:unflippable-leaves}, whereas the level-\(16\) trunk
+component has predecessors.  They are therefore distinct components of
+\(G(16)\), and \(b(S^3)\le16\).
+\end{proof}
+
+\paragraph{Data availability.}
+The computational certificates used in this paper will be made available in
+an archival repository.  These include the seed lists for the \(n=10\),
+\(n=11\), and high-valence \(n=12\) computations; the restricted-flip paths
+certifying membership in the relevant \(\mathcal T(n)\); the simplification
+sequences for \(U(16)^{+}\), \(U(20)^{+}\), \(U_1(21)^{+}\), and \(U_2(21)^{+}\);
+and the code and connecting paths for the surface stabilization experiments
+of Proposition~\ref{prop:surface-coalescence}.  Each certificate can be
+checked independently by verifying every listed move and the claimed terminal
+triangulation.
+
+\section{Conclusions and questions}
+\label{sec:conclusions}
+
+Return to an arbitrary fixed closed connected PL manifold \(M\).  The main
+theorem gives a global organization of its Pachner graph.  Fixed-vertex
+components form a one-ended graded tree under facet stabilization; any two rays eventually merge; and every pair of
+triangulations has a canonical component path with a three-stage Pachner
+lift.  For \(S^3\), the boundary of the \(4\)-simplex begins the trunk.  Its level components
+contain every triangulated \(3\)-sphere through \(11\) vertices and merge
+with each of the four known isolated sphere components after one facet
+subdivision.
+
+The component-tree formulation changes several of the natural open
+questions.  Eventual absorption is automatic; the central issues are now
+quantitative bounds, the geometry of branching, and the first levels at which
+new branches appear.
+
+\begin{enumerate}
+
+\item[\textbf{(Q1)}] \emph{Effective stabilization and absorption bounds.}
+Given triangulations \(P\) and \(Q\) of a fixed \(d\)-manifold, bound the
+least level at which iterated facet subdivisions of \(P\) and \(Q\) enter
+one restricted component.  Can this height be bounded in terms of the
+numbers of vertices or facets, the length of a known Pachner path, or other
+local data?  For the \(S^3\) trunk and \(U\in C(n)\), let \(a(U)\)
+be the least \(k\ge0\) for which the \(k\)-fold stabilization of \(U\) is
+\(\mathcal T(n+k)\).  The four known unflippable spheres have \(a(U)=1\).
+How large can \(a(U)\) be?  General
+simplification bounds such as those of Mijatovi\'c \cite{M03} are far too
+large to describe the observed behavior.
+
+\item[\textbf{(Q2)}] \emph{Branching and merging.}
+Characterize the fibers of
+\[
+ s_n:C(n)\longrightarrow C(n+1).
+\]
+The surface computations show that a single stabilization fiber can contain
+at least \(59\) components: all \(59\) isolated components at the minimum
+level for \(\Sigma_6\) merge in one step.  More generally, is the stabilization map
+from the minimum level of every closed surface constant?  Are the fiber
+sizes unbounded, even for surfaces?  When complete target catalogs are
+available, does the common image component exhaust the next fixed-vertex
+graph?  More generally, can a newborn component of a surface occur above the
+minimum level?
+
+For \(S^3\), Corollary~\ref{cor:first-branching-bound} gives
+\(12\le b(S^3)\le16\).  What is the exact first branching level?  At
+\(n=12\), only seeds with blocked valence-three edges remain to be analyzed.
+Does a component
+outside \(\mathcal T(n)\) contain more than one triangulation?  The
+\(N_4\) surface example shows that non-singleton branches occur naturally,
+although every presently known component outside the sphere trunk is a
+singleton.
+
+\item[\textbf{(Q3)}] \emph{Geometry of branches outside the sphere trunk.}
+All four currently known unflippable triangulated \(3\)-spheres are
+neighborly.  Does there exist a non-neighborly unflippable triangulated
+\(3\)-sphere?  More broadly, does every
+triangulated \(3\)-sphere admitting a \emph{\(3\)-diagram} lie in
+\(\mathcal T(n)\) when it has \(n\) vertices?  Here a \(3\)-diagram
+means a choice of an exterior facet whose complement has a straight-line
+realization in \(\mathbb R^3\) with tetrahedral convex hull.  Regular \(3\)-diagrams lie in the sphere trunk by
+the theorem of Edelsbrunner and Shah.  A positive answer
+would separate geometric
+obstructions to the flip-connectivity problem of Edelsbrunner, Preparata,
+and West \cite{EPW90} from the abstract component structure.
+
+\item[\textbf{(Q4)}] \emph{Higher-dimensional component trees.}
+Bagchi and Datta provide unflippable leaves in every dimension at
+least four, while recent computations show that simplification in dimension
+four can encounter substantial combinatorial depth \cite{BBS26}.  What are
+the first branching levels for \(S^d\), how complicated can the horizontal
+components and stabilization fibers become, and how rapidly do branches
+merge into the sphere trunk?  Corollary~\ref{cor:component-tree} gives
+stable connectivity but no practical strategy for finding the horizontal
+path at a common stabilization level.
+
+\end{enumerate}
+
+\section*{Acknowledgements}
+
+The authors thank OpenAI's ChatGPT for assistance during an exploratory phase
+of the proof of Theorem~\ref{thm:component-stabilization}; the final argument
+was checked and edited by the authors.
+
 \begin{thebibliography}{99}
+\small
 
-\bibitem{CrouzeixNilpotent3}
-M.~Crouzeix,
-\newblock \emph{Spectral sets and $3\times3$ nilpotent matrices},
-\newblock unpublished manuscript, 2019.
+\bibitem{ABS80}
+A. Altshuler, J. Bokowski, and L. Steinberg.
+``The classification of simplicial 3-spheres with nine vertices into
+polytopes and non-polytopes.''
+\emph{Discrete Math.} 31(2):115--124, 1980.
 
+\bibitem{ABS96}
+A. Altshuler, J. Bokowski, and P. Schuchert.
+``Neighborly \(2\)-manifolds with \(12\) vertices.''
+\emph{J. Combin. Theory Ser. A} 75(1):148--162, 1996.
+doi:10.1006/jcta.1996.0069.
 
-\bibitem{Crabb}
-M.~Crabb,
-\newblock \emph{Norm estimates for powers of matrices},
-\newblock Michigan Math.\ J.\ \textbf{18} (1971), 125--129.
+\bibitem{BD13}
+B. Bagchi and B. Datta.
+``On \(k\)-stellated and \(k\)-stacked spheres.''
+\emph{Discrete Math.} 313(20):\allowbreak 2318--2329, 2013.
+doi:\allowbreak 10.1016/j.disc.2013.06.010.
 
-\bibitem{Choi}
-D.~Choi,
-\newblock \emph{Norm inequalities related to powers of operators},
-\newblock Linear Algebra Appl.\ \textbf{438} (2013), 3871--3878.
+\bibitem{Bar73}
+D. Barnette.
+``The triangulations of the 3-sphere with up to 8 vertices.''
+\emph{J. Combin. Theory Ser. A} 14(1):37--52, 1973.
+doi:10.1016/0097-3165(73)90062-9.
 
-\bibitem{Duren}
-P.~Duren,
-\newblock \emph{Univalent Functions},
-\newblock Springer-Verlag, New York, 1983.
+\bibitem{BL00}
+A. Bj\"orner and F. H. Lutz.
+``Simplicial manifolds, bistellar flips and a 16-vertex triangulation of the
+Poincar\'e homology 3-sphere.''
+\emph{Exp. Math.} 9(2):275--289, 2000.
 
-\bibitem{Crouzeix2004}
-M.~Crouzeix,
-\newblock Bounds for analytical functions of matrices,
-\newblock \emph{Integral Equations Operator Theory} \textbf{48} (2004), 461--477.
+\bibitem{BK12}
+U. Brehm and W. K\"uhnel.
+``Lattice triangulations of \(\mathbb E^3\) and of the 3-torus.''
+\emph{Israel J. Math.} 189:97--133, 2012.
+doi:10.1007/s11856-011-0180-8.
 
-\bibitem{CrouzeixPalencia2017}
-M.~Crouzeix and C.~Palencia,
-\newblock The numerical range is a $(1+\sqrt{2})$-spectral set,
-\newblock \emph{SIAM J. Matrix Anal. Appl.} \textbf{38} (2017), no.~2, 649--655.
+\bibitem{BBS26}
+R. Burke, B. A. Burton, and J. Spreer.
+``Small triangulations of 4-manifolds and the 4-manifold census.''
+\emph{Discrete Comput. Geom.}, 2026.
+doi:10.1007/s00454-026-00818-w.
 
-\bibitem{GustafsonRao}
-K.~E.~Gustafson and D.~K.~M.~Rao,
-\newblock \emph{Numerical Range: The Field of Values of Linear Operators and Matrices},
-\newblock Springer, 1997.
+\bibitem{BH26}
+B. A. Burton and A. He.
+``Connecting 3-manifold triangulations with unimodal sequences of elementary
+moves.''
+\emph{Discrete Comput. Geom.} 75(4):1306--1330, 2026.
+doi:10.1007/s00454-025-00735-4.
 
-\bibitem{HornJohnsonTopics}
-R.~A.~Horn and C.~R.~Johnson,
-\newblock \emph{Topics in Matrix Analysis},
-\newblock Cambridge University Press, 1991.
+\bibitem{Csaszar49}
+A. Cs\'asz\'ar.
+``A polyhedron without diagonals.''
+\emph{Acta Sci. Math. (Szeged)} 13:140--142, 1949.
+
+\bibitem{D73}
+A. K. Dewdney.
+``Wagner's theorem for torus graphs.''
+\emph{Discrete Math.} 4(2):139--149, 1973.
+doi:10.1016/0012-365X(73)90076-9.
+
+\bibitem{DFM04}
+R. Dougherty, V. Faber, and M. Murphy.
+``Unflippable tetrahedral complexes.''
+\emph{Discrete Comput. Geom.} 32(3):309--315, 2004.
+
+\bibitem{EPW90}
+H. Edelsbrunner, F. P. Preparata, and D. B. West.
+``Tetrahedralizing point sets in three dimensions.''
+\emph{J. Symbolic Comput.} 10(3--4):335--347, 1990.
+
+\bibitem{ES96}
+H. Edelsbrunner and N. R. Shah.
+``Incremental topological flipping works for regular triangulations.''
+\emph{Algorithmica} 15(3):223--241, 1996.
+
+\bibitem{F17}
+M. Firsching.
+``Realizability and inscribability for simplicial polytopes via nonlinear
+optimization.''
+\emph{Math. Program.} 166(1--2):273--295, 2017.
+doi:10.1007/s10107-017-1120-0.
+
+\bibitem{F20}
+M. Firsching.
+``The complete enumeration of 4-polytopes and 3-spheres with nine vertices.''
+\emph{Israel J. Math.} 238(1):1--48, 2020.
+doi:10.1007/s11856-020-2070-4.
+
+\bibitem{F-Data}
+M. Firsching.
+``Combinatorial 3-spheres and 4-polytopes with up to 9 vertices (and inscribed
+simplicial 3-spheres with up to 10 vertices).''
+Online dataset, available at \url{https://firsching.ch/polytopes}.
+
+\bibitem{GS67}
+B. Gr\"unbaum and V. P. Sreedharan.
+``An enumeration of simplicial 4-polytopes with 8 vertices.''
+\emph{J. Combin. Theory} 2(4):437--465, 1967.
+
+\bibitem{JLL22}
+M. Joswig, D. Lofano, F. H. Lutz, et al.
+``Frontiers of sphere recognition in practice.''
+\emph{J. Appl. Comput. Topol.} 6(3):503--527, 2022.
+doi:10.1007/s41468-022-00092-8.
+
+\bibitem{JR80}
+M. Jungerman and G. Ringel.
+``Minimal triangulations on orientable surfaces.''
+\emph{Acta Math.} 145:121--154, 1980.
+
+\bibitem{King03}
+S. A. King.
+``Regular flip equivalence of surface triangulations.''
+\emph{Topology Appl.} 127(1--2):169--173, 2003.
+doi:10.1016/S0166-8641(02)00058-5.
+
+\bibitem{KNN99}
+H. Komuro, A. Nakamoto, and S. Negami.
+``Diagonal flips in triangulations on closed surfaces with minimum degree
+at least 4.''
+\emph{J. Combin. Theory Ser. B} 76(1):68--92, 1999.
+doi:10.1006/jctb.1998.1889.
+
+\bibitem{K23}
+W. K\"uhnel.
+``Generalized Heawood numbers.''
+\emph{Electron. J. Combin.} 30(4):Paper 4.17, 2023.
+doi:10.37236/12104.
+
+\bibitem{KL84}
+W. K\"uhnel and G. Lassmann.
+``The rhombidodecahedral tessellation of 3-space and a particular 15-vertex
+triangulation of the 3-dimensional torus.''
+\emph{Manuscripta Math.} 49:51--77, 1984.
+
+\bibitem{Lutz08}
+F. H. Lutz.
+``Combinatorial 3-manifolds with 10 vertices.''
+\emph{Beitr. Algebra Geom.} 49(1):97--106, 2008.
+
+\bibitem{L09}
+F. H. Lutz, T. Sulanke, and E. Swartz.
+``\(f\)-vectors of 3-manifolds.''
+\emph{Electron. J. Combin.} 16(2):Research Paper 13, 2009.
+doi:10.37236/79.
+
+\bibitem{LutzSurf}
+F. H. Lutz.
+``The Manifold Page: Surfaces.''
+Online data collection, available at
+\url{https://www3.math.tu-berlin.de/IfM/Nachrufe/Frank_Lutz/stellar/surfaces.html}.
+
+\bibitem{M03}
+A. Mijatovi\'c.
+``Simplifying triangulations of \(S^3\).''
+\emph{Pacific J. Math.} 208(2):291--324, 2003.
+
+\bibitem{N94}
+S. Negami.
+``Diagonal flips in triangulations of surfaces.''
+\emph{Discrete Math.} 135(1--3):225--232, 1994.
+doi:10.1016/0012-365X(93)E0101-9.
+
+\bibitem{N99survey}
+S. Negami.
+``Diagonal flips of triangulations on surfaces, a survey.''
+\emph{Yokohama Math. J.} 47 (special issue):1--40, 1999.
+
+\bibitem{N99frozen}
+S. Negami.
+``Note on frozen triangulations on closed surfaces.''
+\emph{Yokohama Math. J.} 47 (special issue):191--202, 1999.
+
+\bibitem{NSW16}
+E. Nevo, F. Santos, and S. Wilson.
+``Many triangulated odd-dimensional spheres.''
+\emph{Math. Ann.} 364(3--4):737--762, 2016.
+doi:10.1007/s00208-015-1232-x.
+
+\bibitem{P91}
+U. Pachner.
+``P.L. homeomorphic manifolds are equivalent by elementary shellings.''
+\emph{European J. Combin.} 12(2):129--145, 1991.
+doi:10.1016/S0195-6698(13)80080-7.
+
+\bibitem{R55}
+G. Ringel.
+``Wie man die geschlossenen nichtorientierbaren Fl\"achen in m\"oglichst
+wenig Dreiecke zerlegen kann.''
+\emph{Math. Ann.} 130:317--326, 1955.
+
+\bibitem{S14}
+J. Spreer.
+``Combinatorial 3-manifolds with transitive cyclic symmetry.''
+\emph{Discrete Comput. Geom.} 51(2):394--426, 2014.
+doi:10.1007/s00454-013-9560-7.
+
+\bibitem{Sul06}
+T. Sulanke.
+``Irreducible triangulations of low genus surfaces.''
+arXiv:math/0606690, 2006.
+
+\bibitem{SulPM}
+T. Sulanke.
+``Examples of pseudo-minimal triangulations.''
+Online manuscript, available at
+\url{https://tsulanke.pages.iu.edu/graphs/pseudomin/examples.pdf}.
+
+\bibitem{SL09}
+T. Sulanke and F. H. Lutz.
+``Isomorphism-free lexicographic enumeration of triangulated surfaces and
+3-manifolds.''
+\emph{European J. Combin.} 30(8):1965--1979, 2009.
+doi:10.1016/j.ejc.2008.12.016.
+
+\bibitem{W36}
+K. Wagner.
+``Bemerkungen zum Vierfarbenproblem.''
+\emph{Jahresber. Dtsch. Math.-Ver.} 46:26--32, 1936.
 
 \end{thebibliography}
 
