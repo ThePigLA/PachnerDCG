@@ -80,8 +80,8 @@ The purpose of this paper is to describe how the components of these slices
 fit together across successive vertex numbers.
 
 Fix a closed connected PL \(d\)-manifold \(M\), where \(d\ge2\).  Let
-\(G(n)\) be the graph whose vertices are the \(n\)-vertex simplicial
-triangulations of \(M\), with an edge for each vertex-preserving bistellar
+\(G(n)\) be the graph whose vertices are the simplicial
+triangulations of \(M\) with \(n\) vertices , with an edge for each vertex-preserving bistellar
 move.  Write
 \[
  C(n)=\pi_0\bigl(G(n)\bigr)
@@ -122,10 +122,10 @@ vertex has out-degree one.  Pachner's theorem implies that the underlying
 undirected graph is connected, and the unique upward edge rules out cycles.
 Thus \(\mathcal C\) is a graded tree.  Moreover, the directed rays from any
 two vertices eventually meet: components can merge under facet subdivision,
-but they cannot split.  The resulting normal form for Pachner paths is worth
+but they cannot split.  The resulting canonical form for Pachner paths is worth
 stating separately.
 
-\begin{theorem*}[Normal form for Pachner paths]
+\begin{theorem*}[Canonical Pachner sequences]
 Any two simplicial triangulations \(P\) and \(Q\) of the same closed
 connected PL \(d\)-manifold admit a Pachner sequence of the form
 \[
@@ -151,8 +151,10 @@ permitted local moves include, besides the exchanges of two tetrahedra for
 three and of three for two, additional moves that delete a pair of tetrahedra
 and have no counterpart for simplicial complexes.  Here the triangulations
 are simplicial, the horizontal slices fix an arbitrary vertex count, and the
-grading itself is by vertex number.  The two normal-form statements concern
-different categories and different complexity parameters.
+grading itself is by the number of vertices.  
+
+%The two normal-form statements concern
+%different categories and different complexity parameters.
 
 The component tree need not have a unique vertex at its lowest occupied
 level.  Every component determines a unique stabilization ray, and any two
