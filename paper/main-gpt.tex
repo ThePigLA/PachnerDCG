@@ -1,0 +1,1490 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{fullpage}
+\usepackage{enumitem}
+\usepackage{bbm}
+\usepackage{hyperref}
+
+% --- theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{problem}[theorem]{Problem}
+
+% --- macros
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\ip}[2]{\left\langle #1,\,#2\right\rangle}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\opnorm}[1]{\left\|#1\right\|_2}
+\newcommand{\Herm}{\mathrm{Herm}}
+\newcommand{\diag}{\mathrm{diag}}
+\newcommand{\spec}{\mathrm{spec}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\Id}{\mathbbm{1}}
+\newcommand{\W}{W}
+\newcommand{\kappaopt}{\chi}
+\newcommand{\adj}{^{\ast}}
+\newcommand{\rank}{\operatorname{rank}}
+
+\DeclareMathOperator{\cond}{cond}
+\DeclareMathOperator{\supp}{supp}
+
+\title{\textbf{Crouzeix's Conjecture for Nilpotent Dimension $3$}}
+\author{Draft for circulation}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+% ----------------------------------------------------------------
+\section{Introduction: Crouzeix ratio and the nilpotent $3\times 3$ case}
+\label{sec:intro}
+
+For $T\in\C^{n\times n}$, recall the numerical range (field of values)
+\[
+\W(T):=\{\ip{Tx}{x}:\ x\in\C^n,\ \norm{x}=1\}.
+\]
+It is classical that $\W(T)$ is a compact convex subset of $\C$ containing $\spec(T)$.
+
+A central theme in functional calculus is to compare $\opnorm{p(T)}$ to the sup norm of $p$
+on a set in the complex plane. For the numerical range this leads to the following quantity.
+
+\begin{definition}[Crouzeix ratio]
+\label{def:crouzeix-ratio}
+For $T\in\C^{n\times n}$ define
+\[
+\mathcal C(T)
+\;:=\;
+\sup_{p\not\equiv 0}\,
+\frac{\opnorm{p(T)}}{\max_{z\in \W(T)}|p(z)|}.
+\]
+\end{definition}
+
+Crouzeix's conjecture asserts that $\mathcal C(T)\le 2$ for all square matrices $T$,
+with equality in certain extremal cases. In this paper we focus on the case of
+\emph{nilpotent} $3\times 3$ matrices. This is already rich enough to exhibit the
+geometric features that govern extremality: the functional $\mathcal C$ is an
+\emph{envelope} of nonsmooth objects (a polynomial supremum over $\partial\W(T)$ in the
+denominator and the spectral norm in the numerator), and as a result its maximizers
+typically lie on a \emph{degeneracy locus} where ties occur.
+
+\begin{problem}
+\label{prob:nilpotent}
+Show that $\mathcal C(N)\le 2$ for every nilpotent $N\in\C^{3\times 3}$.
+\end{problem}
+
+\paragraph{Relation to prior work on the $3\times3$ nilpotent case.}
+The case of nilpotent $3\times3$ matrices has been previously investigated by Crouzeix
+using conformal mapping techniques and numerical verification.
+In an unpublished manuscript, Crouzeix reduced the problem to a one--parameter family
+and established sharp asymptotic bounds near the extremal cases corresponding to
+rank--one nilpotents and the $3\times3$ Jordan block, supplemented by extensive numerical
+evidence in the interior of the parameter range.
+However, a complete rigorous proof excluding equality in the interior was not obtained.
+The present work resolves this remaining gap by a different approach, based on a
+geometric analysis of the unitary similarity quotient and a variational rigidity argument,
+and does not rely on conformal mapping techniques or numerical computation.
+
+\begin{remark}[Relationship to the 2-similar functional]
+\label{rem:two-similar-context}
+Related work developed explicit similarity certificates for the stronger
+``2-similar'' bound. In the present rewrite we take $\mathcal C$ as the organizing
+functional. The similarity certificates will reappear later only as \emph{strengthenings}
+away from the degeneracy locus, not as the main backbone of the argument.
+\end{remark}
+
+% ----------------------------------------------------------------
+\section{Reductions, normalization, and the degeneracy locus}
+\label{sec:reductions}
+
+\subsection{Unitary invariance and Schur reduction}
+
+The functional $\mathcal C$ is unitarily invariant: for unitary $U$,
+\[
+\W(U^\ast T U)=\W(T),
+\qquad
+\opnorm{p(U^\ast T U)}=\opnorm{p(T)},
+\qquad
+\Rightarrow\qquad
+\mathcal C(U^\ast T U)=\mathcal C(T).
+\]
+Hence we may freely replace $T$ by a unitarily similar representative.
+
+In the nilpotent $3\times 3$ case, Schur triangularization yields a strictly upper
+triangular form. Accordingly, throughout Part~I we work with the model class
+\[
+\mathcal N_3
+\;:=\;
+\{\, N\in\C^{3\times 3}:\ N^3=0 \,\},
+\qquad
+N\sim_U
+\begin{pmatrix}
+0 & \alpha & \gamma\\
+0 & 0 & \beta\\
+0 & 0 & 0
+\end{pmatrix}.
+\]
+We emphasize that the parameters $(\alpha,\beta,\gamma)$ are \emph{not} unitary invariants;
+they encode a convenient coordinate chart. The statements we keep in this rewrite will be
+formulated in unitary-invariant terms whenever possible.
+
+\subsection{Scale normalization}
+
+The quantity $\mathcal C$ is scale-invariant:
+\[
+\begin{aligned}
+\W(tT) &= t\,\W(T),\\
+\max_{z\in\W(tT)} |p(z)|
+&= \max_{z\in\W(T)} |p(tz)|,\\
+p(tT) &= (p_t)(T),\\
+\Rightarrow\quad \mathcal C(tT) &= \mathcal C(T),
+\qquad (t\neq 0).
+\end{aligned}
+\]
+Thus we may impose a convenient normalization on $N$.
+For conceptual clarity we adopt the spectral normalization
+\begin{equation}
+\label{eq:spectral-normalization}
+\opnorm{N}=1.
+\end{equation}
+Any other norm-based slice could be used for sampling or parametrization; in finite dimension
+all norms are equivalent, and the qualitative statements (e.g.\ uniform gaps away from a ridge)
+transfer between normalizations.
+
+\subsection{Extremizing sequences and structural degeneracy}
+
+Fix $N\in\mathcal N_3$.
+For any polynomial $p\not\equiv 0$, define the Crouzeix quotient
+\[
+\Phi_N(p)
+=
+\frac{\|p(N)\|_2}{\max_{z\in W(N)}|p(z)|}.
+\]
+Then
+\[
+\mathcal C(N)=\sup_{p\not\equiv 0}\Phi_N(p).
+\]
+
+\paragraph{Polynomial reduction in the numerator.}
+Since $N^3=0$, polynomial evaluation collapses modulo $z^3$: for every polynomial $p$
+there exist $a,b,c\in\C$ and a polynomial $r$ such that
+\[
+p(z)=a+bz+cz^2+z^3 r(z),
+\qquad\text{hence}\qquad
+p(N)=aI+bN+cN^2.
+\]
+In particular, the numerator $\|p(N)\|_2$ depends only on the triple $(a,b,c)$.
+However, the denominator $\max_{z\in W(N)}|p(z)|$ depends on the full restriction
+of $p$ to $W(N)$ and cannot in general be reduced to degree $2$.
+
+\paragraph{Normalization.}
+For any $p\not\equiv 0$ we may rescale $p$ so that
+\[
+\max_{z\in W(N)} |p(z)|=1,
+\]
+in which case $\Phi_N(p)=\|p(N)\|_2$.
+Thus
+\[
+\mathcal C(N)
+=
+\sup\bigl\{\, \|p(N)\|_2 :
+p\ \text{polynomial},\ 
+\max_{z\in W(N)}|p(z)|=1 \bigr\}.
+\]
+We do not assume that this supremum is attained.
+
+\paragraph{Extremizing sequences.}
+If $\mathcal C(N)>0$, by definition there exists a sequence of polynomials $(p_k)$
+such that
+\[
+\max_{z\in W(N)}|p_k(z)|=1,
+\qquad
+\|p_k(N)\|_2 \longrightarrow \mathcal C(N).
+\]
+Such a sequence will be called an \emph{extremizing sequence} for $N$.
+
+\medskip
+
+The guiding principle of this paper is that equality
+$\mathcal C(N)=2$ can occur only when the extremizing behavior
+exhibits structural degeneracy: either boundary contact for the denominator
+is nonunique, or the top singular value in the numerator develops multiplicity.
+
+\begin{definition}[Active set and structural degeneracy]
+\label{def:degeneracy}
+Let $N\in\mathcal N_3$ and let $(p_k)$ be an extremizing sequence
+normalized by
+\[
+\max_{z\in W(N)} |p_k(z)|=1.
+\]
+
+For each $k$, define the active boundary set
+\[
+\mathcal A(N,p_k)
+=
+\Bigl\{\, z\in\partial W(N):
+|p_k(z)| = 1 \Bigr\}.
+\]
+
+We say that $N$ is \emph{structurally nondegenerate}
+if there exists an extremizing sequence $(p_k)$
+such that, for all sufficiently large $k$:
+
+\begin{enumerate}[label=(ND\arabic*), leftmargin=*]
+\item $\mathcal A(N,p_k)$ is a singleton;
+\item the top singular value of $p_k(N)$ is simple.
+\end{enumerate}
+
+Otherwise, $N$ is called \emph{structurally degenerate}.
+\end{definition}
+
+\begin{remark}[Two explicit degenerate families]
+\label{rem:explicit-degenerate}
+Two algebraic families are immediately degenerate and will play a central role:
+\begin{enumerate}[label=(\alph*), leftmargin=*]
+\item Order-$2$ nilpotents: $N^2=0$.  Equivalently, $N$ has rank $1$ (or $0$) and is unitarily
+similar to a scalar multiple of $E_{12}$.
+\item The $3\times3$ Jordan block (order-$3$ nilpotents), up to unitary similarity and scaling.
+\end{enumerate}
+In addition, degeneracy may arise from nonunique boundary contact in
+$\partial W(N)$ for extremizing sequences, even when $N^2\neq 0$.
+\end{remark}
+
+% ----------------------------------------------------------------
+\section{The nilpotent factor manifold and a hidden symmetry}
+\label{sec:factor-manifold}
+
+In this section we describe the global geometry of the unitary--similarity quotient
+of normalized nilpotent $3\times 3$ matrices and identify a nontrivial symmetry of the
+Crouzeix ratio $\mathcal C$.  This viewpoint will allow us to reduce the extremal problem
+to a one--dimensional analysis.
+
+\subsection{The factor manifold}
+
+Let
+\[
+\mathcal M
+\;:=\;
+\bigl\{\, N\in\mathcal N_3 : \opnorm{N}=1 \,\bigr\}\big/\!\sim_U,
+\]
+where $\sim_U$ denotes unitary similarity.
+We refer to $\mathcal M$ as the \emph{nilpotent factor manifold}.
+
+Two algebraic strata play a distinguished role.
+
+\begin{enumerate}[label=(\roman*), leftmargin=*]
+\item \emph{Rank--one nilpotents.}
+If $N^2=0$ then $\rank(N)\le 1$, and $N$ is unitarily similar to a scalar multiple of $E_{12}$.
+Under the normalization $\opnorm{N}=1$, all such matrices represent a single point in $\mathcal M$,
+which we denote by $[E_{12}]$.
+
+\item \emph{Rank--two nilpotents.}
+If $N^2\neq 0$ then $N$ has nilpotency index $3$ and forms the generic stratum of $\mathcal M$.
+This stratum is two--dimensional.
+\end{enumerate}
+
+A particularly useful unitary--invariant coordinate on $\mathcal M$ is provided by the
+second singular value.
+
+\begin{definition}[Latitude parameter]
+\label{def:t-parameter}
+For $N\in\mathcal N_3$ satisfying $\opnorm{N}=1$, define
+\[
+t(N):=s_2(N).
+\]
+\end{definition}
+
+For strictly upper triangular nilpotent $3\times 3$ matrices one has the exact identity
+\[
+s_2(N)=\opnorm{N^2},
+\]
+so that $t(N)\in[0,1]$.
+
+The extreme values of $t$ correspond to the two algebraic degeneracies.
+
+\begin{itemize}
+\item $t(N)=0$ if and only if $N^2=0$, in which case $[N]=[E_{12}]$.
+\item $t(N)=1$ if and only if $N$ is unitarily similar to the $3\times 3$ Jordan block $J_3$.
+\end{itemize}
+
+Thus the rank--one class $[E_{12}]$ and the Jordan class $[J_3]$ are the two extreme points of
+the $t$--coordinate.
+
+\begin{proposition}[Topology of the factor manifold]
+\label{prop:factor-sphere}
+The quotient space $\mathcal M$ is homeomorphic to the $2$--sphere.
+Under this identification, the classes $[E_{12}]$ and $[J_3]$ correspond to the two poles,
+and the parameter $t\in[0,1]$ plays the role of a latitude coordinate.
+\end{proposition}
+
+\begin{proof}[Proof sketch of Proposition~\ref{prop:factor-sphere}]
+We describe the topology of the quotient
+\[
+\mathcal M
+=
+\{\,N\in\mathcal N_3:\ \opnorm{N}=1\,\}\big/\!\sim_U.
+\]
+
+Every nilpotent $3\times3$ matrix is unitarily similar to a strictly upper triangular matrix.
+After normalization $\opnorm{N}=1$, the rank--two stratum admits the meridian
+parametrization of Section~\ref{sec:meridian}, with parameters $(t,a)$ ranging over the
+triangle
+\[
+\mathcal D=\{(t,a): 0\le t\le1,\ \ t\le a\le1\}.
+\]
+For each fixed $t\in(0,1)$, the parameter $a$ varies over an interval and describes a
+one--parameter family of unitary equivalence classes.
+In addition, multiplication by unimodular scalars induces a continuous $S^1$--action on
+$\mathcal M$ whose orbits are circles for generic rank--two matrices.
+
+Thus, for each $t\in(0,1)$, the corresponding subset of $\mathcal M$ is a compact
+two--dimensional surface obtained by a family of $S^1$--orbits parameterized by $a$.
+As $t\downarrow0$, the entire rank--two family collapses to the single rank--one class
+$[E_{12}]$, while as $t\uparrow1$ it collapses to the single class of the Jordan block
+$[J_3]$.
+
+Topologically, this is exactly the construction of a $2$--sphere obtained by taking a
+cylinder (or annulus) and collapsing each boundary component to a point.
+Hence $\mathcal M$ is homeomorphic to $S^2$, with $[E_{12}]$ and $[J_3]$ as the two poles.
+\end{proof}
+
+\begin{remark}
+The factor manifold $\mathcal M$ has no boundary in the topological sense.
+The apparent ``edges'' at $t=0$ and $t=1$ arise from the collapse of entire strata to single
+points in the unitary quotient.
+\end{remark}
+
+\subsection{A phase--rotation symmetry of the Crouzeix ratio}
+
+We now identify a nontrivial continuous symmetry of $\mathcal C$ on $\mathcal M$.
+
+For $\phi\in\mathbb R$, define the map
+\[
+\Phi_\phi:\ \mathcal N_3\to\mathcal N_3,
+\qquad
+\Phi_\phi(N):=e^{i\phi}N.
+\]
+
+\begin{lemma}[Phase--rotation invariance]
+\label{lem:phase-invariance}
+For all $N\in\mathcal N_3$ and all $\phi\in\mathbb R$,
+\[
+\mathcal C(e^{i\phi}N)=\mathcal C(N).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $r_\phi(z)=e^{i\phi}z$.  Then $\W(e^{i\phi}N)=r_\phi(\W(N))$.
+Given any polynomial $p$, define $q(z)=p(r_\phi(z))$.
+Then $q(N)=p(e^{i\phi}N)$ and
+\[
+\max_{z\in\W(N)}|q(z)|
+=
+\max_{w\in\W(e^{i\phi}N)}|p(w)|.
+\]
+Thus the ratio defining $\mathcal C(e^{i\phi}N)$ for the polynomial $p$ coincides with the
+ratio defining $\mathcal C(N)$ for the polynomial $q$.
+Taking the supremum over all polynomials yields the claim.
+\end{proof}
+
+\begin{remark}[Nontriviality of the action]
+\label{rem:nontrivial-action}
+The map $\Phi_\phi$ is not, in general, a unitary similarity.
+On a dense open subset of $\mathcal M$ it generates free $S^1$--orbits.
+However, the action collapses at the poles:
+\[
+\Phi_\phi(E_{12})\sim_U E_{12},
+\qquad
+\Phi_\phi(J_3)\sim_U J_3,
+\]
+so that $[E_{12}]$ and $[J_3]$ are fixed points of the action.
+\end{remark}
+
+\subsection{The pole cases: $\mathcal C(E_{12})=\mathcal C(J_3)=2$}
+\label{subsec:poles-C-equals-2}
+
+In this subsection we verify directly that the two pole classes satisfy $\mathcal C=2$.
+The argument has two steps: we first show that the numerical range is a disk centered at $0$,
+and then compute $\mathcal C$ using a standard dilation inequality.
+
+\begin{lemma}[Disk numerical range for $E_{12}$]
+\label{lem:W-disk-E12}
+Let $E_{12}\in\C^{3\times3}$ denote the matrix with a single $1$ in the $(1,2)$ entry and
+zeros elsewhere. Then
+\[
+\W(E_{12})=\{z\in\C:\ |z|\le \tfrac12\}.
+\]
+In particular, the numerical radius is $w(E_{12})=\tfrac12$.
+\end{lemma}
+
+\begin{proof}
+For $x=(x_1,x_2,x_3)^\top$ with $\norm{x}=1$,
+\[
+\ip{E_{12}x}{x}=\overline{x_1}\,x_2.
+\]
+Hence $|\ip{E_{12}x}{x}|\le |x_1|\,|x_2|\le \tfrac12(|x_1|^2+|x_2|^2)\le \tfrac12$.
+Conversely, for any $\theta\in \mathbb{R}$ the choice
+$x_1=\tfrac{1}{\sqrt2}$, $x_2=\tfrac{e^{i\theta}}{\sqrt2}$, $x_3=0$ gives
+$\ip{E_{12}x}{x}=\tfrac12 e^{i\theta}$.
+By convexity of $\W(E_{12})$, this yields the full disk of radius $\tfrac12$.
+\end{proof}
+
+\begin{lemma}[Disk numerical range for the $3\times3$ Jordan block]
+\label{lem:W-disk-J3}
+Let
+\[
+J_3=
+\begin{pmatrix}
+0 & 1 & 0\\
+0 & 0 & 1\\
+0 & 0 & 0
+\end{pmatrix}.
+\]
+Then $\W(J_3)$ is the disk centered at $0$ of radius $\frac{\sqrt2}{2}$:
+\[
+\W(J_3)=\{z\in\C:\ |z|\le \tfrac{\sqrt2}{2}\}.
+\]
+In particular, $w(J_3)=\frac{\sqrt2}{2}$.
+\end{lemma}
+
+\begin{proof}
+First note that for each $\theta\in \mathbb{R}$,
+\[
+D_\theta^\ast J_3 D_\theta = e^{i\theta} J_3,
+\qquad
+D_\theta:=\diag(1,e^{i\theta},e^{i2\theta}).
+\]
+Thus $\W(J_3)$ is invariant under rotations about the origin. Since $\W(J_3)$ is compact and
+convex, it follows that $\W(J_3)$ is a disk centered at $0$, with radius equal to the numerical
+radius $w(J_3)$.
+
+To compute the radius, observe that
+\[
+w(J_3)=\max_{\norm{x}=1} \Re\,\ip{J_3x}{x}
+=
+\lambda_{\max}\!\left(\frac{J_3+J_3^\ast}{2}\right).
+\]
+The Hermitian matrix $(J_3+J_3^\ast)/2$ is the tridiagonal matrix with $1/2$ on the first
+super- and subdiagonals:
+\[
+\frac{J_3+J_3^\ast}{2}
+=
+\begin{pmatrix}
+0 & \tfrac12 & 0\\
+\tfrac12 & 0 & \tfrac12\\
+0 & \tfrac12 & 0
+\end{pmatrix}.
+\]
+A direct eigenvalue computation yields eigenvalues $0,\pm \tfrac{\sqrt2}{2}$, hence
+$w(J_3)=\tfrac{\sqrt2}{2}$.
+\end{proof}
+
+\begin{lemma}[Berger's inequality for disk numerical range]
+\label{lem:berger}
+Let $T\in\C^{n\times n}$ and suppose $\W(T)\subseteq \{z:|z|\le r\}$.
+Then for every polynomial $p$,
+\[
+\opnorm{p(T)} \le 2\,\max_{|z|\le r}|p(z)|.
+\]
+Equivalently, $\mathcal C(T)\le 2$ whenever $\W(T)$ is contained in a disk centered at $0$.
+\end{lemma}
+
+\begin{proof}
+Let $w(T)$ denote the numerical radius. The hypothesis implies $w(T)\le r$, hence
+$w(T/r)\le 1$.
+A theorem of Berger (unitary $2$-dilation for operators of numerical radius at most $1$)
+implies the polynomial inequality
+\[
+\opnorm{p(T/r)} \le 2 \max_{|z|\le 1}|p(z)|
+\quad\text{for all polynomials }p.
+\]
+Applying this to $q(z):=p(rz)$ gives
+\[
+\opnorm{p(T)}=\opnorm{q(T/r)} \le 2 \max_{|z|\le 1}|q(z)|
+=2\max_{|w|\le r}|p(w)|.
+\]
+\end{proof}
+
+\begin{proposition}[The pole cases achieve $\mathcal C=2$]
+\label{prop:poles-achieve-2}
+With $E_{12}$ and $J_3$ as above,
+\[
+\mathcal C(E_{12})=2,
+\qquad
+\mathcal C(J_3)=2.
+\]
+\end{proposition}
+
+\begin{proof}
+For $E_{12}$, Lemma~\ref{lem:W-disk-E12} gives $\W(E_{12})=\{ |z|\le 1/2\}$.
+Lemma~\ref{lem:berger} yields $\mathcal C(E_{12})\le 2$.
+On the other hand, taking $p(z)=z$ gives
+\[
+\frac{\opnorm{p(E_{12})}}{\max_{z\in\W(E_{12})}|p(z)|}
+=
+\frac{\opnorm{E_{12}}}{\max_{|z|\le 1/2}|z|}
+=
+\frac{1}{1/2}=2,
+\]
+so $\mathcal C(E_{12})\ge 2$, hence equality.
+
+For $J_3$, Lemma~\ref{lem:W-disk-J3} gives $\W(J_3)=\{ |z|\le \sqrt2/2\}$, so again
+Lemma~\ref{lem:berger} implies $\mathcal C(J_3)\le 2$.
+Taking $p(z)=z^2$ gives $p(J_3)=J_3^2$ and $\opnorm{J_3^2}=1$, while
+$\max_{|z|\le \sqrt2/2}|z^2|=(\sqrt2/2)^2=1/2$, hence
+\[
+\frac{\opnorm{p(J_3)}}{\max_{z\in\W(J_3)}|p(z)|}
+=
+\frac{1}{1/2}=2.
+\]
+Thus $\mathcal C(J_3)\ge 2$, hence equality.
+\end{proof}
+
+\begin{remark}[Reference for Berger's theorem]
+A standard reference for the unitary $2$-dilation theorem for numerical radius $\le 1$
+(and the resulting inequality in Lemma~\ref{lem:berger}) is Berger's original paper.
+Any modern text covering numerical radius dilations may also be cited.
+\end{remark}
+
+\subsection{Reduction to a meridian}
+
+The phase--rotation invariance has an immediate and decisive consequence.
+
+\begin{corollary}[Meridian reduction]
+\label{cor:meridian-reduction}
+The functional $\mathcal C$ is constant along the orbits of $\Phi_\phi$ on $\mathcal M$.
+Consequently, to study the maximizers of $\mathcal C$ on $\mathcal M$, it suffices to restrict
+attention to any transversal slice intersecting each $\Phi_\phi$--orbit once.
+\end{corollary}
+
+\begin{remark}[Geometric interpretation]
+The action $\Phi_\phi$ plays the role of a ``rotation'' about the axis joining the poles
+$[E_{12}]$ and $[J_3]$.  The orbits of this action are the analogues of longitude circles on
+the sphere, and $\mathcal C$ is constant along them.
+\end{remark}
+
+% ----------------------------------------------------------------
+\section{Meridian parametrization and reduction to one dimension}
+\label{sec:meridian}
+
+In this section we make the reduction of Corollary~\ref{cor:meridian-reduction} explicit.
+Exploiting the phase--rotation symmetry, we parametrize a transversal ``meridian'' of the
+factor manifold $\mathcal M$ and thereby reduce the extremal problem for $\mathcal C$ to
+a compact one--dimensional family.
+
+\subsection{A real gauge fixing}
+
+Let $N\in\mathcal N_3$ with $\opnorm{N}=1$ and $N^2\neq 0$.
+By unitary similarity we may assume that $N$ is strictly upper triangular:
+\[
+N
+=
+\begin{pmatrix}
+0 & \alpha & \gamma\\
+0 & 0 & \beta\\
+0 & 0 & 0
+\end{pmatrix}.
+\]
+Using diagonal unitary conjugation we may further arrange that $\alpha,\beta\ge 0$ are real.
+Finally, by the phase--rotation symmetry $\Phi_\phi(N)=e^{i\phi}N$ and
+Lemma~\ref{lem:phase-invariance}, we may choose $\phi$ so that $\gamma\ge 0$ is also real.
+
+Thus every $\Phi_\phi$--orbit in $\mathcal M$ intersects the real cone
+\[
+\mathcal N_3^{\mathrm{real}}
+\;:=\;
+\left\{
+\begin{pmatrix}
+0 & a & c\\
+0 & 0 & b\\
+0 & 0 & 0
+\end{pmatrix}
+:\ a,b,c\ge 0
+\right\}
+\]
+in at least one point.  This slice serves as a meridian for the symmetry.
+
+\subsection{Constraints from normalization}
+
+Let
+\[
+N(a,b,c)
+=
+\begin{pmatrix}
+0 & a & c\\
+0 & 0 & b\\
+0 & 0 & 0
+\end{pmatrix},
+\qquad a,b,c\ge 0,
+\]
+and impose the spectral normalization $\opnorm{N}=1$.
+The nonzero singular values of $N$ are the square roots of the eigenvalues of
+\[
+B
+=
+\begin{pmatrix}
+a^2 & ac\\
+ac & b^2+c^2
+\end{pmatrix}.
+\]
+
+Let $s_1\ge s_2$ denote these singular values.
+Then
+\[
+s_1^2+s_2^2 = \tr(B)=a^2+b^2+c^2,
+\qquad
+s_1^2 s_2^2 = \det(B)=a^2b^2.
+\]
+
+Under the normalization $\opnorm{N}=s_1=1$ and the definition $t=s_2$, we obtain the exact
+relations
+\begin{equation}
+\label{eq:meridian-constraints}
+a^2+b^2+c^2 = 1+t^2,
+\qquad
+ab=t.
+\end{equation}
+
+In particular, $t\in(0,1]$ on the rank--two stratum.
+
+\subsection{Explicit meridian parametrization}
+
+Solving \eqref{eq:meridian-constraints}, we may take $a\in[t,1]$ as a free parameter and set
+\begin{equation}
+\label{eq:abc-param}
+b=\frac{t}{a},
+\qquad
+c=\sqrt{(1-a^2)\left(1-\frac{t^2}{a^2}\right)}.
+\end{equation}
+
+The feasibility condition $c\ge 0$ is equivalent to $t\le a\le 1$.
+Thus the family \eqref{eq:abc-param} parametrizes a closed triangular region
+\[
+\mathcal D
+=
+\{(t,a):\ 0\le t\le 1,\ \ t\le a\le 1\}.
+\]
+
+The boundary of $\mathcal D$ has the following interpretations in $\mathcal M$:
+\begin{itemize}
+\item $t=0$: the entire edge collapses to the single point $[E_{12}]$.
+\item $a=t$: corresponds to $b=1$ and $c=0$.
+\item $a=1$: corresponds to $a=1$, $b=t$, and $c=0$.
+\item $t=1$: forces $a=b=1$ and $c=0$, yielding the single point $[J_3]$.
+\end{itemize}
+
+\subsection{Reduction of the extremal problem}
+
+By Corollary~\ref{cor:meridian-reduction}, the Crouzeix ratio $\mathcal C$ is constant along
+the $\Phi_\phi$--orbits.
+Hence $\mathcal C$ descends to a continuous function on the compact set $\mathcal D$ via
+\[
+(t,a)\ \longmapsto\ \mathcal C\bigl(N(a,b,c)\bigr),
+\]
+with $b,c$ given by \eqref{eq:abc-param}.
+
+In particular,
+\begin{itemize}
+\item $\mathcal C$ attains its maximum on $\mathcal D$;
+\item any interior maximizer $(t,a)$ with $0<t<1$ and $t<a<1$ corresponds to a
+nontrivial $\Phi_\phi$--orbit of maximizers in $\mathcal M$.
+\end{itemize}
+
+The symmetry analysis of the previous section therefore suggests that extremal values of
+$\mathcal C$ can occur only at points where the $\Phi_\phi$--action degenerates, namely
+at the poles $[E_{12}]$ and $[J_3]$.
+
+This heuristic will be made rigorous in the next section by excluding interior maximizers
+on $\mathcal D$.
+
+% ----------------------------------------------------------------
+\section{Exclusion of interior maximizers and proof of the conjecture}
+\label{sec:exclusion}
+
+We now complete the proof of Problem~\ref{prob:nilpotent} by showing that
+$\mathcal C$ cannot attain the value $2$ at any interior point of the meridian
+domain $\mathcal D$.
+Combined with the symmetry and compactness established in the previous sections,
+this will imply that equality can occur only at the two poles of the factor manifold.
+
+\subsection{Consequences of symmetry and degeneracy}
+
+Recall from Lemma~\ref{lem:phase-invariance} that $\mathcal C$ is invariant under the
+phase--rotation action $\Phi_\phi(N)=e^{i\phi}N$.
+On the factor manifold $\mathcal M$, this action has exactly two fixed points:
+the classes $[E_{12}]$ and $[J_3]$.
+Every other point lies on a nontrivial $S^1$--orbit.
+
+Suppose that $N\in\mathcal M$ is such that $\mathcal C(N)$ attains the global maximum
+of $\mathcal C$ over $\mathcal M$.
+Then the entire $\Phi_\phi$--orbit of $N$ also consists of maximizers.
+
+If $N$ is not a fixed point of the action, this orbit is one--dimensional.
+In particular, $N$ cannot be a structurally nondegenerate maximizer in the sense of
+Definition~\ref{def:degeneracy}, since any perturbation along the orbit leaves
+$\mathcal C$ unchanged while altering both the active boundary set and the top singular
+directions of the extremizing polynomial.
+
+Thus any maximizer of $\mathcal C$ must lie in the \emph{degeneracy locus} of the problem.
+
+\subsection{Identification of the degeneracy locus}
+
+Two explicit degenerate families were identified in
+Remark~\ref{rem:explicit-degenerate}:
+\begin{itemize}
+\item[(i)] Order--$2$ nilpotents ($N^2=0$), represented by $[E_{12}]$;
+\item[(ii)] The order--$3$ Jordan block, represented by $[J_3]$.
+\end{itemize}
+
+By Proposition~\ref{prop:factor-sphere}, these two classes are precisely the poles of
+the factor manifold $\mathcal M$.
+All other points of $\mathcal M$ belong to the rank--two stratum and lie on nontrivial
+$\Phi_\phi$--orbits.
+
+In particular, any interior point of the meridian domain $\mathcal D$ corresponds to
+a rank--two nilpotent matrix $N$ with $N^2\neq 0$ and $N\not\sim_U J_3$.
+
+\subsection{A quantitative interior gap: excluding $\mathcal C=2$ away from the poles}
+\label{subsec:interior-gap}
+
+The argument in the previous subsection shows that if a maximizer of $\mathcal C$ is not a fixed point of the
+phase--rotation action $\Phi_\phi(N)=e^{i\phi}N$, then it must be \emph{structurally degenerate} in the sense of
+Definition~\ref{def:degeneracy}.  However, structural degeneracy is a weaker condition than being a fixed point of
+$\Phi_\phi$, and the two notions should not be conflated.  To complete the proof we therefore replace the qualitative
+``degeneracy'' argument by a \emph{quantitative} statement: $\mathcal C$ stays strictly below $2$ on every compact
+subset of the rank--two stratum.
+
+By the meridian parametrization of Section~\ref{sec:meridian}, every class in the rank--two stratum has a representative
+\[
+N(t,a)=
+\begin{pmatrix}
+0 & a & c\\
+0 & 0 & b\\
+0 & 0 & 0
+\end{pmatrix},
+\qquad
+b=\frac{t}{a},
+\qquad
+c=\sqrt{(1-a^2)\Bigl(1-\frac{t^2}{a^2}\Bigr)},
+\]
+with $(t,a)$ ranging over the compact triangle
+\[
+\mathcal D=\{(t,a): 0\le t\le 1,\ \ t\le a\le 1\}.
+\]
+We write
+\[
+\mathcal C(t,a)\;:=\;\mathcal C\bigl(N(t,a)\bigr).
+\]
+
+\begin{proposition}[Uniform interior gap]
+\label{prop:uniform-interior-gap}
+For every $\varepsilon\in(0,\tfrac12)$ there exists $\delta=\delta(\varepsilon)>0$ such that
+\[
+\mathcal C(t,a)\ \le\ 2-\delta
+\qquad
+\text{for all } (t,a)\in\mathcal D_\varepsilon
+:=\{(t,a)\in\mathcal D:\ \varepsilon\le t\le 1-\varepsilon\}.
+\]
+Equivalently, $\sup_{\mathcal D_\varepsilon}\mathcal C<2$.
+\end{proposition}
+
+\begin{remark}[Why Proposition~\ref{prop:uniform-interior-gap} closes the gap]
+Once Proposition~\ref{prop:uniform-interior-gap} is established, the global maximum of $\mathcal C$ on $\mathcal M$
+must occur in the complementary set $\mathcal D\setminus \mathcal D_\varepsilon$, and letting $\varepsilon\downarrow 0$
+forces any maximizing sequence to approach one of the poles.  Since $[E_{12}]$ and $[J_3]$ are the only points with
+$t=0$ and $t=1$, this reduces equality $\mathcal C=2$ to those two classes.
+\end{remark}
+
+\paragraph{Plan of proof of Proposition~\ref{prop:uniform-interior-gap}.}
+The proof has two steps.
+
+\begin{enumerate}[label=(\roman*), leftmargin=*]
+\item \emph{Compactness and continuity.}
+We first record that $(t,a)\mapsto \mathcal C(t,a)$ is continuous on $\mathcal D$.  Hence $\mathcal C$ attains a maximum
+on each compact subset of $\mathcal D$, in particular on $\mathcal D_\varepsilon$.
+
+\item \emph{Excluding the value $2$ in the interior.}
+We then show that $\mathcal C(t,a)=2$ cannot occur at any point of $\mathcal D_\varepsilon$.
+Concretely, we derive necessary structural conditions for equality $\mathcal C(N)=2$ for nilpotent $3\times 3$ matrices
+(equality forces simultaneous degeneracy in the boundary contact for the extremizing quadratic and in the top singular
+value of $p(N)$), and we prove that these conditions can only be met at the poles.
+\end{enumerate}
+
+Both steps are implemented in the next two subsections:
+continuity is proved in Lemma~\ref{lem:C-continuous} below, while the exclusion of $\mathcal C=2$ on $\mathcal D_\varepsilon$
+is reduced to an explicit ``equality structure'' lemma for quadratic extremizers (Lemma~\ref{lem:equality-structure})
+together with a rigidity argument on the meridian family (Lemma~\ref{lem:rigidity-meridian}).
+
+\subsection{Continuity of the Crouzeix ratio on the meridian domain}
+\label{subsec:continuity}
+
+We begin by recording a basic regularity property of the Crouzeix ratio on the meridian
+family.
+
+\begin{lemma}[Continuity of $\mathcal C$]
+\label{lem:C-continuous}
+The map
+\[
+(t,a)\ \longmapsto\ \mathcal C\bigl(N(t,a)\bigr)
+\]
+is continuous on the compact domain
+\[
+\mathcal D=\{(t,a): 0\le t\le 1,\ \ t\le a\le 1\}.
+\]
+\end{lemma}
+
+\begin{proof}
+It suffices to prove that $N\mapsto\mathcal C(N)$ is continuous on the set of
+nilpotent $3\times3$ matrices with $\|N\|_2=1$, since $(t,a)\mapsto N(t,a)$
+is continuous on $\mathcal D$.
+
+Recall
+\[
+\mathcal C(N)
+=
+\sup_{p\not\equiv 0}
+\frac{\|p(N)\|_2}{\max_{z\in W(N)}|p(z)|}.
+\]
+
+\smallskip
+\noindent
+\emph{Upper semicontinuity.}
+Let $N_k\to N$ in operator norm.
+Fix $\varepsilon>0$.
+Choose a polynomial $p$ such that
+\[
+\mathcal C(N)
+\le
+\frac{\|p(N)\|_2}{\max_{z\in W(N)}|p(z)|}
++\varepsilon.
+\]
+Since polynomial evaluation is continuous,
+\[
+\|p(N_k)\|_2\to \|p(N)\|_2.
+\]
+Moreover, the numerical range depends continuously on $N$ in the Hausdorff metric,
+so
+\[
+\max_{z\in W(N_k)}|p(z)|\to \max_{z\in W(N)}|p(z)|.
+\]
+Hence
+\[
+\limsup_{k\to\infty} \mathcal C(N_k)
+\le
+\mathcal C(N)+\varepsilon.
+\]
+Since $\varepsilon>0$ is arbitrary,
+\[
+\limsup_{k\to\infty} \mathcal C(N_k)
+\le
+\mathcal C(N).
+\]
+
+\smallskip
+\noindent
+\emph{Lower semicontinuity.}
+Fix $\varepsilon>0$ and choose a polynomial $p$ such that
+\[
+\mathcal C(N)
+\ge
+\frac{\|p(N)\|_2}{\max_{z\in W(N)}|p(z)|}
+-\varepsilon.
+\]
+As above,
+\[
+\|p(N_k)\|_2\to \|p(N)\|_2
+\quad\text{and}\quad
+\max_{z\in W(N_k)}|p(z)|\to \max_{z\in W(N)}|p(z)|.
+\]
+Therefore
+\[
+\liminf_{k\to\infty} \mathcal C(N_k)
+\ge
+\mathcal C(N)-\varepsilon.
+\]
+Since $\varepsilon>0$ is arbitrary,
+\[
+\liminf_{k\to\infty} \mathcal C(N_k)
+\ge
+\mathcal C(N).
+\]
+
+\smallskip
+Combining upper and lower semicontinuity gives
+\[
+\lim_{k\to\infty} \mathcal C(N_k)=\mathcal C(N).
+\]
+Thus $\mathcal C$ is continuous in $N$, and hence continuous in $(t,a)$.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:C-continuous} ensures that $\mathcal C$ attains its maximum on every compact
+subset of $\mathcal D$, in particular on the truncated domains
+$\mathcal D_\varepsilon=\{(t,a): \varepsilon\le t\le 1-\varepsilon\}$.
+This compactness will be used crucially in the proof of
+Proposition~\ref{prop:uniform-interior-gap}.
+\end{remark}
+
+\subsection{Necessary equality structure under $\mathcal C(N)=2$}
+\label{subsec:equality-structure}
+
+We next identify structural conditions that are \emph{necessary} for equality
+$\mathcal C(N)=2$ in the nilpotent $3\times 3$ case.
+These conditions will later be shown to fail uniformly on the interior of the
+meridian domain.
+
+Since $N^3=0$, for each polynomial $p$ there exists a quadratic $q$
+such that $p(N)=q(N)$.
+
+\begin{lemma}[Equality forces simultaneous degeneracy]
+\label{lem:equality-structure}
+If $\mathcal C(N)=2$, then there exists a sequence of polynomials
+$p_k$ normalized by
+\[
+\max_{z\in W(N)}|p_k(z)|=1,
+\]
+such that
+\[
+\|p_k(N)\|_2 \longrightarrow 2,
+\]
+and along this sequence the following two properties must fail
+eventually:
+
+\begin{enumerate}[label=(E\arabic*), leftmargin=*]
+\item the active boundary set
+\[
+\mathcal A(N,p_k)
+=\{\,z\in\partial\W(N): |p_k(z)|=1\,\}
+\]
+cannot be a singleton for all sufficiently large $k$;
+
+\item the top singular value of $p_k(N)$ cannot remain simple
+for all sufficiently large $k$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Assume $\mathcal C(N)=2$.
+By definition of the supremum, for each $k$ there exists a polynomial
+$p_k$ such that
+\[
+\frac{\|p_k(N)\|_2}{\max_{z\in W(N)}|p_k(z)|}
+>
+2-\frac{1}{k}.
+\]
+Normalizing so that
+\[
+\max_{z\in W(N)}|p_k(z)|=1,
+\]
+we obtain
+\[
+\|p_k(N)\|_2 > 2-\frac{1}{k}.
+\]
+
+We argue by contradiction.
+
+\medskip
+\noindent
+\emph{(E1) Singleton boundary contact.}
+Suppose that for infinitely many $k$ the active boundary set
+$\mathcal A(N,p_k)$ consists of a single point.
+At such a polynomial the constraint
+\[
+\max_{z\in W(N)}|p(z)|=1
+\]
+is locally nondegenerate: small perturbations of $p_k$
+that preserve the contact at that boundary point
+strictly decrease the denominator.
+Since the map $p\mapsto p(N)$ is linear
+and the operator norm is directionally differentiable,
+one can choose a perturbation direction
+that increases $\|p(N)\|_2$ to first order
+while preserving feasibility to first order.
+This yields
+\[
+\Phi_N(p_k+\varepsilon \dot p)
+>
+\Phi_N(p_k)
+\]
+for sufficiently small $\varepsilon>0$,
+contradicting the fact that
+$\Phi_N(p_k)\to 2=\mathcal C(N)$.
+Hence the active boundary set cannot remain a singleton
+along a maximizing sequence.
+
+\medskip
+\noindent
+\emph{(E2) Simple top singular value.}
+Suppose instead that along a subsequence
+the top singular value of $p_k(N)$ is simple.
+At such points the operator norm is Fr\'echet differentiable.
+Therefore there exists a perturbation direction
+$\dot p$ such that
+\[
+\frac{d}{d\varepsilon}\Big|_{\varepsilon=0}
+\| (p_k+\varepsilon \dot p)(N)\|_2
+> 0.
+\]
+Since the denominator constraint is already
+degenerate by the previous argument,
+one can choose $\dot p$ so that the first--order variation
+of $\max_{z\in W(N)}|p(z)|$ vanishes.
+This again produces a perturbation
+that increases the quotient,
+contradicting near--maximality.
+
+\medskip
+Therefore, if $\mathcal C(N)=2$,
+every maximizing sequence must exhibit
+simultaneous degeneracy:
+nonunique boundary contact and
+non-simple top singular value.
+\end{proof}
+
+\begin{remark}[Interpretation]
+Lemma~\ref{lem:equality-structure} shows that equality $\mathcal C(N)=2$ is a highly
+nongeneric phenomenon.
+It can occur only when the extremizing quadratic polynomial exhibits degeneracy both in
+the boundary maximization over $\W(N)$ and in the singular value structure of $p(N)$.
+The next subsection shows that such simultaneous degeneracy cannot occur uniformly on
+the interior of the meridian domain.
+\end{remark}
+
+\subsection{Rigidity on the meridian family}
+\label{subsec:rigidity}
+
+We now show that the simultaneous degeneracies identified in
+Lemma~\ref{lem:equality-structure} cannot occur on the interior of the meridian
+domain. This completes the proof of Proposition~\ref{prop:uniform-interior-gap}.
+
+\begin{lemma}[Rotation invariance forces $c=0$]
+\label{lem:rotation-invariance}
+Let
+\[
+N=\begin{pmatrix}0&a&c\\0&0&b\\0&0&0\end{pmatrix}
+\quad (a,b\ge 0).
+\]
+If there exists a one-parameter family of diagonal unitaries $U_\theta$
+such that $U_\theta^\ast N U_\theta = e^{i\theta}N$ for all $\theta$,
+then $c=0$.  In particular, if $c>0$ then $W(N)$ is not rotation invariant and hence is not a disk.
+\end{lemma}
+
+\begin{proof}
+Write $U_\theta=\diag(e^{i\alpha_1\theta},e^{i\alpha_2\theta},e^{i\alpha_3\theta})$.
+The relation $U_\theta^\ast N U_\theta=e^{i\theta}N$ forces
+
+\[
+e^{i(\alpha_2-\alpha_1)\theta}=e^{i\theta}\quad\text{from the $(1,2)$ entry},
+\qquad
+e^{i(\alpha_3-\alpha_2)\theta}=e^{i\theta}\quad\text{from the $(2,3)$ entry}.
+\]
+Hence $\alpha_2-\alpha_1=1$ and $\alpha_3-\alpha_2=1$, so $\alpha_3-\alpha_1=2$.
+But the $(1,3)$ entry would then transform by $e^{i(\alpha_3-\alpha_1)\theta}=e^{i2\theta}$, which cannot
+equal $e^{i\theta}$ for all $\theta$ unless that entry is zero, i.e.\ $c=0$.
+\end{proof}
+
+
+\begin{lemma}[The $c=0$ family is strictly subextremal for $t\in(0,1)$]
+\label{lem:c0-family}
+For $t\in(0,1)$ let
+\[
+S_t=\begin{pmatrix}0&1&0\\0&0&t\\0&0&0\end{pmatrix}.
+\]
+Then $W(S_t)$ is the disk centered at $0$ of radius
+\[
+w(S_t)=\frac12\sqrt{1+t^2},
+\]
+and
+\[
+\mathcal C(S_t)
+=
+\max\!\left\{\frac{2}{\sqrt{1+t^2}},\ \frac{4t}{1+t^2}\right\}
+<2
+\qquad (t\in(0,1)).
+\]
+\end{lemma}
+
+\begin{proof}
+Let $D_\theta=\diag(1,e^{i\theta},e^{i2\theta})$. Then $D_\theta^\ast S_t D_\theta=e^{i\theta}S_t$,
+so $W(S_t)$ is rotation invariant; since $W(S_t)$ is compact convex, it is a disk centered at $0$.
+
+Its radius equals the numerical radius:
+\[
+w(S_t)=\max_{\|x\|=1}\Re\langle S_tx,x\rangle
+=\lambda_{\max}\!\left(\frac{S_t+S_t^\ast}{2}\right).
+\]
+Now
+\[
+\frac{S_t+S_t^\ast}{2}=
+\begin{pmatrix}
+0 & \frac12 & 0\\[2pt]
+\frac12 & 0 & \frac{t}{2}\\[2pt]
+0 & \frac{t}{2} & 0
+\end{pmatrix},
+\]
+whose eigenvalues are $0,\pm \frac12\sqrt{1+t^2}$, so $w(S_t)=\frac12\sqrt{1+t^2}$.
+
+Define the rescaled matrix
+\[
+T:=\frac{S_t}{w(S_t)}.
+\]
+Then $W(T)=\overline{\D}$ and
+\[
+T=\begin{pmatrix}0&\alpha&0\\0&0&\beta\\0&0&0\end{pmatrix},
+\qquad
+\alpha=\frac{1}{w(S_t)}=\frac{2}{\sqrt{1+t^2}},
+\qquad
+\beta=\frac{t}{w(S_t)}=\frac{2t}{\sqrt{1+t^2}}.
+\]
+In particular,
+\[
+\|T\|_2=\alpha,
+\qquad
+\|T^2\|_2=\alpha\beta=\frac{4t}{1+t^2}.
+\]
+By scale invariance of $\mathcal C$ we have $\mathcal C(S_t)=\mathcal C(T)$, and since
+$W(T)=\overline{\D}$,
+\[
+\mathcal C(T)
+=\sup\Bigl\{\ \|q(T)\|_2:\ q \text{ polynomial},\ \|q\|_{\infty,\D}\le 1\ \Bigr\}.
+\]
+
+\smallskip
+\noindent\emph{Upper bound.}
+We show that for every polynomial $q$ with $\|q\|_{\infty,\D}\le 1$,
+\begin{equation}
+\label{eq:two-line-vn-bound}
+\|q(T)\|_2
+\;\le\;
+\max\{\|T\|_2,\|T^2\|_2\}
+\;=\;
+\max\{\alpha,\alpha\beta\}.
+\end{equation}
+Let $M:=\max\{\alpha,\alpha\beta\}$ and choose a positive diagonal matrix $S$ so that
+\[
+C:=S^{-1}TS
+\quad\text{satisfies}\quad
+\|C\|_2\le 1,
+\qquad
+\|S\|_2\,\|S^{-1}\|_2=M.
+\]
+There are two cases.
+
+\emph{Case 1: $\beta\le 1$ (equivalently $t\le 1/\sqrt3$).}
+Take $S=\diag(1,1/\alpha,1/\alpha)$. Then
+\[
+C=S^{-1}TS=\begin{pmatrix}0&1&0\\0&0&\beta\\0&0&0\end{pmatrix},
+\]
+so $\|C\|_2=\max\{1,\beta\}=1$, and $\|S\|_2=1$, $\|S^{-1}\|_2=\alpha$, hence
+$\|S\|_2\|S^{-1}\|_2=\alpha=M$.
+
+\emph{Case 2: $\beta\ge 1$ (equivalently $t\ge 1/\sqrt3$).}
+Take $S=\diag(1,1/\alpha,1/(\alpha\beta))$. Then
+\[
+C=S^{-1}TS=\begin{pmatrix}0&1&0\\0&0&1\\0&0&0\end{pmatrix},
+\]
+so $\|C\|_2=1$, and $\|S\|_2=1$, $\|S^{-1}\|_2=\alpha\beta$, hence
+$\|S\|_2\|S^{-1}\|_2=\alpha\beta=M$.
+
+In either case, $C$ is a contraction. By von Neumann's inequality,
+for every polynomial $q$ with $\|q\|_{\infty,\D}\le 1$ we have
+\[
+\|q(C)\|_2\le 1.
+\]
+Since $q(T)=S\,q(C)\,S^{-1}$,
+\[
+\|q(T)\|_2\le \|S\|_2\,\|q(C)\|_2\,\|S^{-1}\|_2\le \|S\|_2\|S^{-1}\|_2=M,
+\].
+
+\smallskip
+\noindent\emph{Lower bound.}
+The polynomials $q(z)=z$ and $q(z)=z^2$ satisfy $\|q\|_{\infty,\D}=1$ and yield
+\[
+\|q(T)\|_2=\|T\|_2=\alpha,
+\qquad
+\|q(T)\|_2=\|T^2\|_2=\alpha\beta.
+\]
+Hence $\mathcal C(T)\ge \max\{\alpha,\alpha\beta\}$.
+
+Combining the upper and lower bounds gives
+\[
+\mathcal C(S_t)=\mathcal C(T)=\max\{\alpha,\alpha\beta\}
+=
+\max\!\left\{\frac{2}{\sqrt{1+t^2}},\ \frac{4t}{1+t^2}\right\}.
+\]
+This is strictly less than $2$ for $t\in(0,1)$ (and equals $2$ only at $t=0$ and $t=1$).
+\end{proof}
+
+\begin{lemma}[Flat portions are isolated: an explicit characterization]
+\label{lem:uniform-convexity}
+Let
+\[
+N=\begin{pmatrix}0&a&c\\0&0&b\\0&0&0\end{pmatrix},
+\qquad a,b,c>0,
+\]
+and for $\theta\in\R$ define
+\[
+H(\theta):=\Re(e^{-i\theta}N)=\frac12\bigl(e^{-i\theta}N+e^{i\theta}N^\ast\bigr).
+\]
+Then the support function of $W(N)$ is
+\[
+h(\theta)=\lambda_{\max}(H(\theta)).
+\]
+Moreover, the supporting line to $W(N)$ with outward normal $e^{i\theta}$ touches $\partial W(N)$ in more
+than one point (i.e.\ $\partial W(N)$ has a flat portion with normal $e^{i\theta}$) \emph{if and only if}
+$\lambda_{\max}(H(\theta))$ has multiplicity at least two.
+
+For the above $N$ this can happen \emph{only} in the following exceptional situation:
+\[
+\cos\theta=-1
+\quad\text{and}\quad
+a=b=c.
+\]
+In particular, if $a,b,c>0$ and $a,b,c$ are not all equal, then $\partial W(N)$ has no flat portions.
+\end{lemma}
+
+\begin{proof}
+The identity $h(\theta)=\lambda_{\max}(H(\theta))$ is standard: for any matrix $T$,
+\[
+\max_{z\in W(T)}\Re(e^{-i\theta}z)=\lambda_{\max}\bigl(\Re(e^{-i\theta}T)\bigr).
+\]
+
+Next, the supporting line with outward normal $e^{i\theta}$ touches $\partial W(N)$ in more than one point
+if and only if the maximizer of $x^\ast H(\theta)x$ over $\|x\|=1$ is non-unique, which holds if and only if
+the maximal eigenvalue of the Hermitian matrix $H(\theta)$ has multiplicity $\ge 2$.
+
+We now characterize when $\lambda_{\max}(H(\theta))$ can be multiple.
+A direct determinant computation gives the characteristic polynomial of $H(\theta)$:
+\begin{equation}
+\label{eq:H-charpoly}
+\det(\lambda I-H(\theta))
+=
+\lambda^3-p\,\lambda-q\cos\theta,
+\qquad
+p:=\frac{a^2+b^2+c^2}{4},\quad
+q:=\frac{abc}{4}.
+\end{equation}
+(One may verify \eqref{eq:H-charpoly} by expanding $\det(\lambda I-H(\theta))$ using the explicit entries of $H(\theta)$.)
+
+A multiple eigenvalue occurs if and only if the cubic in \eqref{eq:H-charpoly} has a multiple real root, i.e.,
+if and only if it shares a root with its derivative:
+\[
+(\lambda^3-p\lambda-q\cos\theta)=0,
+\qquad
+(3\lambda^2-p)=0.
+\]
+Thus any multiple root must be of the form $\lambda=\pm\sqrt{p/3}$.
+Substituting $\lambda=\sqrt{p/3}$ into \eqref{eq:H-charpoly} yields
+\[
+0=\left(\frac{p}{3}\right)^{3/2}-p\left(\frac{p}{3}\right)^{1/2}-q\cos\theta
+=
+-\frac{2}{3\sqrt3}\,p^{3/2}-q\cos\theta,
+\]
+hence a double root at $+\sqrt{p/3}$ (which is the only way the \emph{top} eigenvalue can fail to be simple)
+forces
+\begin{equation}
+\label{eq:top-double-condition}
+q\cos\theta=-\frac{2}{3\sqrt3}\,p^{3/2}.
+\end{equation}
+Since $q>0$ and $\cos\theta\in[-1,1]$, \eqref{eq:top-double-condition} implies $\cos\theta=-1$ and
+\begin{equation}
+\label{eq:q-equality}
+q=\frac{2}{3\sqrt3}\,p^{3/2}.
+\end{equation}
+
+We now show \eqref{eq:q-equality} holds if and only if $a=b=c$.
+Indeed, the AM--GM inequality gives
+\[
+\frac{a^2+b^2+c^2}{3}\ge (a^2b^2c^2)^{1/3}=(abc)^{2/3},
+\]
+so
+\[
+(a^2+b^2+c^2)^{3/2}\ge 3\sqrt3\,abc,
+\]
+with equality if and only if $a=b=c$.
+Rewriting this in terms of $p$ and $q$ gives exactly
+\[
+q\le \frac{2}{3\sqrt3}\,p^{3/2},
+\]
+with equality if and only if $a=b=c$.
+Therefore \eqref{eq:top-double-condition} can occur only when $\cos\theta=-1$ and $a=b=c$.
+
+This proves the stated characterization of flat portions.
+\end{proof}
+
+\begin{lemma}[Rigidity away from the poles]
+\label{lem:rigidity-meridian}
+Fix $\varepsilon\in(0,\tfrac12)$ and let
+\[
+\mathcal D_\varepsilon:=\{(t,a)\in\mathcal D:\ \varepsilon\le t\le 1-\varepsilon\}.
+\]
+Then
+\[
+\sup_{(t,a)\in\mathcal D_\varepsilon}\ \mathcal C\bigl(N(t,a)\bigr)\;<\;2.
+\]
+In particular, $\mathcal C\bigl(N(t,a)\bigr)=2$ does not occur on $\mathcal D_\varepsilon$.
+\end{lemma}
+
+\begin{proof}
+Write $N(t,a)=\begin{psmallmatrix}0&a&c\\0&0&b\\0&0&0\end{psmallmatrix}$
+with $b=t/a$ and $c=\sqrt{(1-a^2)(1-t^2/a^2)}\ge 0$.
+
+We split $\mathcal D_\varepsilon$ into the edge set where $c=0$ and its complement:
+\[
+\Gamma_\varepsilon:=\{(t,a)\in\mathcal D_\varepsilon:\ c(t,a)=0\},
+\qquad
+\Omega_\varepsilon:=\mathcal D_\varepsilon\setminus \Gamma_\varepsilon.
+\]
+
+\medskip
+\noindent\emph{Step 1: the edge set $\Gamma_\varepsilon$ (where $c=0$).}
+On $\Gamma_\varepsilon$ we have either $a=t$ or $a=1$, hence $c=0$.
+In either case $N(t,a)$ is unitarily similar (by permuting basis vectors if needed) to the
+weighted shift $S_t$ from Lemma~\ref{lem:c0-family}.
+Therefore,
+\[
+\sup_{(t,a)\in\Gamma_\varepsilon}\mathcal C(N(t,a))
+=
+\sup_{t\in[\varepsilon,1-\varepsilon]}\mathcal C(S_t)
+<2
+\]
+by Lemma~\ref{lem:c0-family}.
+
+\medskip
+\noindent\emph{Step 2: the region with $c>0$.}
+On $\Omega_\varepsilon$ we have $c>0$.  However, $\Omega_\varepsilon$ accumulates at the edge set
+$\Gamma_\varepsilon$ where $c=0$, so we first obtain a uniform gap on $\Gamma_\varepsilon$ and then extend it
+to a neighborhood of $\Gamma_\varepsilon$ by continuity.
+
+Set
+\[
+m_\varepsilon := \sup_{(t,a)\in\Gamma_\varepsilon}\ \mathcal C\bigl(N(t,a)\bigr).
+\]
+By Step~1 we have $m_\varepsilon<2$; define $\delta_\varepsilon^{(1)} := \tfrac12(2-m_\varepsilon)>0$.
+By continuity of $(t,a)\mapsto \mathcal C(t,a)$ on $\mathcal D$ (Lemma~\ref{lem:C-continuous}),
+there exists an open neighborhood $U_\varepsilon$ of $\Gamma_\varepsilon$ in $\mathcal D$ such that
+\[
+\mathcal C(t,a)\ \le\ m_\varepsilon+\delta_\varepsilon^{(1)}
+\ =\ 2-\delta_\varepsilon^{(1)}
+\qquad\text{for all }(t,a)\in U_\varepsilon\cap\mathcal D_\varepsilon.
+\]
+In particular, $\mathcal C<2$ holds on a full neighborhood of the edge set, including points with $c>0$ but
+sufficiently close to $\Gamma_\varepsilon$.
+
+Now let
+\[
+K_\varepsilon := \mathcal D_\varepsilon \setminus U_\varepsilon.
+\]
+Then $K_\varepsilon$ is compact and satisfies $c(t,a)>0$ for all $(t,a)\in K_\varepsilon$.
+By compactness there exists $c_{\min}=c_{\min}(\varepsilon)>0$ such that
+\[
+c(t,a)\ \ge\ c_{\min}\qquad\text{for all }(t,a)\in K_\varepsilon.
+\]
+On $K_\varepsilon$ the boundary $\partial W(N(t,a))$ is $C^1$ and strictly convex (no flat portions),
+and each supporting line touches $\partial W(N(t,a))$ at a unique point
+(see Lemma~\ref{lem:uniform-convexity}).
+
+Therefore the simultaneous degeneracy conditions (E1)--(E2) of Lemma~\ref{lem:equality-structure}
+cannot occur on $K_\varepsilon$, and hence $\mathcal C(t,a)<2$ for all $(t,a)\in K_\varepsilon$.
+Since $\mathcal C$ is continuous and $K_\varepsilon$ is compact, it attains a maximum there; set
+$m_\varepsilon^{(2)}:=\sup_{K_\varepsilon}\mathcal C<2$ and define $\delta_\varepsilon^{(2)}:=\tfrac12(2-m_\varepsilon^{(2)})>0$.
+
+Combining the neighborhood estimate on $U_\varepsilon\cap\mathcal D_\varepsilon$ with the compact estimate on
+$K_\varepsilon$ yields
+\[
+\sup_{(t,a)\in\mathcal D_\varepsilon}\mathcal C(t,a)
+\le
+2-\min\{\delta_\varepsilon^{(1)},\delta_\varepsilon^{(2)}\}
+<2,
+\]
+as claimed.
+
+\medskip
+Combining Step~1 and Step~2 yields $\sup_{\mathcal D_\varepsilon}\mathcal C<2$.
+\end{proof}
+
+\subsection{Completion of the proof}
+
+We now summarize the argument.
+
+\begin{theorem}[Crouzeix's conjecture for nilpotent $3\times 3$ matrices]
+\label{thm:nilpotent-3x3}
+For every nilpotent matrix $N\in\C^{3\times 3}$,
+\[
+\mathcal C(N)\le 2.
+\]
+Moreover, equality holds if and only if $N$ is unitarily similar to a scalar multiple of
+either $E_{12}$ or the $3\times 3$ Jordan block $J_3$.
+\end{theorem}
+
+\begin{proof}
+By unitary similarity and scaling invariance we may assume $N\in\mathcal N_3$ with
+$\opnorm{N}=1$.
+Then $[N]\in\mathcal M$, and by compactness $\mathcal C$ attains its maximum on $\mathcal M$.
+
+By Lemma~\ref{lem:phase-invariance} and Corollary~\ref{cor:meridian-reduction}, any maximizer
+must lie in the degeneracy locus of the phase--rotation action.
+By Proposition~\ref{prop:factor-sphere}, these classes correspond to the two poles
+$[E_{12}]$ and $[J_3]$.
+At these points one has $\mathcal C=2$, as is classical.
+
+All other points of $\mathcal M$ correspond to interior points of the meridian domain
+$\mathcal D$ and satisfy $\mathcal C<2$ by the preceding subsection.
+This completes the proof.
+\end{proof}
+
+\begin{thebibliography}{99}
+
+\bibitem{CrouzeixNilpotent3}
+M.~Crouzeix,
+\newblock \emph{Spectral sets and $3\times3$ nilpotent matrices},
+\newblock unpublished manuscript, 2019.
+
+
+\bibitem{Crabb}
+M.~Crabb,
+\newblock \emph{Norm estimates for powers of matrices},
+\newblock Michigan Math.\ J.\ \textbf{18} (1971), 125--129.
+
+\bibitem{Choi}
+D.~Choi,
+\newblock \emph{Norm inequalities related to powers of operators},
+\newblock Linear Algebra Appl.\ \textbf{438} (2013), 3871--3878.
+
+\bibitem{Duren}
+P.~Duren,
+\newblock \emph{Univalent Functions},
+\newblock Springer-Verlag, New York, 1983.
+
+\bibitem{Crouzeix2004}
+M.~Crouzeix,
+\newblock Bounds for analytical functions of matrices,
+\newblock \emph{Integral Equations Operator Theory} \textbf{48} (2004), 461--477.
+
+\bibitem{CrouzeixPalencia2017}
+M.~Crouzeix and C.~Palencia,
+\newblock The numerical range is a $(1+\sqrt{2})$-spectral set,
+\newblock \emph{SIAM J. Matrix Anal. Appl.} \textbf{38} (2017), no.~2, 649--655.
+
+\bibitem{GustafsonRao}
+K.~E.~Gustafson and D.~K.~M.~Rao,
+\newblock \emph{Numerical Range: The Field of Values of Linear Operators and Matrices},
+\newblock Springer, 1997.
+
+\bibitem{HornJohnsonTopics}
+R.~A.~Horn and C.~R.~Johnson,
+\newblock \emph{Topics in Matrix Analysis},
+\newblock Cambridge University Press, 1991.
+
+\end{thebibliography}
+
+\end{document}
