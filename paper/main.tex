@@ -120,7 +120,7 @@ a directed edge
 from each \(U\in C(n)\).  The Component Stabilization Theorem says that every
 vertex has out-degree one.  Pachner's theorem implies that the underlying
 undirected graph is connected, and the unique upward edge rules out cycles.
-Thus \(\mathcal C\) is a graded tree.  Moreover, the directed rays from any
+Thus, \(\mathcal C\) is a graded tree.  Moreover, the directed rays from any
 two vertices eventually meet: components can merge under facet subdivision,
 but they cannot split.  The resulting canonical form for Pachner paths is worth
 stating separately.
@@ -137,21 +137,13 @@ connected PL \(d\)-manifold admit a Pachner sequence of the form
  \xrightarrow{\;(d+1)\text{--}1\;*}
  Q.
 \]
-Thus the number of vertices first increases, then remains constant, and
+Thus, the number of vertices first increases, then remains constant, and
 finally decreases.
 \end{theorem*}
 
 This is an existence theorem; it does not assert that an arbitrary prescribed
-Pachner sequence can be reordered in this way.  It is also distinct from the
-unimodal sequences of Burton and He \cite{BH26}.  Their theorem concerns
-generalized triangulations of \(3\)-manifolds, in which tetrahedra are glued
-along faces, self-identifications are allowed, and the triangulation has a
-single vertex.  Complexity is graded by the number of tetrahedra, and the
-permitted local moves include, besides the exchanges of two tetrahedra for
-three and of three for two, additional moves that delete a pair of tetrahedra
-and have no counterpart for simplicial complexes.  Here the triangulations
-are simplicial, the horizontal slices fix an arbitrary vertex count, and the
-grading itself is by the number of vertices.  
+Pachner sequence can be reordered in this way.  This result is distinct from the unimodal path theorem of Burton and He \cite{BH26}. Their theorem concerns generalized one-vertex triangulations of 3-manifolds and grades complexity by the number of tetrahedra. Here the triangulations are simplicial, the horizontal graphs fix the number of vertices, and the component graph is graded by that number. The hypotheses and grading are therefore different.
+
 
 %The two normal-form statements concern
 %different categories and different complexity parameters.
@@ -337,7 +329,7 @@ closed simplicial \(d\)-manifold is \((d+1)\)-regular: every facet has
 simple.  Indeed, the intersection of two distinct facets in a simplicial
 complex is either empty or a single common face of dimension at most
 \(d-1\), so the facets can share at most one ridge.  A simple
-\((d+1)\)-regular graph has at least \(d+2\) vertices.  Thus \(P\) has a
+\((d+1)\)-regular graph has at least \(d+2\) vertices.  Thus, \(P\) has a
 facet \(\rho\) outside the support.
 
 The move leaves \(\rho\) and every proper face of \(\rho\) unchanged.
@@ -435,7 +427,7 @@ Corollary~\ref{cor:stabilization-map} gives each component
 the underlying undirected graph contained a cycle.  Choose a vertex of
 minimal level on that cycle.  Both of its neighbors on the cycle would lie at
 the next level, and they would have to be distinct.  This contradicts the
-uniqueness of the upward neighbor.  Thus the underlying graph is acyclic and,
+uniqueness of the upward neighbor.  Thus, the underlying graph is acyclic and,
 being connected, is a tree.
 \end{proof}
 
@@ -486,12 +478,12 @@ that \(vw\notin T\).  Thus
  \operatorname{lk}_T(\tau)=\partial(vw),
 \]
 so \(\tau*\partial(vw)\) supports a proper \(2\)--\(d\) bistellar move,
-contrary to unflippability.  Thus \(T\) admits no vertex-deleting move.
+contrary to unflippability.  Thus, \(T\) admits no vertex-deleting move.
 Since its fixed-vertex component consists only of \(T\),
 Proposition~\ref{prop:predecessors} now applies.
 \end{proof}
 
-Thus stabilization may identify distinct components, but it cannot split one
+Thus, stabilization may identify distinct components, but it cannot split one
 component into several.  More strongly, every two stabilization rays merge.
 
 \begin{corollary}[Coalescence]
@@ -684,7 +676,7 @@ More generally, Negami proved that for every closed surface \(F\), the graph
 \cite{N94,N99survey}; King later gave an explicit bound linear in
 \(\lvert\chi(F)\rvert\) \cite{King03}.  A related result of Komuro,
 Nakamoto, and Negami preserves minimum degree at least four \cite{KNN99}.
-Thus the component tree of a surface eventually has a single ray.  Our
+Thus, the component tree of a surface eventually has a single ray.  Our
 computations instead concern its first mergers at minimum vertex levels.
 
 The unique \(7\)-vertex triangulation of the torus is the classical
@@ -783,7 +775,7 @@ this gives an unflippable \(d\)-sphere on \(d+13\) vertices for every
 
 Each such sphere is an isolated fixed-vertex component.  Nevertheless, the
 Component Tree Theorem guarantees that its stabilization ray eventually
-merges with the sphere trunk.  Thus unflippable triangulations
+merges with the sphere trunk.  Thus, unflippable triangulations
 appear in arbitrarily high dimensions, while stabilization imposes a uniform
 global constraint on how their components fit into the full Pachner graph.
 
@@ -808,7 +800,7 @@ can be constructed from the outer tetrahedron by inserting points and
 applying \(2\)--\(3\) and \(3\)--\(2\) flips.  In the full Pachner graph,
 this gives a path from \(\partial\Delta^4\) to the boundary of the given
 polytope using only \(1\)--\(4\), \(2\)--\(3\), and \(3\)--\(2\) moves.
-Thus every polytopal triangulated \(3\)-sphere with \(n\) vertices lies in
+Thus, every polytopal triangulated \(3\)-sphere with \(n\) vertices lies in
 \(\mathcal T(n)\).
 
 \paragraph{The trunk also contains non-polytopal spheres.}
@@ -818,7 +810,7 @@ examples \cite{GS67} \cite{Bar73}.  It is easy to show both lie in \(\mathcal T(
 polytopal triangulation or from the other, so \(G(8)=\mathcal T(8)\).
 
 At \(n=9\), Altshuler, Bokowski, and Steinberg \cite{ABS80} showed that
-\(G(9)\) is connected.   Hence \(G(9)=\mathcal T(9)\).  Using Firsching's polytopality data \cite{F20}, we verified that
+\(G(9)\) is connected.   Hence \(G(9)=\mathcal T(9)\).  Using Firsching's polytopality data \cite{F-Data}, we verified that
 \(G(9)\) has \(1296\) vertices, of which \(1142\) are polytopal
 and \(154\) are non-polytopal, and that the induced subgraph on the
 non-polytopal vertices is itself connected. 
@@ -831,7 +823,7 @@ The four currently known examples relevant to our computations are
 The \(16\)-vertex example is from \cite{DFM04}; the \(20\)- and
 \(21\)-vertex examples arise among the cyclic triangulations studied in
 \cite{S14}.  Each is neighborly and has minimum edge valence at least four.
-Thus every \(2\)--\(3\) move is blocked by an existing complementary edge
+Thus, every \(2\)--\(3\) move is blocked by an existing complementary edge
 and every \(3\)--\(2\) move is blocked by edge valence.  Each is therefore
 unflippable and, by Corollary~\ref{cor:unflippable-leaves}, represents a
 newborn singleton leaf of the component tree, distinct from
@@ -926,7 +918,7 @@ We exhaustively enumerated all \(12\)-vertex seed triangulations whose edges
 all have valence at least \(4\).  For every seed in this class, we found an
 explicit restricted-flip path to \(\mathcal T(12)\).  Equivalently, the union
 of these paths gives a connected subgraph of \(G(12)\) containing
-all high-valence seeds and a known vertex of \(\mathcal T(12)\).  Thus no
+all high-valence seeds and a known vertex of \(\mathcal T(12)\).  Thus, no
 high-valence \(12\)-vertex seed gives a component outside
 \(\mathcal T(12)\).
 
@@ -958,7 +950,7 @@ For each of
  U(16),\quad U(20),\quad U_1(21),\quad U_2(21),
 \]
 every \(1\)--\(4\) subdivision lies in \(\mathcal T(n+1)\), where \(n\) is
-the vertex number of the original sphere.  Thus each isolated component
+the vertex number of the original sphere.  Thus, each isolated component
 merges into the sphere trunk after one stabilization.
 \end{theorem}
 
@@ -1176,12 +1168,6 @@ M. Firsching.
 optimization.''
 \emph{Math. Program.} 166(1--2):273--295, 2017.
 doi:10.1007/s10107-017-1120-0.
-
-\bibitem{F20}
-M. Firsching.
-``The complete enumeration of 4-polytopes and 3-spheres with nine vertices.''
-\emph{Israel J. Math.} 238(1):1--48, 2020.
-doi:10.1007/s11856-020-2070-4.
 
 \bibitem{F-Data}
 M. Firsching.
