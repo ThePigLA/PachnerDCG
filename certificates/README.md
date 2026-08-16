@@ -1,7 +1,7 @@
 # Computational certificates
 
 This directory is the public archival release for the computational evidence
-cited in `paper/main-gpt.tex`.
+cited in `paper/main.tex`.
 
 The present release contains the complete one-facet-subdivision certificates
 for the four known unflippable triangulated 3-spheres; the complete lists and

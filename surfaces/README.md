@@ -1,7 +1,7 @@
 # Surface flip-graph experiments
 
 This directory is the public archival release for the surface computations
-cited in `paper/main-gpt.tex` (Section "Surface flip graphs and one-step
+cited in `paper/main.tex` (Section "Surface flip graphs and one-step
 coalescence", Proposition "One-step coalescence at minimum levels"). It
 supports the claim that, for four surfaces whose minimum-level fixed-vertex
 flip graphs are disconnected -- the nonorientable surfaces N_4 and N_5, the

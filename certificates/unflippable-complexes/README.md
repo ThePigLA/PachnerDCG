@@ -1,7 +1,7 @@
 # One-step certificates for the known unflippable 3-spheres
 
 This directory contains the four certificates used for the one-step merger
-result in `paper/main-gpt.tex`. Each `simplification-certificate.json` starts
+result in `paper/main.tex`. Each `simplification-certificate.json` starts
 with the indicated unflippable 3-sphere, performs exactly one `1-4` move, and
 ends at the boundary of the 4-simplex using only `2-3`, `3-2`, and `4-1`
 moves. No 4-dimensional complex or certificate is used here.
