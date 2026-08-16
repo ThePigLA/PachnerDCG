@@ -104,8 +104,9 @@ subdivision of \(Q\).
 \end{theorem*}
 
 The same local argument works in every dimension.  After a new vertex is
-inserted into a facet, it can be slid across a common ridge into an adjacent
-facet by a \(2\)--\(d\) move followed by a \(d\)--\(2\) move.  Since the
+inserted into a facet, it can be slid across a common \((d-1)\)-face,
+called a ridge, into an adjacent facet by a \(2\)--\(d\) move followed by a
+\(d\)--\(2\) move.  Since the
 facet-adjacency graph of a connected closed triangulated manifold is
 connected, all choices of the subdivided facet give triangulations in one
 component of \(G(n+1)\).  A vertex-preserving bistellar move downstairs can
@@ -329,7 +330,7 @@ Lemma~\ref{lem:slide} transport the stellar vertex along such a path using
 only proper bistellar moves.
 \end{proof}
 
-The third lemma lifts an edge of a horizontal graph.
+The third lemma lifts an edge of \(G(n)\) to an edge of \(G(n+1)\).
 
 \begin{lemma}[Proper edges lift between fibers]
 \label{lem:edges-lift}
@@ -1000,8 +1001,8 @@ contain every triangulated \(3\)-sphere through \(11\) vertices and merge
 with each of the four known isolated sphere components after one facet
 subdivision.
 
-The component-tree formulation changes several of the natural open
-questions.  Eventual absorption is automatic; the central issues are now
+The component-tree formulation suggests several natural open questions.
+Eventual absorption is automatic; the central issues are now
 quantitative bounds, the geometry of branching, and the first levels at which
 new branches appear.
 
