@@ -1,0 +1,25 @@
+[
+ {
+  "surface": "Klein",
+  "chi": 0,
+  "orientable": false,
+  "n": 8,
+  "n_triangulations": 6,
+  "n_components": 1,
+  "component_sizes": [
+   6
+  ],
+  "at_minimum_n": true,
+  "min_vertices": 8,
+  "newborn_here": [
+   0
+  ],
+  "n_newborn_here": 1,
+  "newborn_here_sizes": [
+   6
+  ],
+  "min_degree_by_component": [
+   4
+  ]
+ }
+]

@@ -1,0 +1,172 @@
+ython batch.py ./manifolds/ --json survey.json --csv survey.csv --detail
+Loading 11 file(s) ...
+  manifolds_lex_d2_n10_o0_g3.txt: cached (1 groups)
+  manifolds_lex_d2_n10_o0_g6.txt: cached (1 groups)
+  manifolds_lex_d2_n10_o0_g7.txt: cached (1 groups)
+  manifolds_lex_d2_n10_o1_g2.txt: cached (1 groups)
+  manifolds_lex_d2_n10_o1_g3.txt: cached (1 groups)
+  manifolds_lex_d2_n11_o1_g2.txt: cached (1 groups)
+  manifolds_lex_d2_n11_o1_g3.txt: cached (1 groups)
+  manifolds_lex_d2_n11_o1_g4.txt: cached (1 groups)
+  manifolds_lex_d2_n12_o1_g6.txt: cached (1 groups)
+  manifolds_lex_d2_n9_o0_g3.txt: cached (1 groups)
+  manifolds_lex_d2_n9_o0_g4.txt: cached (1 groups)
+
+COVERAGE  (levels present per surface)
+  surface  chi       9     10     11     12
+-------------------------------------------
+  Sigma_2   -2       .    865 113506      .
+  Sigma_3   -4       .     20  65878      .
+  Sigma_4   -6       .      .    821      .
+  Sigma_6  -10       .      .      .     59
+      N_3   -1     133  11784      .      .
+      N_4   -2      37      .      .      .
+      N_6   -4       .   1022      .      .
+      N_7   -5       .     14      .      .
+
+FIBERS COMPUTABLE: 3
+    Sigma_2  s_10 : n=10 -> n=11
+    Sigma_3  s_10 : n=10 -> n=11
+        N_3  s_9 : n=9 -> n=10
+
+GAPS: 8 level(s) have no successor
+    Sigma_2  n=11 present, n=12 missing   -> manifolds_lex_d2_n12_o1_g2.txt
+    Sigma_3  n=11 present, n=12 missing   -> manifolds_lex_d2_n12_o1_g3.txt
+    Sigma_4  n=11 present, n=12 missing   -> manifolds_lex_d2_n12_o1_g4.txt
+    Sigma_6  n=12 present, n=13 missing   -> manifolds_lex_d2_n13_o1_g6.txt
+        N_3  n=10 present, n=11 missing   -> manifolds_lex_d2_n11_o0_g3.txt
+        N_4  n=9 present, n=10 missing   -> manifolds_lex_d2_n10_o0_g4.txt
+        N_6  n=10 present, n=11 missing   -> manifolds_lex_d2_n11_o0_g6.txt
+        N_7  n=10 present, n=11 missing   -> manifolds_lex_d2_n11_o0_g7.txt
+
+Also worth having, to extend each chain downward:
+    Sigma_2  has n>=10, minimum is n=9: manifolds_lex_d2_n9_o1_g2.txt
+
+  Sigma_2 n=10: 865 triangulations, 1 components (2.1s)
+  Sigma_2 n=11: 113506 triangulations, 1 components (464.0s)
+  Sigma_3 n=10: 20 triangulations, 4 components (0.0s)
+  Sigma_3 n=11: 65878 triangulations, 1 components (403.6s)
+  Sigma_4 n=11: 821 triangulations, 12 components (1.8s)
+  Sigma_6 n=12: 59 triangulations, 59 components (0.0s)
+  N_3 n=9: 133 triangulations, 1 components (0.2s)
+  N_3 n=10: 11784 triangulations, 1 components (33.3s)
+  N_4 n=9: 37 triangulations, 3 components (0.1s)
+  N_6 n=10: 1022 triangulations, 22 components (2.2s)
+  N_7 n=10: 14 triangulations, 14 components (0.0s)
+
+  surface  chi   n    #tri  comps                  sizes  ->img           fibers  newborn  maxfib  dist
+-------------------------------------------------------------------------------------------------------
+  Sigma_2   -2  10     865      1                  [865]      1              [1]        0       1     0
+  Sigma_2   -2  11  113506      1               [113506]      -                -        -       -     -
+  Sigma_3   -4  10      20      4          [13, 5, 1, 1]      1              [4]        0       4    17
+  Sigma_3   -4  11   65878      1                [65878]      -                -        -       -     -
+  Sigma_4   -6  11     821     12 [786, 9, 4, 4, 3, 3...      -                -        -       -     -
+  Sigma_6  -10  12      59     59 [1, 1, 1, 1, 1, 1, ...      -                -        -       -     -
+      N_3   -1   9     133      1                  [133]      1              [1]        0       1     0
+      N_3   -1  10   11784      1                [11784]      -                -        -       -     -
+      N_4   -2   9      37      3             [32, 3, 2]      -                -        -       -     -
+      N_6   -4  10    1022     22 [363, 297, 253, 24,...      -                -        -       -     -
+      N_7   -5  10      14     14 [1, 1, 1, 1, 1, 1, ...      -                -        -       -     -
+
+==================================================================
+Sigma_2  (chi = -2, orientable)  level n = 10
+==================================================================
+  triangulations: 865
+  components of F(n): 1  sizes [865]
+  components of F(n+1): 1  sizes [113506]
+  image of s_10: 1 component(s)
+  fibers: [1]   largest = 1
+    component 0 at n+1  <-  components [0] at n
+  newly born at n+1: 0
+  coalescence distance: 0
+  lift-fiber check: 20760 subdivisions, 0 violations
+  ALL components merge at n+1 (absorption time 1)
+
+==================================================================
+Sigma_2  (chi = -2, orientable)  level n = 11
+==================================================================
+  triangulations: 113506
+  components of F(n): 1  sizes [113506]
+  (no level n+1 data; stabilization not computed)
+
+==================================================================
+Sigma_3  (chi = -4, orientable)  level n = 10
+==================================================================
+  triangulations: 20
+  components of F(n): 4  sizes [13, 5, 1, 1]
+  components of F(n+1): 1  sizes [65878]
+  image of s_10: 1 component(s)
+  fibers: [4]   largest = 4
+    component 0 at n+1  <-  components [0, 1, 2, 3] at n
+  newly born at n+1: 0
+  coalescence distance: 17  (between components [2, 3] of F(10))
+  lift-fiber check: 560 subdivisions, 0 violations
+  ALL components merge at n+1 (absorption time 1)
+
+==================================================================
+Sigma_3  (chi = -4, orientable)  level n = 11
+==================================================================
+  triangulations: 65878
+  components of F(n): 1  sizes [65878]
+  (no level n+1 data; stabilization not computed)
+
+==================================================================
+Sigma_4  (chi = -6, orientable)  level n = 11
+==================================================================
+  triangulations: 821
+  components of F(n): 12  sizes [786, 9, 4, 4, 3, 3, 3, 3, 3, 1, 1, 1]
+  (no level n+1 data; stabilization not computed)
+
+==================================================================
+Sigma_6  (chi = -10, orientable)  level n = 12
+==================================================================
+  triangulations: 59
+  components of F(n): 59  sizes [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  (no level n+1 data; stabilization not computed)
+
+==================================================================
+N_3  (chi = -1, nonorientable)  level n = 9
+==================================================================
+  triangulations: 133
+  components of F(n): 1  sizes [133]
+  components of F(n+1): 1  sizes [11784]
+  image of s_9: 1 component(s)
+  fibers: [1]   largest = 1
+    component 0 at n+1  <-  components [0] at n
+  newly born at n+1: 0
+  coalescence distance: 0
+  lift-fiber check: 2660 subdivisions, 0 violations
+  ALL components merge at n+1 (absorption time 1)
+
+==================================================================
+N_3  (chi = -1, nonorientable)  level n = 10
+==================================================================
+  triangulations: 11784
+  components of F(n): 1  sizes [11784]
+  (no level n+1 data; stabilization not computed)
+
+==================================================================
+N_4  (chi = -2, nonorientable)  level n = 9
+==================================================================
+  triangulations: 37
+  components of F(n): 3  sizes [32, 3, 2]
+  (no level n+1 data; stabilization not computed)
+
+==================================================================
+N_6  (chi = -4, nonorientable)  level n = 10
+==================================================================
+  triangulations: 1022
+  components of F(n): 22  sizes [363, 297, 253, 24, 12, 11, 11, 8, 6, 5, 5, 4, 4, 3, 3, 3, 2, 2, 2, 2, 1, 1]
+  (no level n+1 data; stabilization not computed)
+
+==================================================================
+N_7  (chi = -5, nonorientable)  level n = 10
+==================================================================
+  triangulations: 14
+  components of F(n): 14  sizes [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  (no level n+1 data; stabilization not computed)
+
+wrote survey.json
+wrote survey.csv
+
+lift-fiber lemma: 23980 subdivisions checked, 0 violations

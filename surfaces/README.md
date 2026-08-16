@@ -1,0 +1,86 @@
+# Surface flip-graph experiments
+
+This directory is the public archival release for the surface computations
+cited in `paper/main-gpt.tex` (Section "Surface flip graphs and one-step
+coalescence", Proposition "One-step coalescence at minimum levels"). It
+supports the claim that, for four surfaces whose minimum-level fixed-vertex
+flip graphs are disconnected -- the nonorientable surfaces N_4 and N_5, the
+orientable surface Sigma_3, and Sigma_6 -- every component merges into a
+single component after one facet subdivision (a 1--3 stellar move), with
+Sigma_6 merging 59 isolated components at once.
+
+## Layout
+
+- `coalesce.py` -- canonical-form isomorphism testing (flag-based, exact for
+  connected closed surfaces), diagonal (2--2) flips, facet (1--3)
+  subdivision, Euler characteristic / orientability checks, flip-graph
+  component decomposition (`components_at_level`), and a multi-source
+  BFS + union-find coalescence checker (`do_seeds_coalesce`) that stops as
+  soon as all seed components merge, without building the full next-level
+  flip graph.
+- `fibers.py` / `fiberstate.py` -- machinery for computing, and certifying by
+  randomized degree-reduction walks (`targeted_search`), the fibers of the
+  stabilization map s_n : C(n) -> C(n+1), with checkpointing to a JSON state
+  file.
+- `run_classes.py`, `run_fibers.py` -- command-line drivers that take a
+  Lutz-format census file (`manifold_lex_...txt`) plus a target Euler
+  characteristic and orientability flag, and report the flip-graph
+  components at that level and/or their fibers at the next level.
+- `test_coalesce.py`, `test_fibers.py`, `test_fiberstate.py` -- self-checks
+  against small hand-built examples (the tetrahedron, octahedron, a
+  6-vertex RP^2, the 7-vertex Moebius torus) plus a timing check for
+  `canonical_form`.
+- `sigma6.json` -- the checkpointed `FiberState` (components, merge
+  witnesses, and automorphism data) for Sigma_6 at n=12. This is the
+  certificate behind the paper's Sigma_6 claim: all 59 singleton components
+  merge into one component at n=13.
+- `survey/` -- the batch pipeline used to sweep multiple surfaces and levels
+  against a directory of Lutz-format census files at once:
+  - `batch.py` -- loads a directory of census files, filters each to closed
+    surfaces of the requested (chi, orientable) type, computes flip-graph
+    components (and, where a next-level file is also present, the
+    stabilization fibers), and writes `survey.json` / `survey.csv`.
+  - `survey.py`, `coalesce.py`, `run_classes.py` -- supporting library code.
+    `coalesce.py` here is identical to the top-level copy; it is kept
+    alongside `batch.py` so the pipeline directory is self-contained.
+  - `test_survey.py`, `test_newborn.py` -- tests for the survey pipeline.
+  - `results.txt`, `survey.json`, `survey.csv` -- the output of a run of
+    `batch.py` over the nine/ten/eleven/twelve-vertex census files,
+    including the N_4 (n=9) and Sigma_3 (n=10) rows cited in the paper.
+  - `klein.json` -- the corresponding record for the Klein bottle N_2 at its
+    minimum level (n=8), included as a sanity check; it is frozen/neighborly
+    and is not one of the four surfaces in the proposition.
+  - `survey_run.log` -- the console transcript of the `batch.py` run that
+    produced `survey.json` / `survey.csv` (renamed from `survery.log`;
+    content unchanged).
+
+## Reproducing the component counts
+
+Each script above takes a Lutz-format census file of closed-surface
+triangulations. For example, for N_4 at n=9:
+
+    python run_classes.py manifold_lex_d2_n9_o0_g4.txt -2 0
+
+reports the flip-graph components of F(9) for chi=-2, nonorientable
+surfaces, and a `--checkpoint` file can be used with `--resume` to continue
+a targeted search for merges at the next level (this is how `sigma6.json`
+was produced for Sigma_6).
+
+## What is not included
+
+The census files these scripts run against (Sulanke-Lutz-format
+enumerations of closed-surface triangulations, `manifolds_lex_d2_*.txt`)
+are not included in this repository: two of them individually exceed
+GitHub's 100 MB file-size limit, and the full set used for the survey is
+several hundred megabytes in total. They are third-party enumeration data,
+reproducible with the isomorphism-free enumeration software of Sulanke and
+Lutz cited in the paper, or obtainable from Lutz's Manifold Page. Point
+`run_classes.py`, `run_fibers.py`, or `survey/batch.py` at a local copy of
+the relevant `manifold_lex_d2_n<k>_o<0|1>_g<h>.txt` files to regenerate the
+component and fiber counts recorded in `survey.json`, `survey.csv`, and
+`results.txt`.
+
+This release also does not include a standalone script or certificate
+specifically producing the N_5 (chi=-3) row of the proposition's table: no
+`manifold_lex_d2_*_g5.txt` census file or computed record for N_5 was found
+in this working directory.

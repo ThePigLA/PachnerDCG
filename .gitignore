@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# OS
+.DS_Store
+
+# Large/generated data not part of the public release.
+# See surfaces/README.md for how to regenerate it.
+surfaces/survey/manifolds/
+surfaces/survey/.levelcache.json
+surfaces/survey/*.zip
