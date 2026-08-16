@@ -109,8 +109,3 @@ release; it is not needed for the merge certificate in `n5.json`, but
 would allow the same complete-level cross-checks (newborn-component
 agreement, lift-fiber well-definedness) that the other rows in
 `survey.csv` carry.
-
-This release also omits a handful of dated snapshot `.zip` backups of
-`survey.py` / `batch.py` / `coalesce.py` / `test_survey.py` /
-`test_newborn.py` / `run_classes.py` that accumulated during development;
-their contents are all superseded by the tracked files above.
