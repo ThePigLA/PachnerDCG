@@ -1,4 +1,14 @@
+import sys
 import time
+from pathlib import Path
+
+
+# This test lives one directory below the shared surface helpers.  Keep the
+# local survey modules first on sys.path, then make ``surfaces/fibers.py``
+# available when the test is invoked from the repository root.
+SURFACES = Path(__file__).resolve().parents[1]
+if str(SURFACES) not in sys.path:
+    sys.path.append(str(SURFACES))
 
 from coalesce import (normalize, canonical_form, subdivide_facet,
                       components_at_level, f_vector, diagonal_flips)
