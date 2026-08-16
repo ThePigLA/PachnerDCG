@@ -1,0 +1,29 @@
+[
+ {
+  "surface": "N_5",
+  "chi": -3,
+  "orientable": false,
+  "n": 9,
+  "n_triangulations": 2,
+  "n_components": 2,
+  "component_sizes": [1, 1],
+  "at_minimum_n": true,
+  "min_vertices": 9,
+  "newborn_here": [0, 1],
+  "n_newborn_here": 2,
+  "newborn_here_sizes": [1, 1],
+  "min_degree_by_component": [8, 8],
+  "frozen_by_component": [true, true],
+  "stabilization": {
+   "method": "exhaustive fiber search (run_fibers.py, exhaustive mode); no complete n=10 census file was used or is required",
+   "source_file": "manifolds/manifolds_lex_d2_n9_o0_g5.txt",
+   "n_plus_1": 10,
+   "seeds": 2,
+   "nodes_explored": 4,
+   "nodes_seen": 15,
+   "fiber_sizes": [2],
+   "image_size": 1,
+   "absorption_one_step": true
+  }
+ }
+]
