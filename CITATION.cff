@@ -1,0 +1,79 @@
+cff-version: 1.2.0
+message: >-
+  If you use this repository, please cite both the software (this file) and
+  the accompanying paper listed under `preferred-citation`.
+title: >-
+  PachnerDCG: certificates and code for component trees of Pachner graphs
+abstract: >-
+  Computational certificates and verification code accompanying the paper
+  "Component Trees of Pachner Graphs with Applications to Triangulated
+  3-Spheres". Includes self-contained, independently checkable Pachner-move
+  certificates for small triangulated 3-spheres -- the ten-, eleven-, and
+  high-valence twelve-vertex seed lists, and one-facet-subdivision
+  certificates for the four known unflippable 3-spheres U(16), U(20),
+  U_1(21), and U_2(21) -- together with the code, summaries, and checkpoints
+  for the surface flip-graph stabilization experiments.
+type: software
+authors:
+  - family-names: Faber
+    given-names: Vance
+    email: vance.faber@gmail.com
+    city: Hoquiam
+    region: Washington
+    country: US
+  - family-names: Murphy
+    given-names: Michael
+    city: Venice
+    region: California
+    country: US
+repository-code: https://github.com/ThePigLA/PachnerDCG
+license: CC0-1.0
+date-released: 2026-08-17
+keywords:
+  - Pachner graph
+  - bistellar flip
+  - triangulated 3-sphere
+  - flip graph
+  - simplicial complex
+  - combinatorial topology
+  - unflippable triangulation
+  - computational certificate
+# Archival release DOI, as cited in the paper's Data availability paragraph.
+# NOTE: this record was not yet publicly resolvable when this file was
+# written -- publish the Zenodo deposit to activate it.
+doi: 10.5281/zenodo.21980010
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.21980010
+    description: Archival Zenodo record for this repository.
+# If you also want a "cite all versions" entry, add Zenodo's concept DOI:
+#   - type: doi
+#     value: 10.5281/zenodo.XXXXXXX
+#     description: Concept DOI resolving to the latest version.
+# Set `version` to match the released tag once one is cut:
+# version: 1.0.0
+preferred-citation:
+  type: unpublished
+  title: >-
+    Component Trees of Pachner Graphs with Applications to Triangulated
+    3-Spheres
+  authors:
+    - family-names: Faber
+      given-names: Vance
+      email: vance.faber@gmail.com
+    - family-names: Murphy
+      given-names: Michael
+  year: 2026
+  abstract: >-
+    Fix a closed connected PL d-manifold M, where d >= 2. For each n, let G(n)
+    be the graph whose vertices are the simplicial triangulations of M with n
+    vertices, with an edge for each vertex-preserving bistellar flip, and let
+    C(n) be its set of connected components. We form a directed graph of the
+    components over all n, with an edge from U in C(n) to V in C(n+1) when a
+    facet subdivision takes some triangulation in U to a triangulation in V.
+    We prove that every vertex of this component graph has out-degree one, so
+    that its underlying undirected graph is a graded tree, and derive
+    canonical component paths, stabilization rays, and trunks. For S^3, the
+    trunk contains every triangulated 3-sphere with at most 11 vertices, every
+    12-vertex seed sphere with minimum edge valence at least 4, and every
+    facet subdivision of each of the four known unflippable 3-spheres.
