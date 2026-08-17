@@ -1,8 +1,12 @@
 # High-valence twelve-vertex seed list
 
 `seed-list.json` is the raw 134-entry high-valence (12)-vertex seed list
-used in the computation.  It is extracted solely from `seeds/12/12seeds.txt`,
-whose SHA-256 digest is recorded in the JSON artifact.
+used in the computation.  It was extracted from the raw enumeration output
+`12seeds.txt`, whose name, entry count, and SHA-256 digest are recorded in the
+`source` field of the JSON artifact as a provenance record.  That raw file is
+not redistributed here and nothing needs it: `seed-list.json` carries the
+facet lists themselves, and the checker below re-derives every asserted
+property from them.
 
 `homology-results.json` records the rational and finite-field homology
 screening.  `s3-seed-list.json` contains its 37 (S^3)-homology candidates,

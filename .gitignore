@@ -10,3 +10,4 @@ __pycache__/
 surfaces/survey/manifolds/
 surfaces/survey/.levelcache.json
 surfaces/survey/*.zip
+_deposit/

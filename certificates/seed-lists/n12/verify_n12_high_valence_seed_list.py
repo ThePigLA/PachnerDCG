@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-"""Verify the public n=12 high-valence seed-list artifact."""
+"""Verify the public n=12 high-valence seed-list artifact.
+
+Every property is checked against ``seed-list.json`` alone.  The checker
+reads no file outside this repository.
+"""
 from __future__ import annotations
 
-import hashlib
 import json
 import sys
 from pathlib import Path
@@ -28,8 +31,6 @@ def main() -> None:
     document = json.loads((HERE / "seed-list.json").read_text())
     assert document["format"] == "high-valence-12-vertex-seed-list-v1"
     assert len(document["seeds"]) == 134
-    source = HERE.parents[2] / "seeds/12" / document["source"]["file"]
-    assert hashlib.sha256(source.read_bytes()).hexdigest() == document["source"]["sha256"]
     for row in document["seeds"]:
         facets = normalize_facets(row["facets"], 3)
         assert len(vertices(facets)) == 12

@@ -49,7 +49,9 @@ python3 certificates/seed-lists/n12/verify_n12_s3_seed_certificates.py
 ```
 
 Each replay checks every move's exact local legality, the intermediate
-closed-manifold conditions, and the claimed terminal complex.
+closed-manifold conditions, and the claimed terminal complex.  All five
+commands run to completion against the contents of this repository alone; no
+checker reads any file outside it.
 
 ## Surface experiments
 
