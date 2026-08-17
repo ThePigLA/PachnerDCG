@@ -72,10 +72,26 @@ reproduce the recorded experiment summaries.
 
 The development repository is hosted at
 [github.com/ThePigLA/PachnerDCG](https://github.com/ThePigLA/PachnerDCG).
-For the paper, please cite the versioned Zenodo DOI for the tagged archival
-release; it will be added here once the public archive is published. The
-Zenodo release will contain the immutable repository snapshot and the
-additional archival data required for full reproduction.
+The archival release is deposited on Zenodo, which issues two DOIs for it:
+
+| DOI | Resolves to | Use it when |
+| --- | --- | --- |
+| _concept DOI: to be added_ | whichever version is newest | citing this work in general |
+| [10.5281/zenodo.21980010](https://doi.org/10.5281/zenodo.21980010) | this snapshot, permanently | reproducing a specific result |
+
+Prefer the concept DOI: it is stable across future revisions of the data and
+code, so a citation made today keeps resolving to the current release.  Cite
+the version DOI when a claim depends on the exact bytes of one snapshot.
+
+Zenodo mints the concept DOI automatically the first time the deposit is
+published, and it will be recorded here and in
+[`CITATION.cff`](CITATION.cff) at that point.  Until the deposit is
+published, neither DOI resolves.
+
+The Zenodo release contains the immutable repository snapshot and the
+additional archival data required for full reproduction.  Machine-readable
+citation metadata for this repository, and for the accompanying paper, is in
+[`CITATION.cff`](CITATION.cff).
 
 ## License
 

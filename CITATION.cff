@@ -38,18 +38,27 @@ keywords:
   - combinatorial topology
   - unflippable triangulation
   - computational certificate
-# Archival release DOI, as cited in the paper's Data availability paragraph.
-# NOTE: this record was not yet publicly resolvable when this file was
-# written -- publish the Zenodo deposit to activate it.
+# Archival release DOI. Zenodo issues two: a *concept* DOI covering all
+# versions, and a *version* DOI pinned to one snapshot. The concept DOI is
+# minted automatically the first time the deposit is published, so it is not
+# knowable while the deposit is still a draft.
+#
+# The value below is the version DOI reserved for the first snapshot -- the
+# one cited in the paper's Data availability paragraph. It does not resolve
+# until the Zenodo deposit is published.
+#
+# ONCE PUBLISHED: copy the concept DOI from the Zenodo record ("Cite all
+# versions") into `doi:` below, and keep the version DOI in `identifiers`.
 doi: 10.5281/zenodo.21980010
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21980010
-    description: Archival Zenodo record for this repository.
-# If you also want a "cite all versions" entry, add Zenodo's concept DOI:
+    description: >-
+      Version DOI for the first archival snapshot of this repository.
+# Concept DOI, to be filled in after the deposit is published:
 #   - type: doi
 #     value: 10.5281/zenodo.XXXXXXX
-#     description: Concept DOI resolving to the latest version.
+#     description: Concept DOI; always resolves to the newest version.
 # Set `version` to match the released tag once one is cut:
 # version: 1.0.0
 preferred-citation:
