@@ -79,4 +79,7 @@ additional archival data required for full reproduction.
 
 ## License
 
-A license will be selected and added before the public release.
+This repository is dedicated to the public domain under the
+[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)
+dedication.  You may use, copy, modify, distribute, and build upon its
+contents for any purpose, without asking permission.
